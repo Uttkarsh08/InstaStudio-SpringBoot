@@ -29,7 +29,6 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO loginRequestDTO) throws FirebaseAuthException {
-        // Step 1: Verify Firebase Token
         FirebaseToken decoded;
         try {
             decoded = FirebaseAuth.getInstance().verifyIdToken(loginRequestDTO.firebaseToken);
@@ -46,13 +45,9 @@ public class AuthController {
         log.info("FirebaseId: {}", firebaseId);
         log.info("loginType: {}", loginType);
 
-        // Step 2: Check if user exists (based on Firebase UID and UserType)
         User user = userService.getUserByFirebaseIdAndUserType(firebaseId, loginType);
         boolean isRegistered = (user != null);
 
-        // Step 3: Determine the subject for JWT (userId or firebaseId)
-
-        // Step 4: Generate tokens
         String accessToken = jwtService.generateAccessToken(firebaseId, isRegistered, loginType);
         String refreshToken = jwtService.generateRefreshToken(firebaseId, isRegistered, loginType);
 

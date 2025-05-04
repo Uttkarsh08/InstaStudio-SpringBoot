@@ -1,22 +1,17 @@
-package com.uttkarsh.InstaStudio.entities;
+package com.uttkarsh.InstaStudio.dto;
 
 import com.uttkarsh.InstaStudio.entities.enums.UserType;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "App_User")
-public class User {
+public class UserProfileCompletionResponseDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
     private String firebaseId;
@@ -27,11 +22,6 @@ public class User {
 
     private String userPhoneNo;
 
-    @Enumerated(EnumType.STRING)
     private UserType userType;
-
-    @ManyToOne
-    @JoinColumn(name = "studio_id")
-    private Studio studio;
 
 }
