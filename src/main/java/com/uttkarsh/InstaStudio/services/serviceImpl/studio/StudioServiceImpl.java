@@ -1,16 +1,22 @@
-package com.uttkarsh.InstaStudio.services.serviceImpl;
+package com.uttkarsh.InstaStudio.services.serviceImpl.studio;
 
-import com.uttkarsh.InstaStudio.dto.StudioCreationRequestDTO;
-import com.uttkarsh.InstaStudio.dto.StudioCreationResponseDTO;
+import com.uttkarsh.InstaStudio.dto.event.EventCreationResponseDTO;
+import com.uttkarsh.InstaStudio.dto.event.EventListResponseDTO;
+import com.uttkarsh.InstaStudio.dto.studio.StudioCreationRequestDTO;
+import com.uttkarsh.InstaStudio.dto.studio.StudioCreationResponseDTO;
+import com.uttkarsh.InstaStudio.entities.Event;
 import com.uttkarsh.InstaStudio.entities.Studio;
 import com.uttkarsh.InstaStudio.entities.User;
-import com.uttkarsh.InstaStudio.exceptions.AdminAlreadyAssignedException;
-import com.uttkarsh.InstaStudio.exceptions.ResourceNotFoundException;
+import com.uttkarsh.InstaStudio.exceptions.*;
+import com.uttkarsh.InstaStudio.repositories.EventRepository;
 import com.uttkarsh.InstaStudio.repositories.StudioRepository;
 import com.uttkarsh.InstaStudio.repositories.UserRepository;
-import com.uttkarsh.InstaStudio.services.StudioService;
+import com.uttkarsh.InstaStudio.services.studio.StudioService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Base64;
@@ -22,6 +28,7 @@ public class StudioServiceImpl implements StudioService {
 
     private final StudioRepository studioRepository;
     private final UserRepository userRepository;
+    private final EventRepository eventRepository;
     private final ModelMapper mapper;
 
     @Override
@@ -56,7 +63,7 @@ public class StudioServiceImpl implements StudioService {
                 .orElseThrow(()-> new ResourceNotFoundException("User not found with ID: " + userId));
 
         if(studio.getAdmins().contains(user)){
-            throw new AdminAlreadyAssignedException("Can't assign same user to a Studio Twice");
+            throw new UserAlreadyAssignedException("Can't assign same user to a Studio Twice");
         }
         if(user.getStudio() != null){
             throw new AdminAlreadyAssignedException("Admin is already assigned to a studio.");
@@ -66,5 +73,29 @@ public class StudioServiceImpl implements StudioService {
         userRepository.save(user);
 
         return mapper.map(studio, StudioCreationResponseDTO.class);
+    }
+
+    @Override
+    public EventCreationResponseDTO addEventToStudio(Long studioId, Long eventId) {
+        Studio studio = studioRepository.findById(studioId)
+                .orElseThrow(()-> new ResourceNotFoundException("Studio not found with ID: " + studioId));
+
+        Event event = eventRepository.findById(eventId)
+                .orElseThrow(()-> new ResourceNotFoundException("Event not found with ID: " + studioId));
+
+        if(studio.getEvents().contains(event)){
+            throw new EventAlreadyAddedException("Can't assign same Event to a Studio Twice");
+        }
+
+        if(event.getStudio() != null){
+            throw new EventAlreadyAssignedException("Event is already assigned to a studio.");
+        }
+
+        event.setStudio(studio);
+        eventRepository.save(event);
+
+        return mapper.map(event, EventCreationResponseDTO.class);
+
+
     }
 }

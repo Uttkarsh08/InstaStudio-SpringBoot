@@ -1,7 +1,6 @@
 package com.uttkarsh.InstaStudio.advices;
 
-import com.uttkarsh.InstaStudio.exceptions.AdminAlreadyAssignedException;
-import com.uttkarsh.InstaStudio.exceptions.ResourceNotFoundException;
+import com.uttkarsh.InstaStudio.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -21,6 +20,33 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(AdminAlreadyAssignedException.class)
     public ResponseEntity<ApiResponse<?>> handleAdminAlreadyAssigned(AdminAlreadyAssignedException ex){
+        ApiError apiError = ApiError.builder()
+                .status(HttpStatus.BAD_REQUEST)
+                .message(ex.getMessage())
+                .build();
+        return buildErrorResponseEntity(apiError);
+    }
+
+    @ExceptionHandler(EventAlreadyAddedException.class)
+    public ResponseEntity<ApiResponse<?>> handleEventAlreadyAdded(EventAlreadyAddedException ex){
+        ApiError apiError = ApiError.builder()
+                .status(HttpStatus.BAD_REQUEST)
+                .message(ex.getMessage())
+                .build();
+        return buildErrorResponseEntity(apiError);
+    }
+
+    @ExceptionHandler(EventAlreadyAssignedException.class)
+    public ResponseEntity<ApiResponse<?>> handleEventAlreadyAssigned(EventAlreadyAssignedException ex){
+        ApiError apiError = ApiError.builder()
+                .status(HttpStatus.BAD_REQUEST)
+                .message(ex.getMessage())
+                .build();
+        return buildErrorResponseEntity(apiError);
+    }
+
+    @ExceptionHandler(UserAlreadyAssignedException.class)
+    public ResponseEntity<ApiResponse<?>> handleUserAlreadyAssigned(UserAlreadyAssignedException ex){
         ApiError apiError = ApiError.builder()
                 .status(HttpStatus.BAD_REQUEST)
                 .message(ex.getMessage())

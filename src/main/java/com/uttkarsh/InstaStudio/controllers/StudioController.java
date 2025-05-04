@@ -1,10 +1,14 @@
 package com.uttkarsh.InstaStudio.controllers;
 
-import com.uttkarsh.InstaStudio.dto.StudioCreationRequestDTO;
-import com.uttkarsh.InstaStudio.dto.StudioCreationResponseDTO;
-import com.uttkarsh.InstaStudio.entities.Studio;
-import com.uttkarsh.InstaStudio.services.StudioService;
+import com.uttkarsh.InstaStudio.dto.event.EventCreationResponseDTO;
+import com.uttkarsh.InstaStudio.dto.event.EventListResponseDTO;
+import com.uttkarsh.InstaStudio.dto.studio.StudioCreationRequestDTO;
+import com.uttkarsh.InstaStudio.dto.studio.StudioCreationResponseDTO;
+import com.uttkarsh.InstaStudio.services.studio.StudioService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,4 +36,15 @@ public class StudioController {
         StudioCreationResponseDTO responseDTO = studioService.assignAdminToStudio(studioId, userId);
         return ResponseEntity.ok(responseDTO);
     }
+
+    @PostMapping(path = "/register/{studioId}/addEvent/{eventId}")
+    public ResponseEntity<EventCreationResponseDTO> addEventToStudio(
+            @PathVariable Long studioId,
+            @PathVariable Long eventId
+
+    ){
+        EventCreationResponseDTO responseDTO = studioService.addEventToStudio(studioId, eventId);
+        return ResponseEntity.ok(responseDTO);
+    }
+
 }

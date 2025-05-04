@@ -1,9 +1,9 @@
 package com.uttkarsh.InstaStudio.controllers;
 
-import com.uttkarsh.InstaStudio.dto.UserProfileCompletionRequestDTO;
+import com.uttkarsh.InstaStudio.dto.user.UserProfileCompletionRequestDTO;
 import com.uttkarsh.InstaStudio.entities.User;
 import com.uttkarsh.InstaStudio.services.JwtService;
-import com.uttkarsh.InstaStudio.services.UserService;
+import com.uttkarsh.InstaStudio.services.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
