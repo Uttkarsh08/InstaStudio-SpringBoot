@@ -10,15 +10,15 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class ProfileCompletionRequestDTO {
+public class UserProfileCompletionRequestDTO {
 
     private String firebaseId;
 
     private String userName;
 
-    private String userPhoneNo;
-
     private String userEmail;
+
+    private String userPhoneNo;
 
     private UserType userType;
 

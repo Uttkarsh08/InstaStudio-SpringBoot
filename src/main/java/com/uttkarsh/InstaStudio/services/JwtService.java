@@ -13,55 +13,15 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 @Service
-public class JwtService {
+public interface JwtService {
 
-    @Value("${jwt.secretKey}")
-    private String jwtSecretKey;
+    String generateAccessToken(String firebaseId, boolean isRegistered, UserType userType);
 
-    private SecretKey getSecretKey(){
-        return Keys.hmacShaKeyFor(jwtSecretKey.getBytes(StandardCharsets.UTF_8));
-    }
+    String generateRefreshToken(String firebaseId, boolean isRegistered, UserType userType);
 
-    public String generateAccessToken(String firebaseId, boolean isRegistered, UserType userType) {
+    boolean validateToken(String token);
 
-        return Jwts.builder()
-                .subject(firebaseId)
-                .claim("isRegistered", isRegistered)
-                .claim("userType", userType.name())
-                .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + 3600_000))
-                .signWith(getSecretKey())
-                .compact();
-    }
-
-    public String generateRefreshToken(String firebaseId, boolean isRegistered, UserType userType) {
-        return Jwts.builder()
-                .subject(firebaseId)
-                .claim("isRegistered", isRegistered)
-                .claim("userType", userType.name())
-                .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + 86_400_000))
-                .signWith(getSecretKey())
-                .compact();
-    }
-
-    public  boolean validateToken(String token) {
-        try {
-            Jwts.parser().setSigningKey(getSecretKey()).build().parseClaimsJws(token);
-            return true;
-        } catch (JwtException e) {
-            return false;
-        }
-    }
-
-    public String getFireBaseIdFromToken(String token){
-        Claims claims = Jwts.parser()
-                .verifyWith(getSecretKey())
-                .build()
-                .parseSignedClaims(token)
-                .getPayload();
-        return claims.getSubject();
-    }
+    String getFireBaseIdFromToken(String token);
 
 
 
