@@ -1,4 +1,4 @@
-package com.uttkarsh.InstaStudio.dto;
+package com.uttkarsh.InstaStudio.dto.auth;
 
 import com.uttkarsh.InstaStudio.entities.enums.UserType;
 import lombok.*;

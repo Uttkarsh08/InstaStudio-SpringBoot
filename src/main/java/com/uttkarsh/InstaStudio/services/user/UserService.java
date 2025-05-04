@@ -1,6 +1,6 @@
-package com.uttkarsh.InstaStudio.services;
+package com.uttkarsh.InstaStudio.services.user;
 
-import com.uttkarsh.InstaStudio.dto.UserProfileCompletionRequestDTO;
+import com.uttkarsh.InstaStudio.dto.user.UserProfileCompletionRequestDTO;
 import com.uttkarsh.InstaStudio.entities.User;
 import com.uttkarsh.InstaStudio.entities.enums.UserType;
 import org.springframework.stereotype.Service;

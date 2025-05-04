@@ -1,4 +1,4 @@
-package com.uttkarsh.InstaStudio.dto;
+package com.uttkarsh.InstaStudio.dto.studio;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

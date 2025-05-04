@@ -4,28 +4,37 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7df082fd-01c9-4f11-ac5d-6932c0859655" name="Changes" comment="Auth configured, working on profile Registration">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/advices/GlobalExceptionHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/controllers/StudioController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/StudioCreationRequestDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/StudioCreationResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/UserProfileCompletionResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/entities/Studio.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/exceptions/AdminAlreadyAssignedException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/exceptions/ResourceNotFoundException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/repositories/StudioRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/StudioService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/JwtServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/StudioServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/UserServiceImpl.java" afterDir="false" />
+    <list default="true" id="7df082fd-01c9-4f11-ac5d-6932c0859655" name="Changes" comment="Profile Creation(User, Studio ans their mapping) Completed">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/controllers/EventController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/event/EventCreationRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/event/EventCreationResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/event/EventListResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/event/SubEventCreationRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/event/SubEventCreationResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/entities/Event.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/exceptions/EventAlreadyAddedException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/exceptions/EventAlreadyAssignedException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/exceptions/UserAlreadyAssignedException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/repositories/EventRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/event/EventService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/event/EventServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/advices/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/advices/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/controllers/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/controllers/AuthController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/controllers/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/controllers/ProfileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/ProfileCompletionRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/UserProfileCompletionRequestDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/entities/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/JwtService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/controllers/StudioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/controllers/StudioController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/LoginRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/auth/LoginRequestDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/LoginResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/auth/LoginResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/StudioCreationRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/studio/StudioCreationRequestDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/StudioCreationResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/studio/StudioCreationResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/UserProfileCompletionRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/user/UserProfileCompletionRequestDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/UserProfileCompletionResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/user/UserProfileCompletionResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/entities/Studio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/entities/Studio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/repositories/StudioRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/repositories/StudioRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/StudioService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/studio/StudioService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/user/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/StudioServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/studio/StudioServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/user/UserServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +44,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -89,6 +99,8 @@
 }</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.uttkarsh.InstaStudio.exceptions" />
+      <recent name="com.uttkarsh.InstaStudio.services.serviceImpl.studio" />
       <recent name="com.uttkarsh.InstaStudio.controllers" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
@@ -154,7 +166,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746219036139</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Profile Creation(User, Studio ans their mapping) Completed">
+      <option name="closed" value="true" />
+      <created>1746382225940</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1746382225940</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -174,6 +194,7 @@
     </ignored-roots>
     <MESSAGE value="Initial Setup" />
     <MESSAGE value="Auth configured, working on profile Registration" />
-    <option name="LAST_COMMIT_MESSAGE" value="Auth configured, working on profile Registration" />
+    <MESSAGE value="Profile Creation(User, Studio ans their mapping) Completed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Profile Creation(User, Studio ans their mapping) Completed" />
   </component>
 </project>

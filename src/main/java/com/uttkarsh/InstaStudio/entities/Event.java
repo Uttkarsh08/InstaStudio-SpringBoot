@@ -1,0 +1,56 @@
+package com.uttkarsh.InstaStudio.entities;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Builder
+@Entity
+@Table(name = "event")
+public class Event {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long eventId;
+
+    private String clientName;
+
+    private String clientPhoneNo;
+
+    private String eventType;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonBackReference  // Prevent serialization of the parent event when serializing sub-events
+    private Event parentEvent;
+
+    @OneToMany(mappedBy = "parentEvent", cascade = CascadeType.ALL)
+    @JsonManagedReference  // Serialize sub-events when serializing the main event
+    private Set<Event> subEvents = new HashSet<>();
+
+    private LocalDateTime eventStartDate;
+
+    private LocalDateTime eventEndDate;
+
+    private String eventLocation;
+
+    private String eventCity;
+
+    private String eventState;
+
+    private boolean evenIsSaved;
+
+    @ManyToOne
+    @JoinColumn(name = "studio_id")
+    @JsonBackReference
+    private Studio studio;
+
+}

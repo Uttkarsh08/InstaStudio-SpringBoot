@@ -1,4 +1,4 @@
-package com.uttkarsh.InstaStudio.dto;
+package com.uttkarsh.InstaStudio.dto.user;
 
 import com.uttkarsh.InstaStudio.entities.enums.UserType;
 import lombok.AllArgsConstructor;
@@ -10,9 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class UserProfileCompletionResponseDTO {
-
-    private Long userId;
+public class UserProfileCompletionRequestDTO {
 
     private String firebaseId;
 
