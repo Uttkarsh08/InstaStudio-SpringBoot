@@ -70,28 +70,4 @@ public class StudioServiceImpl implements StudioService {
 
         return mapper.map(studio, StudioCreationResponseDTO.class);
     }
-
-    @Override
-    public EventResponseDTO addEventToStudio(Long studioId, Long eventId) {
-        Studio studio = studioRepository.findById(studioId)
-                .orElseThrow(()-> new ResourceNotFoundException("Studio not found with ID: " + studioId));
-
-        Event event = eventRepository.findById(eventId)
-                .orElseThrow(()-> new ResourceNotFoundException("Event not found with ID: " + studioId));
-
-        if(studio.getEvents().contains(event)){
-            throw new EventAlreadyAddedException("Can't assign same Event to a Studio Twice");
-        }
-
-        if(event.getStudio() != null){
-            throw new EventAlreadyAssignedException("Event is already assigned to a studio.");
-        }
-
-        event.setStudio(studio);
-        eventRepository.save(event);
-
-        return mapper.map(event, EventResponseDTO.class);
-
-
-    }
 }
