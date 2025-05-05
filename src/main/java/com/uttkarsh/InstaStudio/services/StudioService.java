@@ -12,7 +12,6 @@ public interface StudioService {
 
     StudioCreationResponseDTO assignAdminToStudio(Long studioId, Long userId);
 
-    EventResponseDTO addEventToStudio(Long studioId, Long eventId);
 
 
 }

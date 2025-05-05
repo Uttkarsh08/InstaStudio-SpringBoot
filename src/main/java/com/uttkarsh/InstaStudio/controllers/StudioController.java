@@ -23,23 +23,13 @@ public class StudioController {
         return  ResponseEntity.ok(responseDTO);
     }
 
-    @PostMapping(path = "/register/{studioId}/assignAdmin/{userId}")
+    @PostMapping(path = "/{studioId}/assignAdmin/{userId}")
     public ResponseEntity<StudioCreationResponseDTO> assignAdminToStudio(
             @PathVariable Long studioId,
             @PathVariable Long userId
 
     ){
         StudioCreationResponseDTO responseDTO = studioService.assignAdminToStudio(studioId, userId);
-        return ResponseEntity.ok(responseDTO);
-    }
-
-    @PostMapping(path = "/register/{studioId}/addEvent/{eventId}")
-    public ResponseEntity<EventResponseDTO> addEventToStudio(
-            @PathVariable Long studioId,
-            @PathVariable Long eventId
-
-    ){
-        EventResponseDTO responseDTO = studioService.addEventToStudio(studioId, eventId);
         return ResponseEntity.ok(responseDTO);
     }
 
