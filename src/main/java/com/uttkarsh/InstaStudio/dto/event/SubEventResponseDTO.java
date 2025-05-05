@@ -16,7 +16,7 @@ public class SubEventResponseDTO {
 
     private Long eventId;
 
-    private Event parentEvent;
+    private Long parentEventId;
 
     private String eventType;
 

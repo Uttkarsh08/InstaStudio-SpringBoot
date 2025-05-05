@@ -22,7 +22,7 @@ public class EventListResponseDTO {
 
     private String clientPhoneNo;
 
-    private Set<Long> subEventsIds;
+    private String eventType;
 
     private LocalDateTime eventStartDate;
 
@@ -35,4 +35,6 @@ public class EventListResponseDTO {
     private String eventState;
 
     private boolean eventIsSaved;
+
+    private Set<Long> subEventsIds;
 }

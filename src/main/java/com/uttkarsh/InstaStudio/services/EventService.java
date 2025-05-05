@@ -1,6 +1,7 @@
 package com.uttkarsh.InstaStudio.services;
 
 import com.uttkarsh.InstaStudio.dto.event.*;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,17 @@ public interface EventService {
 
     EventResponseDTO getEventById(Long studioId, Long eventId);
 
+    SubEventResponseDTO getSubEventById(Long studioId, Long eventId);
+
     void saveEventById(Long studioId, Long eventId);
 
     EventResponseDTO getNextUpcomingEventForStudio(Long studioId);
+
+    EventResponseDTO updateEventById(Long studioId, Long eventId, @Valid EventRequestDTO updateEventDTO);
+
+    SubEventResponseDTO updateSubEventById(Long studioId, Long eventId, @Valid SubEventRequestDTO updateEventDTO);
+
+    void deleteSubEventById(Long studioId, Long eventId);
+
+    void deleteEventById(Long studioId, Long eventId);
 }
