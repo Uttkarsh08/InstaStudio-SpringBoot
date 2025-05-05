@@ -1,10 +1,10 @@
-package com.uttkarsh.InstaStudio.services.serviceImpl.user;
+package com.uttkarsh.InstaStudio.services.serviceImpl;
 
 import com.uttkarsh.InstaStudio.dto.user.UserProfileCompletionRequestDTO;
 import com.uttkarsh.InstaStudio.entities.User;
 import com.uttkarsh.InstaStudio.entities.enums.UserType;
 import com.uttkarsh.InstaStudio.repositories.UserRepository;
-import com.uttkarsh.InstaStudio.services.user.UserService;
+import com.uttkarsh.InstaStudio.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;

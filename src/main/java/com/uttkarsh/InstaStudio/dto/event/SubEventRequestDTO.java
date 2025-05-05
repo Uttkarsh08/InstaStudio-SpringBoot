@@ -1,6 +1,5 @@
 package com.uttkarsh.InstaStudio.dto.event;
 
-import com.uttkarsh.InstaStudio.entities.Event;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,9 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Getter
 @Setter
-public class SubEventCreationResponseDTO {
-
-    private Event parentEvent;
+public class SubEventRequestDTO {
 
     private String eventType;
 
@@ -27,5 +24,7 @@ public class SubEventCreationResponseDTO {
     private String eventCity;
 
     private String eventState;
+
+    private Long studioId;
 
 }

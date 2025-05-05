@@ -1,4 +1,4 @@
-package com.uttkarsh.InstaStudio.services.user;
+package com.uttkarsh.InstaStudio.services;
 
 import com.uttkarsh.InstaStudio.dto.user.UserProfileCompletionRequestDTO;
 import com.uttkarsh.InstaStudio.entities.User;
