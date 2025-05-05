@@ -21,6 +21,7 @@ import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -101,21 +102,38 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void saveEventById(Long studioId, Long eventId) {
-        Event event = eventRepository.findByEventIdAndStudio_StudioId(eventId, studioId)
+    public EventResponseDTO getNextUpcomingEventForStudio(Long studioId) {
+        Event event =  eventRepository.findFirstByStudio_StudioIdAndParentEventIsNullAndEventStartDateAfterOrderByEventStartDate(studioId, LocalDateTime.now())
                 .orElseThrow(() -> new ResourceNotFoundException(
-                        "Event with id: " + eventId + " is not associated with studio id: " + studioId));
-        if(event.isEvenIsSaved()){
-            throw new BadCredentialsException("Event iS Already Saved");
-        }
-        event.setEvenIsSaved(true);
-        eventRepository.save(event);
+                        "No Upcoming Event associated with studio id: " + studioId));
+        return mapper.map(event, EventResponseDTO.class);
+
     }
 
     @Override
     public Page<EventListResponseDTO> getAllEventsForStudio(Long studioId, Pageable pageable) {
         Page<Event> events = eventRepository.findAllByStudio_StudioIdAndParentEventIsNullOrderByEventStartDate(studioId, pageable);
-        return events.map(event -> mapper.map(event, EventListResponseDTO.class));
+
+        return events.map(event -> {
+            EventListResponseDTO dto = new EventListResponseDTO();
+            dto.setEventId(event.getEventId());
+            dto.setClientName(event.getClientName());
+            dto.setClientPhoneNo(event.getClientPhoneNo());
+            dto.setEventStartDate(event.getEventStartDate());
+            dto.setEventEndDate(event.getEventEndDate());
+            dto.setEventLocation(event.getEventLocation());
+            dto.setEventCity(event.getEventCity());
+            dto.setEventState(event.getEventState());
+            dto.setEventIsSaved(event.isEvenIsSaved());
+
+            Set<Long> subEventIds = event.getSubEvents()
+                    .stream()
+                    .map(Event::getEventId)
+                    .collect(Collectors.toSet());
+            dto.setSubEventsIds(subEventIds);
+
+            return dto;
+        });
     }
 
     @Override
@@ -124,21 +142,68 @@ public class EventServiceImpl implements EventService {
                 studioId,
                 LocalDateTime.now(),
                 pageable);
+        return upcomingEvents.map(event -> {
+            EventListResponseDTO dto = new EventListResponseDTO();
+            dto.setEventId(event.getEventId());
+            dto.setClientName(event.getClientName());
+            dto.setClientPhoneNo(event.getClientPhoneNo());
+            dto.setEventStartDate(event.getEventStartDate());
+            dto.setEventEndDate(event.getEventEndDate());
+            dto.setEventLocation(event.getEventLocation());
+            dto.setEventCity(event.getEventCity());
+            dto.setEventState(event.getEventState());
+            dto.setEventIsSaved(event.isEvenIsSaved());
 
-        return upcomingEvents.map(event -> mapper.map(event, EventListResponseDTO.class));
+            Set<Long> subEventIds = event.getSubEvents()
+                    .stream()
+                    .map(Event::getEventId)
+                    .collect(Collectors.toSet());
+            dto.setSubEventsIds(subEventIds);
+
+            return dto;
+        });
     }
 
     @Override
     public Page<EventListResponseDTO> getAllCompletedEventsForStudio(Long studioId, Pageable pageable) {
-        Page<Event>  upcomingEvents = eventRepository.findAllByStudio_StudioIdAndParentEventIsNullAndEventStartDateBeforeOrderByEventStartDate(
+        Page<Event>  completedEvents = eventRepository.findAllByStudio_StudioIdAndParentEventIsNullAndEventStartDateBeforeOrderByEventStartDateDesc(
                 studioId,
                 LocalDateTime.now(),
                 pageable);
+        return completedEvents.map(event -> {
+            EventListResponseDTO dto = new EventListResponseDTO();
+            dto.setEventId(event.getEventId());
+            dto.setClientName(event.getClientName());
+            dto.setClientPhoneNo(event.getClientPhoneNo());
+            dto.setEventStartDate(event.getEventStartDate());
+            dto.setEventEndDate(event.getEventEndDate());
+            dto.setEventLocation(event.getEventLocation());
+            dto.setEventCity(event.getEventCity());
+            dto.setEventState(event.getEventState());
+            dto.setEventIsSaved(event.isEvenIsSaved());
 
-        return upcomingEvents.map(event -> mapper.map(event, EventListResponseDTO.class));
+            Set<Long> subEventIds = event.getSubEvents()
+                    .stream()
+                    .map(Event::getEventId)
+                    .collect(Collectors.toSet());
+            dto.setSubEventsIds(subEventIds);
+
+            return dto;
+        });
     }
 
+    @Override
+    public void saveEventById(Long studioId, Long eventId) {
+        Event event = eventRepository.findByEventIdAndStudio_StudioId(eventId, studioId)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Event with id: " + eventId + " is not associated with studio id: " + studioId));
 
+        if(event.isEvenIsSaved()){
+            throw new BadCredentialsException("Event iS Already Saved");
+        }
+        event.setEvenIsSaved(true);
+        eventRepository.save(event);
+    }
 
     @Transactional
     @Override

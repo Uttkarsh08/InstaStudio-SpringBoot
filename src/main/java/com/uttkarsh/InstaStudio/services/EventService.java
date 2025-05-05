@@ -22,4 +22,6 @@ public interface EventService {
     EventResponseDTO getEventById(Long studioId, Long eventId);
 
     void saveEventById(Long studioId, Long eventId);
+
+    EventResponseDTO getNextUpcomingEventForStudio(Long studioId);
 }
