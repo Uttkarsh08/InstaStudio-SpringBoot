@@ -14,18 +14,23 @@ import java.util.Set;
 @Repository
 public interface EventRepository extends JpaRepository<Event, Long> {
     
-    Page<Event> findAllByStudio_StudioIdAndParentEventIsNullAndEventStartDateAfterOrderByEventStartDate(Long studioId, LocalDateTime now, Pageable pageable);
+    Page<Event> findAllByStudio_StudioIdAndParentEventIsNullAndClientNameIsNotNullAndEventStartDateAfterOrderByEventStartDate(Long studioId, LocalDateTime now, Pageable pageable);
 
-    Page<Event> findAllByStudio_StudioIdAndParentEventIsNullAndEventStartDateBeforeOrderByEventStartDateDesc(Long studioId, LocalDateTime now, Pageable pageable);
+    Page<Event> findAllByStudio_StudioIdAndParentEventIsNullAndClientNameIsNotNullAndEventStartDateBeforeOrderByEventStartDateDesc(Long studioId, LocalDateTime now, Pageable pageable);
 
-    Page<Event> findAllByStudio_StudioIdAndParentEventIsNullOrderByEventStartDate(Long studioId, Pageable pageable);
+    Page<Event> findAllByStudio_StudioIdAndParentEventIsNullAndClientNameIsNotNullOrderByEventStartDate(Long studioId, Pageable pageable);
 
     List<Event> findAllByEventIdInOrderByEventStartDateAsc(Set<Long> subEventsIds);
 
     List<Event> findAllByStudio_StudioIdAndParentEventIsNullAndEvenIsSavedFalseAndEventStartDateAfterOrderByEventStartDate(Long studioId, LocalDateTime now);
 
-    Optional<Event> findByEventIdAndStudio_StudioId(Long studioId, Long eventId);
+    Optional<Event> findByEventIdAndStudio_StudioIdAndParentEventIsNull(Long eventId, Long studioId);
 
-    Optional<Event> findFirstByStudio_StudioIdAndParentEventIsNullAndEventStartDateAfterOrderByEventStartDate(Long studioId, LocalDateTime now);
+    Optional<Event> findFirstByStudio_StudioIdAndParentEventIsNullAndClientNameIsNotNullAndEventStartDateAfterOrderByEventStartDate(Long studioId, LocalDateTime now);
 
+    Optional<Event> findByEventIdAndStudio_StudioIdAndParentEventIsNotNull(Long eventId, Long studioId);
+
+    Optional<Event> findByEventIdAndStudio_StudioIdAndParentEventIsNullAndClientNameIsNotNull(Long eventId, Long studioId);
+
+    List<Event> findAllByParentEventIsNullAndClientNameIsNull();
 }

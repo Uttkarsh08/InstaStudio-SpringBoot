@@ -27,6 +27,25 @@ public class GlobalExceptionHandler {
         return buildErrorResponseEntity(apiError);
     }
 
+    @ExceptionHandler(EventIsParentEventException.class)
+    public ResponseEntity<ApiResponse<?>> handleEventIsParentException(EventIsParentEventException ex){
+        ApiError apiError = ApiError.builder()
+                .status(HttpStatus.NOT_FOUND)
+                .message(ex.getMessage())
+                .build();
+        return buildErrorResponseEntity(apiError);
+    }
+
+    @ExceptionHandler(EventIsSubEventException.class)
+    public ResponseEntity<ApiResponse<?>> handleEventIsSubEventException(EventIsSubEventException ex){
+        ApiError apiError = ApiError.builder()
+                .status(HttpStatus.NOT_FOUND)
+                .message(ex.getMessage())
+                .build();
+        return buildErrorResponseEntity(apiError);
+    }
+
+
     @ExceptionHandler(EventAlreadyAddedException.class)
     public ResponseEntity<ApiResponse<?>> handleEventAlreadyAddedException(EventAlreadyAddedException ex){
         ApiError apiError = ApiError.builder()

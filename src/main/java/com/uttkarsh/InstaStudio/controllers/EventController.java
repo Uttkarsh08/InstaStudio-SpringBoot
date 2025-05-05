@@ -2,6 +2,7 @@ package com.uttkarsh.InstaStudio.controllers;
 
 import com.uttkarsh.InstaStudio.dto.event.*;
 import com.uttkarsh.InstaStudio.services.EventService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -43,6 +44,15 @@ public class EventController {
 
     }
 
+    @GetMapping("/{studioId}/sub-event/{eventId}")
+    public ResponseEntity<SubEventResponseDTO> getSubEventById(
+            @PathVariable Long studioId,
+            @PathVariable Long eventId
+    ){
+        return ResponseEntity.ok(eventService.getSubEventById(studioId, eventId));
+
+    }
+
     @GetMapping("/{studioId}/all-events")
     public ResponseEntity<Page<EventListResponseDTO>> getAllEvents(
             @PathVariable Long studioId,
@@ -70,7 +80,7 @@ public class EventController {
         return ResponseEntity.ok(eventService.getAllCompletedEventsForStudio(studioId, pageable));
     }
 
-    @PostMapping("/{studioId}/save-event/{eventId}")
+    @PutMapping("/{studioId}/save-event/{eventId}")
     public ResponseEntity<Void> saveEventById(
             @PathVariable Long studioId,
             @PathVariable Long eventId
@@ -93,5 +103,44 @@ public class EventController {
     ){
         return ResponseEntity.ok(eventService.getNextUpcomingEventForStudio(studioId));
     }
+
+    @PutMapping("/{studioId}/edit-event/{eventId}")
+    public ResponseEntity<EventResponseDTO> updateEventById(
+            @PathVariable Long studioId,
+            @PathVariable Long eventId,
+            @RequestBody @Valid EventRequestDTO updateEventDTO
+    ){
+        EventResponseDTO updatedEvent = eventService.updateEventById(studioId, eventId, updateEventDTO);
+        return ResponseEntity.ok(updatedEvent);
+    }
+
+    @PutMapping("/{studioId}/edit-sub-event/{eventId}")
+    public ResponseEntity<SubEventResponseDTO> updateSubEventById(
+            @PathVariable Long studioId,
+            @PathVariable Long eventId,
+            @RequestBody @Valid SubEventRequestDTO updateEventDTO
+    ){
+        SubEventResponseDTO updatedSubEvent = eventService.updateSubEventById(studioId, eventId, updateEventDTO);
+        return ResponseEntity.ok(updatedSubEvent);
+    }
+
+    @DeleteMapping("/{studioId}/delete-sub-event/{eventId}")
+    public ResponseEntity<Void> deleteSubEventById(
+            @PathVariable Long studioId,
+            @PathVariable Long eventId
+    ){
+        eventService.deleteSubEventById(studioId, eventId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{studioId}/delete-event/{eventId}")
+    public ResponseEntity<Void> deleteEventById(
+            @PathVariable Long studioId,
+            @PathVariable Long eventId
+    ){
+        eventService.deleteEventById(studioId, eventId);
+        return ResponseEntity.noContent().build();
+    }
+
 
 }
