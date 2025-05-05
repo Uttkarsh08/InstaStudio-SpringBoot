@@ -16,7 +16,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     
     Page<Event> findAllByStudio_StudioIdAndParentEventIsNullAndEventStartDateAfterOrderByEventStartDate(Long studioId, LocalDateTime now, Pageable pageable);
 
-    Page<Event> findAllByStudio_StudioIdAndParentEventIsNullAndEventStartDateBeforeOrderByEventStartDate(Long studioId, LocalDateTime now, Pageable pageable);
+    Page<Event> findAllByStudio_StudioIdAndParentEventIsNullAndEventStartDateBeforeOrderByEventStartDateDesc(Long studioId, LocalDateTime now, Pageable pageable);
 
     Page<Event> findAllByStudio_StudioIdAndParentEventIsNullOrderByEventStartDate(Long studioId, Pageable pageable);
 
@@ -25,4 +25,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     List<Event> findAllByStudio_StudioIdAndParentEventIsNullAndEvenIsSavedFalseAndEventStartDateAfterOrderByEventStartDate(Long studioId, LocalDateTime now);
 
     Optional<Event> findByEventIdAndStudio_StudioId(Long studioId, Long eventId);
+
+    Optional<Event> findFirstByStudio_StudioIdAndParentEventIsNullAndEventStartDateAfterOrderByEventStartDate(Long studioId, LocalDateTime now);
+
 }

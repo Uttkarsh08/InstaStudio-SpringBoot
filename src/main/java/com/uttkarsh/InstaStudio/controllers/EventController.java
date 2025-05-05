@@ -87,4 +87,11 @@ public class EventController {
         eventService.saveAllEventsForStudio(studioId);
     }
 
+    @GetMapping("/{studioId}/next-event")
+    public ResponseEntity<EventResponseDTO> getNextUpcomingEvent(
+            @PathVariable Long studioId
+    ){
+        return ResponseEntity.ok(eventService.getNextUpcomingEventForStudio(studioId));
+    }
+
 }

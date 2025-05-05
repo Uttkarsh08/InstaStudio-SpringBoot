@@ -4,29 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7df082fd-01c9-4f11-ac5d-6932c0859655" name="Changes" comment="Started With Events(Partially implemented)">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/exceptions/EventNotAssignedException.java" afterDir="false" />
+    <list default="true" id="7df082fd-01c9-4f11-ac5d-6932c0859655" name="Changes" comment="Implemented more End-points for Event">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/advices/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/advices/GlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/config/MapperConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/config/MapperConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/controllers/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/controllers/AuthController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/controllers/EventController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/controllers/EventController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/controllers/ProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/controllers/ProfileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/controllers/StudioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/controllers/StudioController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/event/EventCreationRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/event/EventRequestDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/event/EventCreationResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/event/EventResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/event/EventListResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/event/EventListResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/event/SubEventCreationRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/event/SubEventRequestDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/event/SubEventCreationResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/event/SubEventResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/entities/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/entities/Event.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/entities/Studio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/entities/Studio.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/repositories/EventRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/repositories/EventRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/event/EventService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/EventService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/event/EventServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/EventServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/studio/StudioServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/StudioServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/user/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/studio/StudioService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/StudioService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/user/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/EventService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/EventService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/EventServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/EventServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,7 +157,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746392721810</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Implemented more End-points for Event">
+      <option name="closed" value="true" />
+      <created>1746457075102</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1746457075102</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -196,6 +187,7 @@
     <MESSAGE value="Auth configured, working on profile Registration" />
     <MESSAGE value="Profile Creation(User, Studio ans their mapping) Completed" />
     <MESSAGE value="Started With Events(Partially implemented)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Started With Events(Partially implemented)" />
+    <MESSAGE value="Implemented more End-points for Event" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented more End-points for Event" />
   </component>
 </project>
