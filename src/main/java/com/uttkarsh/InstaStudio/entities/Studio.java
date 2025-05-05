@@ -29,6 +29,7 @@
         private String studioPinCode;
 
         @Lob
+        @Basic(fetch = FetchType.LAZY)
         @Column(name = "image_data")
         private byte[] imageData;
 

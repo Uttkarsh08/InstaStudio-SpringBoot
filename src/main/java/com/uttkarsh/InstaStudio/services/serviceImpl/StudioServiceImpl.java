@@ -1,7 +1,6 @@
-package com.uttkarsh.InstaStudio.services.serviceImpl.studio;
+package com.uttkarsh.InstaStudio.services.serviceImpl;
 
-import com.uttkarsh.InstaStudio.dto.event.EventCreationResponseDTO;
-import com.uttkarsh.InstaStudio.dto.event.EventListResponseDTO;
+import com.uttkarsh.InstaStudio.dto.event.EventResponseDTO;
 import com.uttkarsh.InstaStudio.dto.studio.StudioCreationRequestDTO;
 import com.uttkarsh.InstaStudio.dto.studio.StudioCreationResponseDTO;
 import com.uttkarsh.InstaStudio.entities.Event;
@@ -11,12 +10,9 @@ import com.uttkarsh.InstaStudio.exceptions.*;
 import com.uttkarsh.InstaStudio.repositories.EventRepository;
 import com.uttkarsh.InstaStudio.repositories.StudioRepository;
 import com.uttkarsh.InstaStudio.repositories.UserRepository;
-import com.uttkarsh.InstaStudio.services.studio.StudioService;
+import com.uttkarsh.InstaStudio.services.StudioService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Base64;
@@ -76,7 +72,7 @@ public class StudioServiceImpl implements StudioService {
     }
 
     @Override
-    public EventCreationResponseDTO addEventToStudio(Long studioId, Long eventId) {
+    public EventResponseDTO addEventToStudio(Long studioId, Long eventId) {
         Studio studio = studioRepository.findById(studioId)
                 .orElseThrow(()-> new ResourceNotFoundException("Studio not found with ID: " + studioId));
 
@@ -94,7 +90,7 @@ public class StudioServiceImpl implements StudioService {
         event.setStudio(studio);
         eventRepository.save(event);
 
-        return mapper.map(event, EventCreationResponseDTO.class);
+        return mapper.map(event, EventResponseDTO.class);
 
 
     }

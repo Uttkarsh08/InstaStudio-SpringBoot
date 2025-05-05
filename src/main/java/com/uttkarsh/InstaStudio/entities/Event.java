@@ -7,6 +7,7 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -34,7 +35,7 @@ public class Event {
 
     @OneToMany(mappedBy = "parentEvent", cascade = CascadeType.ALL)
     @JsonManagedReference  // Serialize sub-events when serializing the main event
-    private Set<Event> subEvents = new HashSet<>();
+    private Set<Event> subEvents = new LinkedHashSet<>();
 
     private LocalDateTime eventStartDate;
 
@@ -48,7 +49,7 @@ public class Event {
 
     private boolean evenIsSaved;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "studio_id")
     @JsonBackReference
     private Studio studio;

@@ -1,7 +1,7 @@
 package com.uttkarsh.InstaStudio.controllers;
 
 import com.uttkarsh.InstaStudio.dto.event.*;
-import com.uttkarsh.InstaStudio.services.event.EventService;
+import com.uttkarsh.InstaStudio.services.EventService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,28 +19,72 @@ public class EventController {
     private final EventService eventService;
 
     @PostMapping("/register/event")
-    public ResponseEntity<EventCreationResponseDTO> createEvent(
-            @RequestBody EventCreationRequestDTO requestDTO
+    public ResponseEntity<EventResponseDTO> createEvent(
+            @RequestBody EventRequestDTO requestDTO
     ){
-        EventCreationResponseDTO responseDTO = eventService.createEvent(requestDTO);
+        EventResponseDTO responseDTO = eventService.createEvent(requestDTO);
         return  ResponseEntity.ok(responseDTO);
     }
 
-    @PostMapping("/register/subevent")
-    public ResponseEntity<SubEventCreationResponseDTO> createSubEvent(
-            @RequestBody SubEventCreationRequestDTO requestDTO
+    @PostMapping("/register/sub-event")
+    public ResponseEntity<SubEventResponseDTO> createSubEvent(
+            @RequestBody SubEventRequestDTO requestDTO
     ){
-        SubEventCreationResponseDTO responseDTO = eventService.createSubEvent(requestDTO);
+        SubEventResponseDTO responseDTO = eventService.createSubEvent(requestDTO);
         return  ResponseEntity.ok(responseDTO);
     }
 
-    @GetMapping("/allevents/{studioId}")
+    @GetMapping("/{studioId}/event/{eventId}")
+    public ResponseEntity<EventResponseDTO> getEventById(
+            @PathVariable Long studioId,
+            @PathVariable Long eventId
+    ){
+        return ResponseEntity.ok(eventService.getEventById(studioId, eventId));
+
+    }
+
+    @GetMapping("/{studioId}/all-events")
     public ResponseEntity<Page<EventListResponseDTO>> getAllEvents(
             @PathVariable Long studioId,
             @RequestParam(defaultValue = "0") Integer PageNumber
     ){
         Pageable pageable = PageRequest.of(PageNumber, PAGE_SIZE);
         return ResponseEntity.ok(eventService.getAllEventsForStudio(studioId, pageable));
+    }
+
+    @GetMapping("/{studioId}/upcoming-events")
+    public ResponseEntity<Page<EventListResponseDTO>> getAllUpcomingEvents(
+            @PathVariable Long studioId,
+            @RequestParam(defaultValue = "0") Integer PageNumber
+    ){
+        Pageable pageable = PageRequest.of(PageNumber, PAGE_SIZE);
+        return ResponseEntity.ok(eventService.getAllUpcomingEventsForStudio(studioId, pageable));
+    }
+
+    @GetMapping("/{studioId}/completed-events")
+    public ResponseEntity<Page<EventListResponseDTO>> getAllCompletedEvents(
+            @PathVariable Long studioId,
+            @RequestParam(defaultValue = "0") Integer PageNumber
+    ){
+        Pageable pageable = PageRequest.of(PageNumber, PAGE_SIZE);
+        return ResponseEntity.ok(eventService.getAllCompletedEventsForStudio(studioId, pageable));
+    }
+
+    @PostMapping("/{studioId}/save-event/{eventId}")
+    public ResponseEntity<Void> saveEventById(
+            @PathVariable Long studioId,
+            @PathVariable Long eventId
+    ){
+        eventService.saveEventById(studioId, eventId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/{studioId}/save-all-events")
+    public void saveAllEvents(
+            @PathVariable Long studioId,
+            @RequestParam(defaultValue = "0") Integer PageNumber
+    ){
+        eventService.saveAllEventsForStudio(studioId);
     }
 
 }

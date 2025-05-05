@@ -1,6 +1,10 @@
 package com.uttkarsh.InstaStudio.dto.event;
 
-import lombok.*;
+import com.uttkarsh.InstaStudio.entities.Event;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -9,15 +13,15 @@ import java.util.Set;
 @AllArgsConstructor
 @Getter
 @Setter
-public class EventCreationRequestDTO {
+public class EventResponseDTO {
+
+    private Long eventId;
 
     private String clientName;
 
     private String clientPhoneNo;
 
-    private String eventType;
-
-    private Set<Long> subEventsIds;
+    private Set<Event> subEvents;
 
     private LocalDateTime eventStartDate;
 
@@ -30,8 +34,5 @@ public class EventCreationRequestDTO {
     private String eventState;
 
     private boolean evenIsSaved;
-
-    private Long studioId;
-
 
 }

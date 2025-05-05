@@ -8,7 +8,7 @@ import com.uttkarsh.InstaStudio.dto.auth.LoginResponseDTO;
 import com.uttkarsh.InstaStudio.entities.User;
 import com.uttkarsh.InstaStudio.entities.enums.UserType;
 import com.uttkarsh.InstaStudio.services.JwtService;
-import com.uttkarsh.InstaStudio.services.user.UserService;
+import com.uttkarsh.InstaStudio.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

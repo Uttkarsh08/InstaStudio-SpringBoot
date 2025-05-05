@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<ApiResponse<?>>handleResourceNotFound(ResourceNotFoundException exception){
+    public ResponseEntity<ApiResponse<?>>handleResourceNotFoundException(ResourceNotFoundException exception){
         ApiError apiError =ApiError.builder()
                 .status(HttpStatus.NOT_FOUND)
                 .message(exception.getMessage())
@@ -19,7 +19,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(AdminAlreadyAssignedException.class)
-    public ResponseEntity<ApiResponse<?>> handleAdminAlreadyAssigned(AdminAlreadyAssignedException ex){
+    public ResponseEntity<ApiResponse<?>> handleAdminAlreadyAssignedException(AdminAlreadyAssignedException ex){
         ApiError apiError = ApiError.builder()
                 .status(HttpStatus.BAD_REQUEST)
                 .message(ex.getMessage())
@@ -28,7 +28,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(EventAlreadyAddedException.class)
-    public ResponseEntity<ApiResponse<?>> handleEventAlreadyAdded(EventAlreadyAddedException ex){
+    public ResponseEntity<ApiResponse<?>> handleEventAlreadyAddedException(EventAlreadyAddedException ex){
         ApiError apiError = ApiError.builder()
                 .status(HttpStatus.BAD_REQUEST)
                 .message(ex.getMessage())
@@ -37,7 +37,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(EventAlreadyAssignedException.class)
-    public ResponseEntity<ApiResponse<?>> handleEventAlreadyAssigned(EventAlreadyAssignedException ex){
+    public ResponseEntity<ApiResponse<?>> handleEventAlreadyAssignedException(EventAlreadyAssignedException ex){
         ApiError apiError = ApiError.builder()
                 .status(HttpStatus.BAD_REQUEST)
                 .message(ex.getMessage())
@@ -46,7 +46,16 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(UserAlreadyAssignedException.class)
-    public ResponseEntity<ApiResponse<?>> handleUserAlreadyAssigned(UserAlreadyAssignedException ex){
+    public ResponseEntity<ApiResponse<?>> handleUserAlreadyAssignedException(UserAlreadyAssignedException ex){
+        ApiError apiError = ApiError.builder()
+                .status(HttpStatus.BAD_REQUEST)
+                .message(ex.getMessage())
+                .build();
+        return buildErrorResponseEntity(apiError);
+    }
+
+    @ExceptionHandler(EventNotAssignedException.class)
+    public ResponseEntity<ApiResponse<?>> handleEventNotAssignedException(EventNotAssignedException ex){
         ApiError apiError = ApiError.builder()
                 .status(HttpStatus.BAD_REQUEST)
                 .message(ex.getMessage())
