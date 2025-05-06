@@ -10,7 +10,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class UserProfileCompletionRequestDTO {
+public class UserResponseDTO {
+
+    private Long userId;
 
     private String firebaseId;
 

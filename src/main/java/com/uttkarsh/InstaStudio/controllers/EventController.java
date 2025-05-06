@@ -4,6 +4,7 @@ import com.uttkarsh.InstaStudio.dto.event.*;
 import com.uttkarsh.InstaStudio.services.EventService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -15,7 +16,8 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class EventController {
 
-    private final int PAGE_SIZE = 5;
+    @Value("${PAGE_SIZE}")
+    private int PAGE_SIZE;
 
     private final EventService eventService;
 

@@ -6,6 +6,7 @@ import com.uttkarsh.InstaStudio.dto.studio.StudioCreationResponseDTO;
 import com.uttkarsh.InstaStudio.entities.Event;
 import com.uttkarsh.InstaStudio.entities.Studio;
 import com.uttkarsh.InstaStudio.entities.User;
+import com.uttkarsh.InstaStudio.entities.enums.UserType;
 import com.uttkarsh.InstaStudio.exceptions.*;
 import com.uttkarsh.InstaStudio.repositories.EventRepository;
 import com.uttkarsh.InstaStudio.repositories.StudioRepository;
@@ -55,12 +56,10 @@ public class StudioServiceImpl implements StudioService {
 
         Studio studio = studioRepository.findById(studioId)
                 .orElseThrow(()-> new ResourceNotFoundException("Studio not found with ID: " + studioId));
-        User user = userRepository.findById(userId)
+
+        User user = userRepository.findByUserIdAndUserType(userId, UserType.ADMIN)
                 .orElseThrow(()-> new ResourceNotFoundException("User not found with ID: " + userId));
 
-        if(studio.getAdmins().contains(user)){
-            throw new UserAlreadyAssignedException("Can't assign same user to a Studio Twice");
-        }
         if(user.getStudio() != null){
             throw new AdminAlreadyAssignedException("Admin is already assigned to a studio.");
         }

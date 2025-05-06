@@ -1,6 +1,6 @@
 package com.uttkarsh.InstaStudio.controllers;
 
-import com.uttkarsh.InstaStudio.dto.user.UserProfileCompletionRequestDTO;
+import com.uttkarsh.InstaStudio.dto.user.UserRequestDTO;
 import com.uttkarsh.InstaStudio.entities.User;
 import com.uttkarsh.InstaStudio.services.JwtService;
 import com.uttkarsh.InstaStudio.services.UserService;
@@ -11,16 +11,16 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/register")
-public class ProfileController {
+@RequestMapping("/api/v1")
+public class UserController {
 
     private final UserService userService;
     private final JwtService jwtService;
 
-    @PostMapping("/user")
+    @PostMapping("/register/user")
     public ResponseEntity<?> createUser(
             @RequestHeader("Authorization") String authHeader,
-            @RequestBody UserProfileCompletionRequestDTO requestDTO) throws Exception {
+            @RequestBody UserRequestDTO requestDTO) throws Exception {
 
         String token = authHeader.split("Bearer ")[1];
         String firebaseId = jwtService.getFireBaseIdFromToken(token);
@@ -29,7 +29,7 @@ public class ProfileController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Token does not match Firebase ID");
         }
 
-        if (userService.existsByFirebaseIdAndUserType(requestDTO.getFirebaseId(), requestDTO.getUserType())) {
+        if (userService.existsByFirebaseId(requestDTO.getFirebaseId())) {
             return ResponseEntity.badRequest().body("User already registered.");
         }
 

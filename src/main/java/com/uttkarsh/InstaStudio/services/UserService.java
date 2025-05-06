@@ -1,6 +1,6 @@
 package com.uttkarsh.InstaStudio.services;
 
-import com.uttkarsh.InstaStudio.dto.user.UserProfileCompletionRequestDTO;
+import com.uttkarsh.InstaStudio.dto.user.UserRequestDTO;
 import com.uttkarsh.InstaStudio.entities.User;
 import com.uttkarsh.InstaStudio.entities.enums.UserType;
 import org.springframework.stereotype.Service;
@@ -8,9 +8,10 @@ import org.springframework.stereotype.Service;
 @Service
 public interface UserService {
 
-    public User getUserByFirebaseIdAndUserType(String firebaseId, UserType type);
 
-    public User createUser(UserProfileCompletionRequestDTO requestDTO);
+    User createUser(UserRequestDTO requestDTO);
 
-    public boolean existsByFirebaseIdAndUserType(String firebaseId, UserType userType);
+    boolean existsByFirebaseId(String firebaseId);
+
+    User getUserByFirebaseId(String firebaseId);
 }

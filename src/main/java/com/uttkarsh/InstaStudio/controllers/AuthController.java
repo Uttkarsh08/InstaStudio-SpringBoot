@@ -45,7 +45,7 @@ public class AuthController {
         log.info("FirebaseId: {}", firebaseId);
         log.info("loginType: {}", loginType);
 
-        User user = userService.getUserByFirebaseIdAndUserType(firebaseId, loginType);
+        User user = userService.getUserByFirebaseId(firebaseId);
         boolean isRegistered = (user != null);
 
         String accessToken = jwtService.generateAccessToken(firebaseId, isRegistered, loginType);

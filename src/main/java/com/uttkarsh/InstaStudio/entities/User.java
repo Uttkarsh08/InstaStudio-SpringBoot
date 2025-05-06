@@ -1,11 +1,15 @@
 package com.uttkarsh.InstaStudio.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.uttkarsh.InstaStudio.entities.enums.UserType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
@@ -27,11 +31,17 @@ public class User {
 
     private String userPhoneNo;
 
+    private LocalDateTime registrationDate;
+
     @Enumerated(EnumType.STRING)
     private UserType userType;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "studio_id")
+    @JsonBackReference
     private Studio studio;
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private MemberProfile memberProfile;
 }
