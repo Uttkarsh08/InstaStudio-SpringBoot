@@ -26,16 +26,12 @@ All APIs are tested using Postman and JUnit to ensure reliability and smooth fro
 - **🛠️ Exception Handling & Consistent Responses**
 Custom exceptions and response wrappers for cleaner debugging, better client-side error handling, and consistent API formats.
 
-- **📸 Use Cases**
-A studio admin can create events, assign team members, and track their completion status.
+- **📸 Use Cases**A studio admin can create events, assign team members, and track their completion status.
+- Clients can be onboarded and linked with specific events or shoots.
+- Members can view assigned events and contribute to real-time progress tracking.
+- API responses are consistently structured to support smooth mobile frontend integration.
 
-Clients can be onboarded and linked with specific events or shoots.
-
-Members can view assigned events and contribute to real-time progress tracking.
-
-API responses are consistently structured to support smooth mobile frontend integration.
-
-##🚀 How to Get Started
+## 🚀 How to Get Started
 
 - **Clone the Repository:**
  ```bash
