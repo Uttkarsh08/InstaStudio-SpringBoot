@@ -23,10 +23,10 @@ Backend-ready structure for integrating payment systems (like UPI or Razorpay) a
 - **🧪 Testing & Validation**
 All APIs are tested using Postman and JUnit to ensure reliability and smooth frontend integration.
 
-🛠️ Exception Handling & Consistent Responses**
+- **🛠️ Exception Handling & Consistent Responses**
 Custom exceptions and response wrappers for cleaner debugging, better client-side error handling, and consistent API formats.
 
-📸 Use Cases**
+- **📸 Use Cases**
 A studio admin can create events, assign team members, and track their completion status.
 
 Clients can be onboarded and linked with specific events or shoots.
@@ -37,7 +37,7 @@ API responses are consistently structured to support smooth mobile frontend inte
 
 ##🚀 How to Get Started
 
-- **Clone the Repository:
+- **Clone the Repository:**
  ```bash
 git clone https://github.com/Uttkarsh08/InstaStudio-SpringBoot.git
 cd InstaStudio-SpringBoot
@@ -45,7 +45,6 @@ cd InstaStudio-SpringBoot
 - **Configure Database (PostgreSQL):**
 
 Create a PostgreSQL database.
-
 Add credentials in your application.yml or .env.
 
 - **Run the Backend Server:**
@@ -58,7 +57,7 @@ Use Postman to hit endpoints for events, users, authentication, and role managem
 Authentication uses access + refresh token logic with token regeneration and expiration handling.
 
 
-##🧱 Tech Stack
+## 🧱 Tech Stack
 - **Language:** Java (Kotlin used in frontend)
 
 - **Backend Framework:** Spring Boot
@@ -70,7 +69,7 @@ Authentication uses access + refresh token logic with token regeneration and exp
 - **API Testing:** Postman, JUnit
 
 
-📅 Development Timeline
+## 📅 Development Timeline
 - **🧩 Backend Modules Developed:** Authentication, Role Authorization, Event & Team Management, Customer Module, Exception Handling.
 
 - **📦 Current State:** Over 20+ endpoints implemented and tested.
