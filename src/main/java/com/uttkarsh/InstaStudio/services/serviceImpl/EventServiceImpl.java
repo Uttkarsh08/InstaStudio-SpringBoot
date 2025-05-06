@@ -7,6 +7,7 @@ import com.uttkarsh.InstaStudio.exceptions.*;
 import com.uttkarsh.InstaStudio.repositories.EventRepository;
 import com.uttkarsh.InstaStudio.repositories.StudioRepository;
 import com.uttkarsh.InstaStudio.services.EventService;
+import com.uttkarsh.InstaStudio.services.StudioService;
 import com.uttkarsh.InstaStudio.utils.mappers.Event.EventListMapper;
 import com.uttkarsh.InstaStudio.utils.mappers.Event.EventMapper;
 import jakarta.transaction.Transactional;

@@ -1,8 +1,9 @@
 package com.uttkarsh.InstaStudio.services.serviceImpl;
 
-import com.uttkarsh.InstaStudio.dto.user.UserProfileCompletionRequestDTO;
+import com.uttkarsh.InstaStudio.dto.user.UserRequestDTO;
 import com.uttkarsh.InstaStudio.entities.User;
 import com.uttkarsh.InstaStudio.entities.enums.UserType;
+import com.uttkarsh.InstaStudio.exceptions.ResourceNotFoundException;
 import com.uttkarsh.InstaStudio.repositories.UserRepository;
 import com.uttkarsh.InstaStudio.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -16,11 +17,12 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
 
-    public User getUserByFirebaseIdAndUserType(String firebaseId, UserType type){
-        return userRepository.getUserByFirebaseIdAndUserType(firebaseId, type);
+    public User getUserByFirebaseId(String firebaseId){
+        return userRepository.getUserByFirebaseId(firebaseId)
+                .orElse(null);
     }
 
-    public User createUser(UserProfileCompletionRequestDTO requestDTO) {
+    public User createUser(UserRequestDTO requestDTO) {
         User user = new User();
         user.setFirebaseId(requestDTO.getFirebaseId());
         user.setUserName(requestDTO.getUserName());
@@ -30,7 +32,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
-    public boolean existsByFirebaseIdAndUserType(String firebaseId, UserType userType) {
-        return userRepository.existsByFirebaseIdAndUserType(firebaseId, userType);
+    public boolean existsByFirebaseId(String firebaseId) {
+        return userRepository.existsByFirebaseId(firebaseId);
     }
 }

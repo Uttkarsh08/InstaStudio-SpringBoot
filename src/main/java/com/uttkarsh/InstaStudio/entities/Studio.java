@@ -1,42 +1,42 @@
-    package com.uttkarsh.InstaStudio.entities;
+package com.uttkarsh.InstaStudio.entities;
 
-    import jakarta.persistence.*;
-    import lombok.*;
+import jakarta.persistence.*;
+import lombok.*;
 
-    import java.util.HashSet;
-    import java.util.Set;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
-    @Entity(name = "studio")
-    @Getter
-    @Setter
-    @Builder
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public class Studio {
+@Entity(name = "studio")
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class Studio {
 
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long studioId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long studioId;
 
-        private String studioName;
+    private String studioName;
 
-        private String studioAddress;
+    private String studioAddress;
 
-        private String studioCity;
+    private String studioCity;
 
-        private String studioState;
+    private String studioState;
 
-        private String studioPinCode;
+    private String studioPinCode;
 
-        @Lob
-        @Basic(fetch = FetchType.LAZY)
-        @Column(name = "image_data")
-        private byte[] imageData;
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @Column(name = "image_data")
+    private byte[] imageData;
 
-        @OneToMany(mappedBy = "studio", cascade = CascadeType.ALL)
-        private Set<User> admins = new HashSet<>();
+    @OneToMany(mappedBy = "studio", cascade = CascadeType.ALL)
+    private Set<User> users = new LinkedHashSet<>();
 
-        @OneToMany(mappedBy = "studio", cascade = CascadeType.ALL)
-        private Set<Event> events = new HashSet<>();
+    @OneToMany(mappedBy = "studio", cascade = CascadeType.ALL)
+    private Set<Event> events = new LinkedHashSet<>();
 
-    }
+}

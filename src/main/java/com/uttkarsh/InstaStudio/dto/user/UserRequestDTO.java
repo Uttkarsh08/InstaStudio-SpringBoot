@@ -6,13 +6,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class UserProfileCompletionResponseDTO {
-
-    private Long userId;
+public class UserRequestDTO {
 
     private String firebaseId;
 
@@ -21,6 +21,8 @@ public class UserProfileCompletionResponseDTO {
     private String userEmail;
 
     private String userPhoneNo;
+
+    private LocalDateTime registrationDate;
 
     private UserType userType;
 
