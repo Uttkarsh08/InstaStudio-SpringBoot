@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -29,5 +30,7 @@ public class SubEventResponseDTO {
     private String eventCity;
 
     private String eventState;
+
+    private Set<Long> memberIds;
 
 }

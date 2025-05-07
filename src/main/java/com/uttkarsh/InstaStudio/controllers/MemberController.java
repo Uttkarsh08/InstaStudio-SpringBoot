@@ -3,6 +3,7 @@ package com.uttkarsh.InstaStudio.controllers;
 import com.uttkarsh.InstaStudio.dto.event.EventRequestDTO;
 import com.uttkarsh.InstaStudio.dto.member.MemberRequestDTO;
 import com.uttkarsh.InstaStudio.dto.member.MemberResponseDTO;
+import com.uttkarsh.InstaStudio.dto.member.MemberReviewResponseDTO;
 import com.uttkarsh.InstaStudio.services.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -71,5 +72,13 @@ public class MemberController {
         return ResponseEntity.noContent().build();
     }
 
-
+    @GetMapping("{studioId}/member/{memberId}/reviews")
+    public ResponseEntity<Page<MemberReviewResponseDTO>> getMemberReviewsById(
+            @PathVariable Long studioId,
+            @PathVariable Long memberId,
+            @RequestParam(defaultValue = "0") Integer PageNumber
+    ){
+        Pageable pageable = PageRequest.of(PageNumber, PAGE_SIZE);
+        return ResponseEntity.ok(memberService.getMemberReviewsById(studioId, memberId, pageable));
+    }
 }

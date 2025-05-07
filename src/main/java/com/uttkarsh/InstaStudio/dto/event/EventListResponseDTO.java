@@ -37,4 +37,7 @@ public class EventListResponseDTO {
     private boolean eventIsSaved;
 
     private Set<Long> subEventsIds;
+
+    private Set<Long> memberIds;
+
 }

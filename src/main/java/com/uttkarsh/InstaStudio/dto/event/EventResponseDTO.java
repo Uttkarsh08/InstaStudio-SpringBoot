@@ -1,6 +1,7 @@
 package com.uttkarsh.InstaStudio.dto.event;
 
 import com.uttkarsh.InstaStudio.entities.Event;
+import com.uttkarsh.InstaStudio.entities.MemberProfile;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,5 +37,7 @@ public class EventResponseDTO {
     private boolean evenIsSaved;
 
     private Set<Event> subEvents;
+
+    private Set<MemberProfile> members;
 
 }
