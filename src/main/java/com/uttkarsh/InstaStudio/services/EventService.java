@@ -28,11 +28,19 @@ public interface EventService {
 
     EventResponseDTO getNextUpcomingEventForStudio(Long studioId);
 
-    EventResponseDTO updateEventById(Long studioId, Long eventId, @Valid EventRequestDTO updateEventDTO);
+    EventResponseDTO updateEventById(Long eventId, @Valid EventRequestDTO updateEventDTO);
 
-    SubEventResponseDTO updateSubEventById(Long studioId, Long eventId, @Valid SubEventRequestDTO updateEventDTO);
+    SubEventResponseDTO updateSubEventById(Long eventId, @Valid SubEventRequestDTO updateEventDTO);
 
     void deleteSubEventById(Long studioId, Long eventId);
 
     void deleteEventById(Long studioId, Long eventId);
+
+    Page<EventListResponseDTO> getAllEventsForMember(Long studioId, Long memberId, Pageable pageable);
+
+    EventResponseDTO getNextUpcomingEventForMember(Long studioId, Long memberId);
+
+    Page<EventListResponseDTO> getUpcomingEventsForMember(Long studioId, Long memberId, Pageable pageable);
+
+    Page<EventListResponseDTO>  getCompletedEventsForMember(Long studioId, Long memberId, Pageable pageable);
 }

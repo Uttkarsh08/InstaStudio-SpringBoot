@@ -13,4 +13,6 @@ public interface MemberRepository extends JpaRepository<MemberProfile, Long> {
     Set<MemberProfile> findAllByMemberIdInAndUser_Studio_StudioId(Set<Long> memberIds, Long studioId);
 
     Optional<MemberProfile> findByMemberIdAndUser_Studio_StudioId(Long memberId, Long studioId);
+
+    boolean existsByMemberIdAndUser_Studio_StudioId(Long memberId, Long studioId);
 }

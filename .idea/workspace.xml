@@ -4,34 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7df082fd-01c9-4f11-ac5d-6932c0859655" name="Changes" comment="Implemented Members(Rating and search left)">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/controllers/RatingController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/member/MemberReviewRequestDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/member/MemberReviewResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/repositories/RatingRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/RatingService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/RatingServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/utils/mappers/Event/SubEventMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/utils/mappers/Member/MemberReviewMapper.java" afterDir="false" />
+    <list default="true" id="7df082fd-01c9-4f11-ac5d-6932c0859655" name="Changes" comment="Implemented Members Rating">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/ValidationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/ValidationServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/controllers/EventController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/controllers/EventController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/controllers/MemberController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/controllers/MemberController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/event/EventListResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/event/EventListResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/event/EventRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/event/EventRequestDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/event/EventResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/event/EventResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/event/SubEventRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/event/SubEventRequestDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/event/SubEventResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/event/SubEventResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/member/MemberResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/member/MemberResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/entities/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/entities/Event.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/entities/MemberProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/entities/MemberProfile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/entities/Rating.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/entities/Rating.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/repositories/EventRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/repositories/EventRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/repositories/MemberRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/repositories/MemberRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/MemberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/MemberService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/EventService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/EventService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/EventServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/EventServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/MemberServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/MemberServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/RatingServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/RatingServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/utils/mappers/Event/EventListMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/utils/mappers/Event/EventListMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/utils/mappers/Event/EventMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/utils/mappers/Event/EventMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/utils/mappers/Member/MemberMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/utils/mappers/Member/MemberMapper.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -227,7 +214,15 @@
       <option name="project" value="LOCAL" />
       <updated>1746573569737</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Implemented Members Rating">
+      <option name="closed" value="true" />
+      <created>1746653049359</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1746653049360</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -260,6 +255,7 @@
     <MESSAGE value="Implemented Event(without search)" />
     <MESSAGE value="Minor Changes" />
     <MESSAGE value="Implemented Members(Rating and search left)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented Members(Rating and search left)" />
+    <MESSAGE value="Implemented Members Rating" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented Members Rating" />
   </component>
 </project>

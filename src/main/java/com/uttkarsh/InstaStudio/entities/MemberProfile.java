@@ -36,7 +36,7 @@ public class MemberProfile {
     @JsonBackReference
     private List<Rating> ratings;
 
-    @ManyToMany(mappedBy = "members")
+    @ManyToMany(mappedBy = "members", cascade = CascadeType.ALL)
     @JsonBackReference
     private Set<Event> events = new LinkedHashSet<>();
 }

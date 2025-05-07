@@ -93,8 +93,7 @@ public class EventController {
 
     @PostMapping("/{studioId}/save-all-events")
     public void saveAllEvents(
-            @PathVariable Long studioId,
-            @RequestParam(defaultValue = "0") Integer PageNumber
+            @PathVariable Long studioId
     ){
         eventService.saveAllEventsForStudio(studioId);
     }
@@ -106,23 +105,21 @@ public class EventController {
         return ResponseEntity.ok(eventService.getNextUpcomingEventForStudio(studioId));
     }
 
-    @PutMapping("/{studioId}/edit-event/{eventId}")
+    @PutMapping("/edit-event/{eventId}")
     public ResponseEntity<EventResponseDTO> updateEventById(
-            @PathVariable Long studioId,
             @PathVariable Long eventId,
             @RequestBody @Valid EventRequestDTO updateEventDTO
     ){
-        EventResponseDTO updatedEvent = eventService.updateEventById(studioId, eventId, updateEventDTO);
+        EventResponseDTO updatedEvent = eventService.updateEventById(eventId, updateEventDTO);
         return ResponseEntity.ok(updatedEvent);
     }
 
-    @PutMapping("/{studioId}/edit-sub-event/{eventId}")
+    @PutMapping("/edit-sub-event/{eventId}")
     public ResponseEntity<SubEventResponseDTO> updateSubEventById(
-            @PathVariable Long studioId,
             @PathVariable Long eventId,
             @RequestBody @Valid SubEventRequestDTO updateEventDTO
     ){
-        SubEventResponseDTO updatedSubEvent = eventService.updateSubEventById(studioId, eventId, updateEventDTO);
+        SubEventResponseDTO updatedSubEvent = eventService.updateSubEventById(eventId, updateEventDTO);
         return ResponseEntity.ok(updatedSubEvent);
     }
 
@@ -142,6 +139,44 @@ public class EventController {
     ){
         eventService.deleteEventById(studioId, eventId);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("{studioId}/member/{memberId}/all-events")
+    public ResponseEntity<Page<EventListResponseDTO>> getEventsByMemberId(
+            @PathVariable Long studioId,
+            @PathVariable Long memberId,
+            @RequestParam(defaultValue = "0") Integer PageNumber
+    ){
+        Pageable pageable = PageRequest.of(PageNumber, PAGE_SIZE);
+        return ResponseEntity.ok(eventService.getAllEventsForMember(studioId, memberId, pageable));
+    }
+
+    @GetMapping("{studioId}/member/{memberId}/next-event")
+    public ResponseEntity<EventResponseDTO> getNextEventForMember(
+            @PathVariable Long studioId,
+            @PathVariable Long memberId
+    ){
+        return ResponseEntity.ok(eventService.getNextUpcomingEventForMember(studioId, memberId));
+    }
+
+    @GetMapping("{studioId}/member/{memberId}/upcoming-event")
+    public ResponseEntity<Page<EventListResponseDTO>> getUpcomingEventsForMember(
+            @PathVariable Long studioId,
+            @PathVariable Long memberId,
+            @RequestParam(defaultValue = "0") Integer PageNumber
+    ){
+        Pageable pageable = PageRequest.of(PageNumber, PAGE_SIZE);
+        return ResponseEntity.ok(eventService.getUpcomingEventsForMember(studioId, memberId, pageable));
+    }
+
+    @GetMapping("{studioId}/member/{memberId}/completed-event")
+    public ResponseEntity<Page<EventListResponseDTO>> getCompletedEventsForMember(
+            @PathVariable Long studioId,
+            @PathVariable Long memberId,
+            @RequestParam(defaultValue = "0") Integer PageNumber
+    ){
+        Pageable pageable = PageRequest.of(PageNumber, PAGE_SIZE);
+        return ResponseEntity.ok(eventService.getCompletedEventsForMember(studioId, memberId, pageable));
     }
 
 
