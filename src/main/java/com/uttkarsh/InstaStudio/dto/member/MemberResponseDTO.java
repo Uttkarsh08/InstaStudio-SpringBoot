@@ -25,6 +25,6 @@ public class MemberResponseDTO {
 
     private String specialization;
 
-    private Double memberAverageRating;
+    private Long memberAverageRating;
 
 }

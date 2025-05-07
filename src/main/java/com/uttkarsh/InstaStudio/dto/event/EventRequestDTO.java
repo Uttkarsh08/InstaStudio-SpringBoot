@@ -17,8 +17,6 @@ public class EventRequestDTO {
 
     private String eventType;
 
-    private Set<Long> subEventsIds;
-
     private LocalDateTime eventStartDate;
 
     private LocalDateTime eventEndDate;
@@ -32,5 +30,9 @@ public class EventRequestDTO {
     private boolean evenIsSaved;
 
     private Long studioId;
+
+    private Set<Long> subEventsIds;
+
+    private Set<Long> memberIds;
 
 }

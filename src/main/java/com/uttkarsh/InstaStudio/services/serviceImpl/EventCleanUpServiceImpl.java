@@ -18,7 +18,7 @@ public class EventCleanUpServiceImpl implements EventCleanUpService {
     @Override
     @Scheduled(cron = "0 0 3 * * ?")
     public void cleanupOrphanedSubEvents() {
-        List<Event> orphanedSubEvents = eventRepository.findAllByParentEventIsNullAndClientNameIsNull(); // This fetches sub-events with no parent
+        List<Event> orphanedSubEvents = eventRepository.findAllByParentEventIsNullAndClientNameIsNull();
         for (Event subEvent : orphanedSubEvents) {
             eventRepository.delete(subEvent);
         }

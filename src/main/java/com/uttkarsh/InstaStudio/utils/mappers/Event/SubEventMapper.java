@@ -1,7 +1,7 @@
 package com.uttkarsh.InstaStudio.utils.mappers.Event;
 
-import com.uttkarsh.InstaStudio.dto.event.EventListResponseDTO;
 import com.uttkarsh.InstaStudio.dto.event.EventResponseDTO;
+import com.uttkarsh.InstaStudio.dto.event.SubEventResponseDTO;
 import com.uttkarsh.InstaStudio.entities.Event;
 import com.uttkarsh.InstaStudio.entities.MemberProfile;
 import org.springframework.context.annotation.Configuration;
@@ -12,15 +12,14 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Configuration
-public class EventMapper {
+public class SubEventMapper {
 
-    public EventResponseDTO toEventDTO(Event event) {
+    public SubEventResponseDTO toSubEventDTO(Event event) {
+
         if (event == null) return null;
 
-        EventResponseDTO dto = new EventResponseDTO();
+        SubEventResponseDTO dto = new SubEventResponseDTO();
         dto.setEventId(event.getEventId());
-        dto.setClientName(event.getClientName());
-        dto.setClientPhoneNo(event.getClientPhoneNo());
         dto.setEventStartDate(event.getEventStartDate());
         dto.setEventEndDate(event.getEventEndDate());
         dto.setEventLocation(event.getEventLocation());
@@ -28,17 +27,12 @@ public class EventMapper {
         dto.setEventState(event.getEventState());
         dto.setEventType(event.getEventType());
 
-        //Sub-Events
-        Set<Event> subEvents = event.getSubEvents()
+
+        Set<Long> membersIds = event.getMembers()
                 .stream()
-                .sorted(Comparator.comparing(Event::getEventStartDate))
+                .map(MemberProfile::getMemberId)
                 .collect(Collectors.toCollection(LinkedHashSet::new));
-
-        dto.setSubEvents(subEvents);
-
-        //Members
-        Set<MemberProfile> members = new LinkedHashSet<>(event.getMembers());
-        dto.setMembers(members);
+        dto.setMemberIds(membersIds);
 
         return dto;
     }

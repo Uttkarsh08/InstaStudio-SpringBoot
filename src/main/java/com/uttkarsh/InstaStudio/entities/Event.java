@@ -1,6 +1,7 @@
 package com.uttkarsh.InstaStudio.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -53,5 +54,13 @@ public class Event {
     @JoinColumn(name = "studio_id")
     @JsonBackReference
     private Studio studio;
+
+    @ManyToMany
+    @JoinTable(
+            name = "event_member",
+            joinColumns = @JoinColumn(name = "event_id"),
+            inverseJoinColumns = @JoinColumn(name = "member_id")
+    )
+    private Set<MemberProfile> members = new LinkedHashSet<>();
 
 }

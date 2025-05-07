@@ -1,5 +1,6 @@
 package com.uttkarsh.InstaStudio.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,6 +22,8 @@ public class Rating {
     private Integer ratingValue;
 
     private String review;
+
+    private String reviewBy;
 
     private LocalDateTime createdAt;
 
