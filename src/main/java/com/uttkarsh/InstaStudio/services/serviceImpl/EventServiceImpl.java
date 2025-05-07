@@ -10,6 +10,7 @@ import com.uttkarsh.InstaStudio.repositories.MemberRepository;
 import com.uttkarsh.InstaStudio.repositories.StudioRepository;
 import com.uttkarsh.InstaStudio.services.EventService;
 import com.uttkarsh.InstaStudio.services.StudioService;
+import com.uttkarsh.InstaStudio.services.ValidationService;
 import com.uttkarsh.InstaStudio.utils.mappers.Event.EventListMapper;
 import com.uttkarsh.InstaStudio.utils.mappers.Event.EventMapper;
 import com.uttkarsh.InstaStudio.utils.mappers.Event.SubEventMapper;
@@ -30,13 +31,13 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class EventServiceImpl implements EventService {
 
-    private final ModelMapper mapper;
     private final EventListMapper eventListMapper;
     private final EventMapper eventMapper;
     private final SubEventMapper subEventMapper;
     private final StudioRepository studioRepository;
     private final EventRepository eventRepository;
     private final MemberRepository memberRepository;
+    private final ValidationService validationService;
 
 
     @Override
@@ -132,15 +133,19 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public EventResponseDTO getEventById(Long studioId, Long eventId) {
+        validationService.isStudioValid(studioId);
+
         Event event = eventRepository.findByEventIdAndStudio_StudioIdAndParentEventIsNullAndClientNameIsNotNull(eventId, studioId)
                 .orElseThrow(() -> new EventIsSubEventException(
                         "Event with id: " + eventId + " is not present or is a SubEvent"));
 
-        return mapper.map(event, EventResponseDTO.class);
+        return eventMapper.toEventDTO(event);
     }
 
     @Override
     public SubEventResponseDTO getSubEventById(Long studioId, Long eventId) {
+        validationService.isStudioValid(studioId);
+
         Event event = eventRepository.findByEventIdAndStudio_StudioIdAndParentEventIsNotNull(eventId, studioId)
                 .orElseThrow(() -> new EventIsParentEventException(
                         "Event with id: " + eventId + " is not present or is a MainEvent"));
@@ -151,16 +156,20 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public EventResponseDTO getNextUpcomingEventForStudio(Long studioId) {
+        validationService.isStudioValid(studioId);
+
         Event event =  eventRepository.findFirstByStudio_StudioIdAndParentEventIsNullAndClientNameIsNotNullAndEventStartDateAfterOrderByEventStartDate(studioId, LocalDateTime.now())
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "No Upcoming Event associated with studio id: " + studioId));
-        return mapper.map(event, EventResponseDTO.class);
+        return eventMapper.toEventDTO(event);
 
     }
 
 
     @Override
     public Page<EventListResponseDTO> getAllEventsForStudio(Long studioId, Pageable pageable) {
+        validationService.isStudioValid(studioId);
+
         Page<Event> events = eventRepository.findAllByStudio_StudioIdAndParentEventIsNullAndClientNameIsNotNullOrderByEventStartDate(studioId, pageable);
 
         return events.map(eventListMapper::toEventListDTO);
@@ -168,6 +177,8 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Page<EventListResponseDTO> getAllUpcomingEventsForStudio(Long studioId, Pageable pageable) {
+        validationService.isStudioValid(studioId);
+
         Page<Event>  upcomingEvents = eventRepository.findAllByStudio_StudioIdAndParentEventIsNullAndClientNameIsNotNullAndEventStartDateAfterOrderByEventStartDate(
                 studioId,
                 LocalDateTime.now(),
@@ -177,6 +188,8 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Page<EventListResponseDTO> getAllCompletedEventsForStudio(Long studioId, Pageable pageable) {
+        validationService.isStudioValid(studioId);
+
         Page<Event>  completedEvents = eventRepository.findAllByStudio_StudioIdAndParentEventIsNullAndClientNameIsNotNullAndEventStartDateBeforeOrderByEventStartDateDesc(
                 studioId,
                 LocalDateTime.now(),
@@ -186,6 +199,8 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public void saveEventById(Long studioId, Long eventId) {
+        validationService.isStudioValid(studioId);
+
         Event event = eventRepository.findByEventIdAndStudio_StudioIdAndParentEventIsNull(eventId, studioId)
                 .orElseThrow(() -> new EventIsSubEventException(
                         "Event with id: " + eventId + " is not present or is a SubEvent"));
@@ -200,6 +215,8 @@ public class EventServiceImpl implements EventService {
     @Transactional
     @Override
     public void saveAllEventsForStudio(Long studioId) {
+        validationService.isStudioValid(studioId);
+
         List<Event> allUnsavedEvents = eventRepository
                 .findAllByStudio_StudioIdAndParentEventIsNullAndEvenIsSavedFalseAndEventStartDateAfterOrderByEventStartDate(studioId, LocalDateTime.now());
 
@@ -212,7 +229,9 @@ public class EventServiceImpl implements EventService {
 
 
     @Override
-    public EventResponseDTO updateEventById(Long studioId, Long eventId, EventRequestDTO requestDTO) {
+    public EventResponseDTO updateEventById(Long eventId, EventRequestDTO requestDTO) {
+        validationService.isStudioValid(requestDTO.getStudioId());
+
         Event event = eventRepository.findById(eventId)
                 .orElseThrow(() -> new ResourceNotFoundException("Event not found with id:"+eventId));
 
@@ -238,9 +257,6 @@ public class EventServiceImpl implements EventService {
             }
         }
 
-        if (!event.getStudio().getStudioId().equals(studioId)) {
-            throw new EventNotAssignedException("Event doesn't belong to this studio");
-        }
         if(event.getParentEvent() != null){
             throw new EventIsSubEventException("This event is parent Event");
         }
@@ -286,7 +302,9 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public SubEventResponseDTO updateSubEventById(Long studioId, Long eventId, SubEventRequestDTO dto) {
+    public SubEventResponseDTO updateSubEventById(Long eventId, SubEventRequestDTO dto) {
+        validationService.isStudioValid(dto.getStudioId());
+
         Event subEvent = eventRepository.findById(eventId)
                 .orElseThrow(() -> new ResourceNotFoundException("Event not found with id:"+eventId));
 
@@ -294,10 +312,6 @@ public class EventServiceImpl implements EventService {
 
         if(subEvent.getParentEvent() == null){
             throw new EventIsSubEventException( "Event with id: " + eventId + " is not present or is a MainEvent");
-        }
-
-        if (!subEvent.getStudio().getStudioId().equals(studioId)) {
-            throw new EventNotAssignedException("Event doesn't belong to this studio");
         }
 
         if(!dto.getMemberIds().isEmpty() && members.isEmpty()){
@@ -325,6 +339,8 @@ public class EventServiceImpl implements EventService {
 
         @Override
         public void deleteSubEventById(Long studioId, Long eventId) {
+            validationService.isStudioValid(studioId);
+
             Event event = eventRepository.findByEventIdAndStudio_StudioIdAndParentEventIsNotNull(eventId, studioId)
                     .orElseThrow(() -> new EventIsParentEventException(
                             "Event with id: " + eventId + " is not present or is a MainEvent"));
@@ -350,6 +366,53 @@ public class EventServiceImpl implements EventService {
         }
 
         eventRepository.delete(event);
+    }
+
+    @Override
+    public Page<EventListResponseDTO> getAllEventsForMember(Long studioId, Long memberId, Pageable pageable) {
+        validationService.isStudioValid(studioId);
+        validationService.isMemberValid(studioId, memberId);
+
+        Page<Event> events = eventRepository.findByMembers_MemberIdAndStudio_StudioIdAndParentEventIsNotNullOrderByEventStartDate(memberId, studioId, pageable);
+
+        return events.map(eventListMapper::toEventListDTO);
+    }
+
+    @Override
+    public EventResponseDTO getNextUpcomingEventForMember(Long studioId, Long memberId) {
+        validationService.isStudioValid(studioId);
+        validationService.isMemberValid(studioId, memberId);
+
+        Event event =  eventRepository.findFirstByStudio_StudioIdAndMembers_MemberIdAndAndParentEventIsNotNullAndEventStartDateAfterOrderByEventStartDate(studioId, memberId, LocalDateTime.now())
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "No Upcoming Event associated with studio id: " + studioId));
+        return eventMapper.toEventDTO(event);
+    }
+
+    @Override
+    public Page<EventListResponseDTO> getUpcomingEventsForMember(Long studioId, Long memberId, Pageable pageable) {
+        validationService.isStudioValid(studioId);
+        validationService.isMemberValid(studioId, memberId);
+
+        Page<Event>  upcomingEvents = eventRepository.findAllByStudio_StudioIdAndMembers_MemberIdAndParentEventIsNotNullAndEventStartDateAfterOrderByEventStartDate(
+                studioId,
+                memberId,
+                LocalDateTime.now(),
+                pageable);
+        return upcomingEvents.map(eventListMapper::toEventListDTO);
+    }
+
+    @Override
+    public Page<EventListResponseDTO> getCompletedEventsForMember(Long studioId, Long memberId, Pageable pageable) {
+        validationService.isStudioValid(studioId);
+        validationService.isMemberValid(studioId, memberId);
+
+        Page<Event>  completedEvents = eventRepository.findAllByStudio_StudioIdAndMembers_MemberIdAndParentEventIsNotNullAndEventStartDateBeforeOrderByEventStartDateDesc(
+                studioId,
+                memberId,
+                LocalDateTime.now(),
+                pageable);
+        return completedEvents.map(eventListMapper::toEventListDTO);
     }
 
 

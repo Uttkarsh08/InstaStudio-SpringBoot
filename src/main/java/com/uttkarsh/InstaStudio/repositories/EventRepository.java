@@ -33,4 +33,14 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     Optional<Event> findByEventIdAndStudio_StudioIdAndParentEventIsNullAndClientNameIsNotNull(Long eventId, Long studioId);
 
     List<Event> findAllByParentEventIsNullAndClientNameIsNull();
+
+    Page<Event> findByMembers_MemberIdAndStudio_StudioIdAndParentEventIsNotNullOrderByEventStartDate(Long memberId, Long studioId, Pageable pageable);
+
+    Optional<Event> findFirstByStudio_StudioIdAndMembers_MemberIdAndAndParentEventIsNotNullAndEventStartDateAfterOrderByEventStartDate(Long studioId, Long memberId, LocalDateTime now);
+
+    Page<Event> findAllByStudio_StudioIdAndMembers_MemberIdAndParentEventIsNotNullAndEventStartDateAfterOrderByEventStartDate(Long studioId, Long memberId, LocalDateTime now, Pageable pageable);
+
+    Page<Event> findAllByStudio_StudioIdAndMembers_MemberIdAndParentEventIsNotNullAndEventStartDateBeforeOrderByEventStartDateDesc(Long studioId, Long memberId, LocalDateTime now, Pageable pageable);
+
+    void deleteAllByStudio_StudioIdAndMembers_MemberId(Long studioId, Long memberId);
 }

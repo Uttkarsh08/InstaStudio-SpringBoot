@@ -68,6 +68,7 @@ public class MemberController {
             @PathVariable Long studioId,
             @PathVariable Long memberId
     ){
+
         memberService.deleteMemberById(studioId, memberId);
         return ResponseEntity.noContent().build();
     }
@@ -81,4 +82,6 @@ public class MemberController {
         Pageable pageable = PageRequest.of(PageNumber, PAGE_SIZE);
         return ResponseEntity.ok(memberService.getMemberReviewsById(studioId, memberId, pageable));
     }
+
+
 }

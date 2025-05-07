@@ -11,11 +11,9 @@ import com.uttkarsh.InstaStudio.entities.enums.UserType;
 import com.uttkarsh.InstaStudio.exceptions.EventAlreadyAssignedException;
 import com.uttkarsh.InstaStudio.exceptions.EventNotAssignedException;
 import com.uttkarsh.InstaStudio.exceptions.ResourceNotFoundException;
-import com.uttkarsh.InstaStudio.repositories.MemberRepository;
-import com.uttkarsh.InstaStudio.repositories.RatingRepository;
-import com.uttkarsh.InstaStudio.repositories.StudioRepository;
-import com.uttkarsh.InstaStudio.repositories.UserRepository;
+import com.uttkarsh.InstaStudio.repositories.*;
 import com.uttkarsh.InstaStudio.services.MemberService;
+import com.uttkarsh.InstaStudio.services.ValidationService;
 import com.uttkarsh.InstaStudio.utils.mappers.Member.MemberMapper;
 import com.uttkarsh.InstaStudio.utils.mappers.Member.MemberReviewMapper;
 import jakarta.transaction.Transactional;
@@ -31,12 +29,13 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
-    private final MemberRepository memberRepository;
+    private final ValidationService validationService;
     private final StudioRepository studioRepository;
     private final UserRepository userRepository;
     private final RatingRepository ratingRepository;
     private final MemberMapper memberMapper;
     private final MemberReviewMapper memberReviewMapper;
+    private final EventRepository eventRepository;
 
     @Override
     public MemberResponseDTO createMember(MemberRequestDTO requestDTO) {
@@ -72,6 +71,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public MemberResponseDTO getMemberById(Long studioId, Long memberId) {
+        validationService.isStudioValid(studioId);
 
         User member = userRepository.findByUserIdAndStudio_StudioIdAndUserType(memberId, studioId, UserType.MEMBER)
                 .orElseThrow(() -> new ResourceNotFoundException("Member can't be found with id: "+  memberId));
@@ -87,6 +87,8 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Page<MemberResponseDTO> getAllMemebersForStudio(Long studioId, Pageable pageable) {
+        validationService.isStudioValid(studioId);
+
         Page<User> members = userRepository.findAllByStudio_StudioIdAndUserType(studioId, UserType.MEMBER, pageable);
 
         return members.map(memberMapper::toMemberDTO);
@@ -94,6 +96,8 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public MemberResponseDTO updateMemberById(Long studioId, Long memberId, MemberRequestDTO requestDTO) {
+        validationService.isStudioValid(studioId);
+
         User member = userRepository.findByUserIdAndStudio_StudioIdAndUserType(memberId, studioId, UserType.MEMBER)
                 .orElseThrow(() -> new ResourceNotFoundException("Member can't be found with id: "+  memberId));
 
@@ -111,6 +115,8 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void deleteMemberById(Long studioId, Long memberId) {
+        validationService.isStudioValid(studioId);
+
         User member = userRepository.findByUserIdAndStudio_StudioIdAndUserType(memberId, studioId, UserType.MEMBER)
                 .orElseThrow(() -> new ResourceNotFoundException("Member can't be found with id: "+  memberId));
 
@@ -122,6 +128,9 @@ public class MemberServiceImpl implements MemberService {
         if (memberProfile == null) {
             throw new ResourceNotFoundException("Member profile not found for member ID: " + memberId);
         }
+
+        eventRepository.deleteAllByStudio_StudioIdAndMembers_MemberId(studioId, memberId);
+        member.setStudio(null);
         member.setMemberProfile(null);
         userRepository.save(member);
 
@@ -129,6 +138,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Page<MemberReviewResponseDTO> getMemberReviewsById(Long studioId, Long memberId, Pageable pageable) {
+        validationService.isStudioValid(studioId);
 
         userRepository.findByUserIdAndStudio_StudioIdAndUserType(memberId, studioId, UserType.MEMBER)
                 .orElseThrow(() -> new ResourceNotFoundException("Member can't be found with id: "+  memberId));

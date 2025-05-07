@@ -28,6 +28,11 @@ public class EventListMapper {
         dto.setEventIsSaved(event.isEvenIsSaved());
         dto.setEventType(event.getEventType());
 
+        if(event.getParentEvent() != null){
+            dto.setClientName(event.getParentEvent().getClientName());
+            dto.setClientPhoneNo(event.getParentEvent().getClientPhoneNo());
+        }
+
         Set<Long> subEventIds = event.getSubEvents()
                 .stream()
                 .sorted(Comparator.comparing(Event::getEventStartDate))

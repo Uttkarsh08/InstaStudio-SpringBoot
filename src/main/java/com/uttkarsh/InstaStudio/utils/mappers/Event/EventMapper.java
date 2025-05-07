@@ -28,6 +28,11 @@ public class EventMapper {
         dto.setEventState(event.getEventState());
         dto.setEventType(event.getEventType());
 
+        if(event.getParentEvent() != null){
+            dto.setClientName(event.getParentEvent().getClientName());
+            dto.setClientPhoneNo(event.getParentEvent().getClientPhoneNo());
+        }
+
         //Sub-Events
         Set<Event> subEvents = event.getSubEvents()
                 .stream()
