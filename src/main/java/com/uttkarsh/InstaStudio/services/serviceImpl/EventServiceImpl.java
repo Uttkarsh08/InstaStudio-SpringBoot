@@ -415,5 +415,56 @@ public class EventServiceImpl implements EventService {
         return completedEvents.map(eventListMapper::toEventListDTO);
     }
 
+    @Override
+    public Page<EventListResponseDTO> searchAllEvents(Long studioId, String query, Pageable pageable) {
+        validationService.isStudioValid(studioId);
+
+        Page<Event> searchEvents = eventRepository.searchAllEvents(studioId, query, pageable);
+        return searchEvents.map(eventListMapper::toEventListDTO);
+    }
+
+    @Override
+    public Page<EventListResponseDTO> searchUpcomingEvents(Long studioId, String query, Pageable pageable) {
+        validationService.isStudioValid(studioId);
+
+        Page<Event> searchEvents = eventRepository.searchUpcomingEvents(studioId, LocalDateTime.now(), query, pageable);
+        return searchEvents.map(eventListMapper::toEventListDTO);
+    }
+
+    @Override
+    public Page<EventListResponseDTO> searchCompletedEvents(Long studioId, String query, Pageable pageable) {
+        validationService.isStudioValid(studioId);
+
+        Page<Event> searchEvents = eventRepository.searchCompletedEvents(studioId, LocalDateTime.now(), query, pageable);
+        return searchEvents.map(eventListMapper::toEventListDTO);
+    }
+
+    @Override
+    public Page<EventListResponseDTO> searchAllEventsForMember(Long studioId, Long memberId, String query, Pageable pageable) {
+        validationService.isStudioValid(studioId);
+        validationService.isMemberValid(studioId, memberId);
+
+        Page<Event> searchEvents = eventRepository.searchAllEventsForMember(studioId, memberId, query, pageable);
+        return searchEvents.map(eventListMapper::toEventListDTO);
+    }
+
+    @Override
+    public Page<EventListResponseDTO> searchUpcomingEventsForMember(Long studioId, Long memberId, String query, Pageable pageable) {
+        validationService.isStudioValid(studioId);
+        validationService.isMemberValid(studioId, memberId);
+
+        Page<Event> searchEvents = eventRepository.searchUpcomingEventsByMemberAndStudio(studioId, memberId, LocalDateTime.now(), query, pageable);
+        return searchEvents.map(eventListMapper::toEventListDTO);
+    }
+
+    @Override
+    public Page<EventListResponseDTO> searchCompletedEventsForMember(Long studioId, Long memberId, String query, Pageable pageable) {
+        validationService.isStudioValid(studioId);
+        validationService.isMemberValid(studioId, memberId);
+
+        Page<Event> searchEvents = eventRepository.searchCompletedEventsByMemberAndStudio(studioId, memberId, LocalDateTime.now(), query, pageable);
+        return searchEvents.map(eventListMapper::toEventListDTO);
+    }
+
 
 }

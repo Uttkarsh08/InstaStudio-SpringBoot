@@ -22,6 +22,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -146,5 +148,21 @@ public class MemberServiceImpl implements MemberService {
         Page<Rating> memberProfile = ratingRepository.findAllByMemberProfile_MemberIdAndMemberProfile_User_Studio_StudioId(memberId, studioId, pageable);
 
         return memberProfile.map(memberReviewMapper::toMemberReviewDTO);
+    }
+
+    @Override
+    public Page<MemberResponseDTO> searchAllMembers(Long studioId, String query, Pageable pageable) {
+        validationService.isStudioValid(studioId);
+
+        Page<User> members = userRepository.searchAllMembers(studioId, query, pageable);
+        return members.map(memberMapper::toMemberDTO);
+    }
+
+    @Override
+    public List<MemberResponseDTO> getALlAvailableMembers(Long studioId, LocalDateTime startDate, LocalDateTime endDate) {
+        validationService.isStudioValid(studioId);
+
+        List<User> availableMembers = userRepository.findAvailableMembersByStudioAndDateRange(studioId, startDate, endDate);
+        return availableMembers.stream().map(memberMapper::toMemberDTO).toList();
     }
 }

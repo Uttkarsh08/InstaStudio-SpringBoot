@@ -43,4 +43,16 @@ public interface EventService {
     Page<EventListResponseDTO> getUpcomingEventsForMember(Long studioId, Long memberId, Pageable pageable);
 
     Page<EventListResponseDTO>  getCompletedEventsForMember(Long studioId, Long memberId, Pageable pageable);
+
+    Page<EventListResponseDTO> searchAllEvents(Long studioId, String query, Pageable pageable);
+
+    Page<EventListResponseDTO> searchUpcomingEvents(Long studioId, String query, Pageable pageable);
+
+    Page<EventListResponseDTO> searchCompletedEvents(Long studioId, String query, Pageable pageable);
+
+    Page<EventListResponseDTO> searchAllEventsForMember(Long studioId, Long memberId, String query, Pageable pageable);
+
+    Page<EventListResponseDTO> searchUpcomingEventsForMember(Long studioId, Long memberId, String query, Pageable pageable);
+
+    Page<EventListResponseDTO> searchCompletedEventsForMember(Long studioId, Long memberId, String query, Pageable pageable);
 }

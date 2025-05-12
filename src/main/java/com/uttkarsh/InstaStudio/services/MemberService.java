@@ -3,9 +3,13 @@ package com.uttkarsh.InstaStudio.services;
 import com.uttkarsh.InstaStudio.dto.member.MemberRequestDTO;
 import com.uttkarsh.InstaStudio.dto.member.MemberResponseDTO;
 import com.uttkarsh.InstaStudio.dto.member.MemberReviewResponseDTO;
+import com.uttkarsh.InstaStudio.entities.MemberProfile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public interface MemberService {
@@ -22,4 +26,7 @@ public interface MemberService {
 
     Page<MemberReviewResponseDTO> getMemberReviewsById(Long studioId, Long memberId, Pageable pageable);
 
+    Page<MemberResponseDTO> searchAllMembers(Long studioId, String query, Pageable pageable);
+
+    List<MemberResponseDTO> getALlAvailableMembers(Long studioId, LocalDateTime startDate, LocalDateTime endDate);
 }
