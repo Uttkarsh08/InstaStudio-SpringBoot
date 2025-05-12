@@ -30,4 +30,6 @@ public class SubEventRequestDTO {
 
     private Set<Long> memberIds;
 
+    private Set<Long> resourceIds;
+
 }

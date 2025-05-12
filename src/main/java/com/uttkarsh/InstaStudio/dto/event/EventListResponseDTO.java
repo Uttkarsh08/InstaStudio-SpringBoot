@@ -40,4 +40,6 @@ public class EventListResponseDTO {
 
     private Set<Long> memberIds;
 
+    private Set<Long> resourceIds;
+
 }

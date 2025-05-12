@@ -63,4 +63,12 @@ public class Event {
     )
     private Set<MemberProfile> members = new LinkedHashSet<>();
 
+    @ManyToMany
+    @JoinTable(
+            name = "event_resource",
+            joinColumns = @JoinColumn(name = "event_id"),
+            inverseJoinColumns = @JoinColumn(name = "resource_id")
+    )
+    private Set<Resource> resources = new LinkedHashSet<>();
+
 }

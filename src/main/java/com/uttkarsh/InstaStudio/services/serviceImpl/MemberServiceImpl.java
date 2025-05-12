@@ -3,10 +3,7 @@ package com.uttkarsh.InstaStudio.services.serviceImpl;
 import com.uttkarsh.InstaStudio.dto.member.MemberRequestDTO;
 import com.uttkarsh.InstaStudio.dto.member.MemberResponseDTO;
 import com.uttkarsh.InstaStudio.dto.member.MemberReviewResponseDTO;
-import com.uttkarsh.InstaStudio.entities.MemberProfile;
-import com.uttkarsh.InstaStudio.entities.Rating;
-import com.uttkarsh.InstaStudio.entities.Studio;
-import com.uttkarsh.InstaStudio.entities.User;
+import com.uttkarsh.InstaStudio.entities.*;
 import com.uttkarsh.InstaStudio.entities.enums.UserType;
 import com.uttkarsh.InstaStudio.exceptions.EventAlreadyAssignedException;
 import com.uttkarsh.InstaStudio.exceptions.EventNotAssignedException;
@@ -23,6 +20,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,6 +33,7 @@ public class MemberServiceImpl implements MemberService {
     private final StudioRepository studioRepository;
     private final UserRepository userRepository;
     private final RatingRepository ratingRepository;
+    private final MemberRepository memberRepository;
     private final MemberMapper memberMapper;
     private final MemberReviewMapper memberReviewMapper;
     private final EventRepository eventRepository;
@@ -100,12 +99,16 @@ public class MemberServiceImpl implements MemberService {
     public MemberResponseDTO updateMemberById(Long studioId, Long memberId, MemberRequestDTO requestDTO) {
         validationService.isStudioValid(studioId);
 
+        Long associatedStudioId = userRepository.findStudioIdByMemberId(memberId)
+                .orElseThrow(() -> new ResourceNotFoundException("Studio can't be found with id: " + studioId));
+
+        if (!associatedStudioId.equals(studioId) || !associatedStudioId.equals(requestDTO.getStudioId())) {
+            throw new EventNotAssignedException("Member doesn't belong to this studio");
+        }
+
         User member = userRepository.findByUserIdAndStudio_StudioIdAndUserType(memberId, studioId, UserType.MEMBER)
                 .orElseThrow(() -> new ResourceNotFoundException("Member can't be found with id: "+  memberId));
 
-        if (!member.getStudio().getStudioId().equals(studioId)) {
-            throw new EventNotAssignedException("Member doesn't belong to this studio");
-        }
 
         member.getMemberProfile().setMemberSalary(requestDTO.getSalary());
         member.getMemberProfile().setSpecialization(requestDTO.getSpecialization());
@@ -115,6 +118,7 @@ public class MemberServiceImpl implements MemberService {
 
     }
 
+    @Transactional
     @Override
     public void deleteMemberById(Long studioId, Long memberId) {
         validationService.isStudioValid(studioId);
@@ -131,10 +135,16 @@ public class MemberServiceImpl implements MemberService {
             throw new ResourceNotFoundException("Member profile not found for member ID: " + memberId);
         }
 
-        eventRepository.deleteAllByStudio_StudioIdAndMembers_MemberId(studioId, memberId);
+        for (Event event : new LinkedHashSet<>(memberProfile.getEvents())) {
+            event.getMembers().remove(memberProfile);
+        }
+        memberProfile.getEvents().clear();
+
         member.setStudio(null);
         member.setMemberProfile(null);
         userRepository.save(member);
+
+        memberRepository.delete(memberProfile);
 
     }
 

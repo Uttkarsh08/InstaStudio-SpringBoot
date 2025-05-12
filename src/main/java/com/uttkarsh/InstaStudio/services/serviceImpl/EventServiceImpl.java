@@ -3,10 +3,12 @@ package com.uttkarsh.InstaStudio.services.serviceImpl;
 import com.uttkarsh.InstaStudio.dto.event.*;
 import com.uttkarsh.InstaStudio.entities.Event;
 import com.uttkarsh.InstaStudio.entities.MemberProfile;
+import com.uttkarsh.InstaStudio.entities.Resource;
 import com.uttkarsh.InstaStudio.entities.Studio;
 import com.uttkarsh.InstaStudio.exceptions.*;
 import com.uttkarsh.InstaStudio.repositories.EventRepository;
 import com.uttkarsh.InstaStudio.repositories.MemberRepository;
+import com.uttkarsh.InstaStudio.repositories.ResourceRepository;
 import com.uttkarsh.InstaStudio.repositories.StudioRepository;
 import com.uttkarsh.InstaStudio.services.EventService;
 import com.uttkarsh.InstaStudio.services.StudioService;
@@ -37,6 +39,7 @@ public class EventServiceImpl implements EventService {
     private final StudioRepository studioRepository;
     private final EventRepository eventRepository;
     private final MemberRepository memberRepository;
+    private final ResourceRepository resourceRepository;
     private final ValidationService validationService;
 
 
@@ -48,6 +51,7 @@ public class EventServiceImpl implements EventService {
 
         Set<Event> subEvents = new LinkedHashSet<>(eventRepository.findAllByEventIdInOrderByEventStartDateAsc(requestDTO.getSubEventsIds()));
         Set<MemberProfile> members = memberRepository.findAllByMemberIdInAndUser_Studio_StudioId(requestDTO.getMemberIds(), requestDTO.getStudioId());
+        Set<Resource> resources = resourceRepository.findAllByResourceIdInAndStudio_StudioId(requestDTO.getResourceIds(), requestDTO.getStudioId());
 
         //Sub-Events
         if(!requestDTO.getSubEventsIds().isEmpty() && subEvents.isEmpty()){
@@ -73,6 +77,14 @@ public class EventServiceImpl implements EventService {
             throw new IllegalArgumentException("Some members do not belong to the specified studio");
         }
 
+        //Resources
+        if(!requestDTO.getResourceIds().isEmpty() && resources.isEmpty()){
+            throw new BadCredentialsException("Found Wrong Resource Id");
+        }
+        if (resources.size() != requestDTO.getResourceIds().size()) {
+            throw new IllegalArgumentException("Some Resources do not belong to the specified studio");
+        }
+
         Event mainEvent = Event.builder()
                 .clientName(requestDTO.getClientName())
                 .clientPhoneNo(requestDTO.getClientPhoneNo())
@@ -85,6 +97,7 @@ public class EventServiceImpl implements EventService {
                 .evenIsSaved(requestDTO.isEvenIsSaved())
                 .subEvents(new LinkedHashSet<>())
                 .members(new LinkedHashSet<>())
+                .resources(new LinkedHashSet<>())
                 .studio(studio)
                 .build();
 
@@ -96,6 +109,7 @@ public class EventServiceImpl implements EventService {
 
         //Members
         mainEvent.setMembers(members);
+        mainEvent.setResources(resources);
 
         Event savedEvent = eventRepository.save(mainEvent);
         return eventMapper.toEventDTO(savedEvent);
@@ -107,12 +121,20 @@ public class EventServiceImpl implements EventService {
                 .orElseThrow(() -> new ResourceNotFoundException("Studio can't be found with id: "+ requestDTO.getStudioId()));
 
         Set<MemberProfile> members = memberRepository.findAllByMemberIdInAndUser_Studio_StudioId(requestDTO.getMemberIds(), requestDTO.getStudioId());
+        Set<Resource> resources = resourceRepository.findAllByResourceIdInAndStudio_StudioId(requestDTO.getResourceIds(), requestDTO.getStudioId());
 
         if(!requestDTO.getMemberIds().isEmpty() && members.isEmpty()){
             throw new BadCredentialsException("Found Wrong Member Id");
         }
         if (members.size() != requestDTO.getMemberIds().size()) {
             throw new IllegalArgumentException("Some members do not belong to the specified studio");
+        }
+
+        if(!requestDTO.getResourceIds().isEmpty() && resources.isEmpty()){
+            throw new BadCredentialsException("Found Wrong Resource Id");
+        }
+        if (resources.size() != requestDTO.getResourceIds().size()) {
+            throw new IllegalArgumentException("Some Resources do not belong to the specified studio");
         }
 
         Event subEvent = Event.builder()
@@ -122,10 +144,13 @@ public class EventServiceImpl implements EventService {
                 .eventEndDate(requestDTO.getEventEndDate())
                 .eventCity(requestDTO.getEventCity())
                 .eventStartDate(requestDTO.getEventStartDate())
+                .members(new LinkedHashSet<>())
+                .resources(new LinkedHashSet<>())
                 .studio(studio)
                 .build();
 
         subEvent.setMembers(members);
+        subEvent.setResources(resources);
         eventRepository.save(subEvent);
 
         return subEventMapper.toSubEventDTO(subEvent);

@@ -30,7 +30,6 @@ public class MemberController {
 
 
     private final MemberService memberService;
-    private final MemberMapper memberMapper;
 
 
     @PostMapping("register/member")

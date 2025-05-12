@@ -59,5 +59,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
             @Param("endDate") LocalDateTime endDate
     );
 
-
+    @Query("""
+    SELECT u.studio.studioId 
+    FROM User u 
+    WHERE u.userType = 'MEMBER' 
+      AND u.userId = :id 
+      AND u.memberProfile IS NOT NULL
+    """)
+    Optional<Long> findStudioIdByMemberId(Long id);
 }
