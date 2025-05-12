@@ -20,7 +20,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -104,5 +106,21 @@ public class ResourceServiceImpl implements ResourceService {
         }
 
         resourceRepository.delete(resource);
+    }
+
+    @Override
+    public List<ResourceResponseDTO> getALlAvailableResources(Long studioId, LocalDateTime startDate, LocalDateTime endDate) {
+        validationService.isStudioValid(studioId);
+
+        List<Resource> availableResources = resourceRepository.findAvailableResourcesByStudioAndDateRange(studioId, startDate, endDate);
+        return availableResources.stream().map(resourceMapper::toResponseDTO).toList();
+    }
+
+    @Override
+    public Page<ResourceResponseDTO> searchAllResources(Long studioId, String query, Pageable pageable) {
+        validationService.isStudioValid(studioId);
+
+        Page<Resource> resources = resourceRepository.searchAllResources(studioId, query, pageable);
+        return resources.map(resourceMapper::toResponseDTO);
     }
 }
