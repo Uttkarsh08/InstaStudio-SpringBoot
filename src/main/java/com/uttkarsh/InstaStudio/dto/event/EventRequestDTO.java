@@ -35,4 +35,6 @@ public class EventRequestDTO {
 
     private Set<Long> memberIds;
 
+    private Set<Long> resourceIds;
+
 }

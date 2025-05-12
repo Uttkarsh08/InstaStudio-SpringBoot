@@ -4,6 +4,7 @@ import com.uttkarsh.InstaStudio.dto.event.EventListResponseDTO;
 import com.uttkarsh.InstaStudio.dto.event.EventResponseDTO;
 import com.uttkarsh.InstaStudio.entities.Event;
 import com.uttkarsh.InstaStudio.entities.MemberProfile;
+import com.uttkarsh.InstaStudio.entities.Resource;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.Comparator;
@@ -44,6 +45,10 @@ public class EventMapper {
         //Members
         Set<MemberProfile> members = new LinkedHashSet<>(event.getMembers());
         dto.setMembers(members);
+
+        //Resources
+        Set<Resource> resources = new LinkedHashSet<>(event.getResources());
+        dto.setResources(resources);
 
         return dto;
     }

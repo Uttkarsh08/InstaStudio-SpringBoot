@@ -3,6 +3,7 @@ package com.uttkarsh.InstaStudio.utils.mappers.Event;
 import com.uttkarsh.InstaStudio.dto.event.EventListResponseDTO;
 import com.uttkarsh.InstaStudio.entities.Event;
 import com.uttkarsh.InstaStudio.entities.MemberProfile;
+import com.uttkarsh.InstaStudio.entities.Resource;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.Comparator;
@@ -44,8 +45,14 @@ public class EventListMapper {
                 .map(MemberProfile::getMemberId)
                 .collect(Collectors.toCollection(LinkedHashSet::new));
 
+        Set<Long> resourceIds = event.getResources()
+                        .stream()
+                        .map(Resource::getResourceId)
+                        .collect(Collectors.toCollection(LinkedHashSet::new));
+
         dto.setSubEventsIds(subEventIds);
         dto.setMemberIds(membersIds);
+        dto.setResourceIds(resourceIds);
 
         return dto;
     }

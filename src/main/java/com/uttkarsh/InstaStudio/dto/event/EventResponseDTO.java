@@ -2,6 +2,7 @@ package com.uttkarsh.InstaStudio.dto.event;
 
 import com.uttkarsh.InstaStudio.entities.Event;
 import com.uttkarsh.InstaStudio.entities.MemberProfile;
+import com.uttkarsh.InstaStudio.entities.Resource;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,5 +40,7 @@ public class EventResponseDTO {
     private Set<Event> subEvents;
 
     private Set<MemberProfile> members;
+
+    private Set<Resource> resources;
 
 }

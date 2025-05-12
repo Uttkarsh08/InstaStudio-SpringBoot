@@ -39,4 +39,7 @@ public class Studio {
     @OneToMany(mappedBy = "studio", cascade = CascadeType.ALL)
     private Set<Event> events = new LinkedHashSet<>();
 
+    @OneToMany(mappedBy = "studio", cascade = CascadeType.ALL)
+    private Set<Resource> resources = new LinkedHashSet<>();
+
 }
