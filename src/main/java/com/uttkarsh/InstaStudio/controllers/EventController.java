@@ -11,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/v1")
 @RequiredArgsConstructor
@@ -179,5 +181,70 @@ public class EventController {
         return ResponseEntity.ok(eventService.getCompletedEventsForMember(studioId, memberId, pageable));
     }
 
+
+    //SEARCHING
+
+    @GetMapping("{studioId}/search/all-events")
+    public ResponseEntity<Page<EventListResponseDTO>> searchAllEvents(
+            @PathVariable Long studioId,
+            @RequestParam String query,
+            @RequestParam(defaultValue = "0") Integer PageNumber
+    ){
+        Pageable pageable = PageRequest.of(PageNumber, PAGE_SIZE);
+        return ResponseEntity.ok(eventService.searchAllEvents(studioId, query, pageable));
+    }
+
+    @GetMapping("/{studioId}/search/upcoming-events")
+    public ResponseEntity<Page<EventListResponseDTO>> searchUpcomingEvents(
+            @PathVariable Long studioId,
+            @RequestParam String query,
+            @RequestParam(defaultValue = "0") Integer PageNumber) {
+
+        Pageable pageable = PageRequest.of(PageNumber, PAGE_SIZE);
+        return ResponseEntity.ok(eventService.searchUpcomingEvents(studioId, query, pageable));
+    }
+
+    @GetMapping("/{studioId}/search/completed-events")
+    public ResponseEntity<Page<EventListResponseDTO>> searchCompletedEvents(
+            @PathVariable Long studioId,
+            @RequestParam String query,
+            @RequestParam(defaultValue = "0") Integer PageNumber) {
+
+        Pageable pageable = PageRequest.of(PageNumber, PAGE_SIZE);
+        return ResponseEntity.ok(eventService.searchCompletedEvents(studioId, query, pageable));
+    }
+
+    @GetMapping("{studioId}/member/{memberId}/search/all-events")
+    public ResponseEntity<Page<EventListResponseDTO>> searchAllEventsForMember(
+            @PathVariable Long studioId,
+            @PathVariable Long memberId,
+            @RequestParam String query,
+            @RequestParam(defaultValue = "0") Integer PageNumber
+    ){
+        Pageable pageable = PageRequest.of(PageNumber, PAGE_SIZE);
+        return ResponseEntity.ok(eventService.searchAllEventsForMember(studioId, memberId, query, pageable));
+    }
+
+    @GetMapping("/{studioId}/member/{memberId}/search/upcoming-events")
+    public ResponseEntity<Page<EventListResponseDTO>> searchUpcomingEventsForMember(
+            @PathVariable Long studioId,
+            @PathVariable Long memberId,
+            @RequestParam String query,
+            @RequestParam(defaultValue = "0") Integer PageNumber) {
+
+        Pageable pageable = PageRequest.of(PageNumber, PAGE_SIZE);
+        return ResponseEntity.ok(eventService.searchUpcomingEventsForMember(studioId, memberId, query, pageable));
+    }
+
+    @GetMapping("/{studioId}/member/{memberId}/search/completed-events")
+    public ResponseEntity<Page<EventListResponseDTO>> searchCompletedEventsForMember(
+            @PathVariable Long studioId,
+            @PathVariable Long memberId,
+            @RequestParam String query,
+            @RequestParam(defaultValue = "0") Integer PageNumber) {
+
+        Pageable pageable = PageRequest.of(PageNumber, PAGE_SIZE);
+        return ResponseEntity.ok(eventService.searchCompletedEventsForMember(studioId, memberId, query, pageable));
+    }
 
 }

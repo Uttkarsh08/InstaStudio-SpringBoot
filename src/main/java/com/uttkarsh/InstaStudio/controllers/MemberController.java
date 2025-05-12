@@ -4,15 +4,21 @@ import com.uttkarsh.InstaStudio.dto.event.EventRequestDTO;
 import com.uttkarsh.InstaStudio.dto.member.MemberRequestDTO;
 import com.uttkarsh.InstaStudio.dto.member.MemberResponseDTO;
 import com.uttkarsh.InstaStudio.dto.member.MemberReviewResponseDTO;
+import com.uttkarsh.InstaStudio.entities.MemberProfile;
 import com.uttkarsh.InstaStudio.services.MemberService;
+import com.uttkarsh.InstaStudio.utils.mappers.Member.MemberMapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,6 +30,7 @@ public class MemberController {
 
 
     private final MemberService memberService;
+    private final MemberMapper memberMapper;
 
 
     @PostMapping("register/member")
@@ -81,6 +88,27 @@ public class MemberController {
     ){
         Pageable pageable = PageRequest.of(PageNumber, PAGE_SIZE);
         return ResponseEntity.ok(memberService.getMemberReviewsById(studioId, memberId, pageable));
+    }
+
+    @GetMapping("/{studioId}/available-members")
+    public ResponseEntity<List<MemberResponseDTO>> getAvailableMembers(
+            @PathVariable Long studioId,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
+
+        return ResponseEntity.ok(memberService.getALlAvailableMembers(studioId, startDate, endDate));
+    }
+
+    //SEARCHING
+
+    @GetMapping("/{studioId}/search/members")
+    public ResponseEntity<Page<MemberResponseDTO>> searchAllMembers(
+            @PathVariable Long studioId,
+            @RequestParam String query,
+            @RequestParam(defaultValue = "0") Integer PageNumber) {
+
+        Pageable pageable = PageRequest.of(PageNumber, PAGE_SIZE);
+        return ResponseEntity.ok(memberService.searchAllMembers(studioId, query, pageable));
     }
 
 

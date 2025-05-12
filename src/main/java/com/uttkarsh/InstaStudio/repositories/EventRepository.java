@@ -4,6 +4,8 @@ import com.uttkarsh.InstaStudio.entities.Event;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
@@ -43,4 +45,98 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     Page<Event> findAllByStudio_StudioIdAndMembers_MemberIdAndParentEventIsNotNullAndEventStartDateBeforeOrderByEventStartDateDesc(Long studioId, Long memberId, LocalDateTime now, Pageable pageable);
 
     void deleteAllByStudio_StudioIdAndMembers_MemberId(Long studioId, Long memberId);
+
+    @Query("SELECT e FROM Event e WHERE e.studio.studioId = :studioId AND " +
+
+            "(LOWER(e.clientName) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
+            "LOWER(e.clientPhoneNo) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
+            "LOWER(e.eventType) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
+            "LOWER(e.eventLocation) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
+            "LOWER(e.eventCity) LIKE LOWER(CONCAT('%', :query, '%')))")
+    Page<Event> searchAllEvents(@Param("studioId") Long studioId,
+                                @Param("query") String query,
+                                Pageable pageable);
+
+    @Query("SELECT e FROM Event e WHERE e.studio.studioId = :studioId AND e.eventStartDate > :now AND " +
+            "(LOWER(e.clientName) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
+            "LOWER(e.clientPhoneNo) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
+            "LOWER(e.eventType) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
+            "LOWER(e.eventLocation) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
+            "LOWER(e.eventCity) LIKE LOWER(CONCAT('%', :query, '%')))")
+    Page<Event> searchUpcomingEvents(@Param("studioId") Long studioId,
+                                     @Param("now") LocalDateTime now,
+                                     @Param("query") String query,
+                                     Pageable pageable);
+
+    @Query("SELECT e FROM Event e WHERE e.studio.studioId = :studioId AND e.eventEndDate < :now AND " +
+            "(LOWER(e.clientName) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
+            "LOWER(e.clientPhoneNo) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
+            "LOWER(e.eventType) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
+            "LOWER(e.eventLocation) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
+            "LOWER(e.eventCity) LIKE LOWER(CONCAT('%', :query, '%'))) " +
+            "ORDER BY e.eventEndDate DESC")
+    Page<Event> searchCompletedEvents(@Param("studioId") Long studioId,
+                                      @Param("now") LocalDateTime now,
+                                      @Param("query") String query,
+                                      Pageable pageable);
+
+
+    //Member's Events Search
+
+    @Query("SELECT e FROM Event e " +
+            "JOIN e.members m " +
+            "WHERE e.studio.studioId = :studioId " +
+            "AND m.memberId = :memberId " +
+            "AND e.parentEvent IS NULL " +
+            "AND (LOWER(e.clientName) LIKE LOWER(CONCAT('%', :query, '%')) " +
+            "OR LOWER(e.clientPhoneNo) LIKE LOWER(CONCAT('%', :query, '%')) " +
+            "OR LOWER(e.eventType) LIKE LOWER(CONCAT('%', :query, '%')) " +
+            "OR LOWER(e.eventLocation) LIKE LOWER(CONCAT('%', :query, '%')) " +
+            "OR LOWER(e.eventCity) LIKE LOWER(CONCAT('%', :query, '%'))) " +
+            "ORDER BY e.eventStartDate")
+    Page<Event> searchAllEventsForMember(@Param("studioId") Long studioId,
+                                         @Param("memberId") Long memberId,
+                                         @Param("query") String query,
+                                         Pageable pageable);
+
+
+    @Query("SELECT e FROM Event e " +
+            "JOIN e.members m " +
+            "WHERE e.studio.studioId = :studioId " +
+            "AND m.memberId = :memberId " +
+            "AND e.parentEvent IS NULL " +
+            "AND e.eventStartDate > :now " +
+            "AND (LOWER(e.clientName) LIKE LOWER(CONCAT('%', :query, '%')) " +
+            "OR LOWER(e.clientPhoneNo) LIKE LOWER(CONCAT('%', :query, '%')) " +
+            "OR LOWER(e.eventType) LIKE LOWER(CONCAT('%', :query, '%')) " +
+            "OR LOWER(e.eventLocation) LIKE LOWER(CONCAT('%', :query, '%')) " +
+            "OR LOWER(e.eventCity) LIKE LOWER(CONCAT('%', :query, '%'))) " +
+            "ORDER BY e.eventStartDate")
+    Page<Event> searchUpcomingEventsByMemberAndStudio(
+            @Param("studioId") Long studioId,
+            @Param("memberId") Long memberId,
+            @Param("now") LocalDateTime now,
+            @Param("query") String query,
+            Pageable pageable);
+
+    @Query("SELECT e FROM Event e " +
+            "JOIN e.members m " +
+            "WHERE e.studio.studioId = :studioId " +
+            "AND m.memberId = :memberId " +
+            "AND e.parentEvent IS NULL " +
+            "AND e.eventEndDate < :now " +
+            "AND (LOWER(e.clientName) LIKE LOWER(CONCAT('%', :query, '%')) " +
+            "OR LOWER(e.clientPhoneNo) LIKE LOWER(CONCAT('%', :query, '%')) " +
+            "OR LOWER(e.eventType) LIKE LOWER(CONCAT('%', :query, '%')) " +
+            "OR LOWER(e.eventLocation) LIKE LOWER(CONCAT('%', :query, '%')) " +
+            "OR LOWER(e.eventCity) LIKE LOWER(CONCAT('%', :query, '%'))) " +
+            "ORDER BY e.eventStartDate DESC")
+    Page<Event> searchCompletedEventsByMemberAndStudio(
+            @Param("studioId") Long studioId,
+            @Param("memberId") Long memberId,
+            @Param("now") LocalDateTime now,
+            @Param("query") String query,
+            Pageable pageable);
+
+
 }
