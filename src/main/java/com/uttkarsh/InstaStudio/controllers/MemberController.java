@@ -1,12 +1,9 @@
 package com.uttkarsh.InstaStudio.controllers;
 
-import com.uttkarsh.InstaStudio.dto.event.EventRequestDTO;
 import com.uttkarsh.InstaStudio.dto.member.MemberRequestDTO;
 import com.uttkarsh.InstaStudio.dto.member.MemberResponseDTO;
 import com.uttkarsh.InstaStudio.dto.member.MemberReviewResponseDTO;
-import com.uttkarsh.InstaStudio.entities.MemberProfile;
 import com.uttkarsh.InstaStudio.services.MemberService;
-import com.uttkarsh.InstaStudio.utils.mappers.Member.MemberMapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -32,7 +30,7 @@ public class MemberController {
 
     private final MemberService memberService;
 
-
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("register/member")
     public ResponseEntity<MemberResponseDTO> createMember(
             @RequestBody MemberRequestDTO requestDTO
@@ -42,6 +40,7 @@ public class MemberController {
 
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'MEMBER')")
     @GetMapping("{studioId}/member/{memberId}")
     public ResponseEntity<MemberResponseDTO> getMemberById(
             @PathVariable Long studioId,
@@ -51,6 +50,7 @@ public class MemberController {
         return ResponseEntity.ok(member);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("{studioId}/all-members")
     public ResponseEntity<Page<MemberResponseDTO>> getAllMembers(
             @PathVariable Long studioId,
@@ -60,6 +60,7 @@ public class MemberController {
         return ResponseEntity.ok(memberService.getAllMemebersForStudio(studioId, pageable));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("{studioId}/edit-member/{memberId}")
     public ResponseEntity<MemberResponseDTO> updateMemberById(
             @PathVariable Long studioId,
@@ -70,6 +71,7 @@ public class MemberController {
         return ResponseEntity.ok(member);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("{studioId}/delete-member/{memberId}")
     public ResponseEntity<Void> deleteMemberById(
             @PathVariable Long studioId,
@@ -80,6 +82,7 @@ public class MemberController {
         return ResponseEntity.noContent().build();
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'MEMBER', 'CUSTOMER')")
     @GetMapping("{studioId}/member/{memberId}/reviews")
     public ResponseEntity<Page<MemberReviewResponseDTO>> getMemberReviewsById(
             @PathVariable Long studioId,
@@ -90,6 +93,7 @@ public class MemberController {
         return ResponseEntity.ok(memberService.getMemberReviewsById(studioId, memberId, pageable));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{studioId}/available-members")
     public ResponseEntity<List<MemberResponseDTO>> getAvailableMembers(
             @PathVariable Long studioId,
@@ -101,6 +105,7 @@ public class MemberController {
 
     //SEARCHING
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{studioId}/search/members")
     public ResponseEntity<Page<MemberResponseDTO>> searchAllMembers(
             @PathVariable Long studioId,

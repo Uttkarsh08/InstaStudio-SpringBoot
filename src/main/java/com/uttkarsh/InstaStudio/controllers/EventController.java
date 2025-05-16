@@ -9,9 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("api/v1")
@@ -23,6 +22,7 @@ public class EventController {
 
     private final EventService eventService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/register/event")
     public ResponseEntity<EventResponseDTO> createEvent(
             @RequestBody EventRequestDTO requestDTO
@@ -31,6 +31,7 @@ public class EventController {
         return  ResponseEntity.ok(responseDTO);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/register/sub-event")
     public ResponseEntity<SubEventResponseDTO> createSubEvent(
             @RequestBody SubEventRequestDTO requestDTO
@@ -39,6 +40,7 @@ public class EventController {
         return  ResponseEntity.ok(responseDTO);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'CUSTOMER')")
     @GetMapping("/{studioId}/event/{eventId}")
     public ResponseEntity<EventResponseDTO> getEventById(
             @PathVariable Long studioId,
@@ -48,6 +50,7 @@ public class EventController {
 
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'MEMBER', 'CUSTOMER')")
     @GetMapping("/{studioId}/sub-event/{eventId}")
     public ResponseEntity<SubEventResponseDTO> getSubEventById(
             @PathVariable Long studioId,
@@ -57,6 +60,7 @@ public class EventController {
 
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{studioId}/all-events")
     public ResponseEntity<Page<EventListResponseDTO>> getAllEvents(
             @PathVariable Long studioId,
@@ -66,6 +70,7 @@ public class EventController {
         return ResponseEntity.ok(eventService.getAllEventsForStudio(studioId, pageable));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{studioId}/upcoming-events")
     public ResponseEntity<Page<EventListResponseDTO>> getAllUpcomingEvents(
             @PathVariable Long studioId,
@@ -75,6 +80,7 @@ public class EventController {
         return ResponseEntity.ok(eventService.getAllUpcomingEventsForStudio(studioId, pageable));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{studioId}/completed-events")
     public ResponseEntity<Page<EventListResponseDTO>> getAllCompletedEvents(
             @PathVariable Long studioId,
@@ -84,6 +90,7 @@ public class EventController {
         return ResponseEntity.ok(eventService.getAllCompletedEventsForStudio(studioId, pageable));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{studioId}/save-event/{eventId}")
     public ResponseEntity<Void> saveEventById(
             @PathVariable Long studioId,
@@ -93,6 +100,7 @@ public class EventController {
         return ResponseEntity.noContent().build();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/{studioId}/save-all-events")
     public void saveAllEvents(
             @PathVariable Long studioId
@@ -100,6 +108,7 @@ public class EventController {
         eventService.saveAllEventsForStudio(studioId);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{studioId}/next-event")
     public ResponseEntity<EventResponseDTO> getNextUpcomingEvent(
             @PathVariable Long studioId
@@ -107,6 +116,7 @@ public class EventController {
         return ResponseEntity.ok(eventService.getNextUpcomingEventForStudio(studioId));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/edit-event/{eventId}")
     public ResponseEntity<EventResponseDTO> updateEventById(
             @PathVariable Long eventId,
@@ -116,6 +126,7 @@ public class EventController {
         return ResponseEntity.ok(updatedEvent);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/edit-sub-event/{eventId}")
     public ResponseEntity<SubEventResponseDTO> updateSubEventById(
             @PathVariable Long eventId,
@@ -125,6 +136,7 @@ public class EventController {
         return ResponseEntity.ok(updatedSubEvent);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{studioId}/delete-sub-event/{eventId}")
     public ResponseEntity<Void> deleteSubEventById(
             @PathVariable Long studioId,
@@ -134,6 +146,7 @@ public class EventController {
         return ResponseEntity.noContent().build();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{studioId}/delete-event/{eventId}")
     public ResponseEntity<Void> deleteEventById(
             @PathVariable Long studioId,
@@ -143,6 +156,7 @@ public class EventController {
         return ResponseEntity.noContent().build();
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'MEMBER')")
     @GetMapping("{studioId}/member/{memberId}/all-events")
     public ResponseEntity<Page<EventListResponseDTO>> getEventsByMemberId(
             @PathVariable Long studioId,
@@ -153,6 +167,7 @@ public class EventController {
         return ResponseEntity.ok(eventService.getAllEventsForMember(studioId, memberId, pageable));
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'MEMBER')")
     @GetMapping("{studioId}/member/{memberId}/next-event")
     public ResponseEntity<EventResponseDTO> getNextEventForMember(
             @PathVariable Long studioId,
@@ -161,6 +176,7 @@ public class EventController {
         return ResponseEntity.ok(eventService.getNextUpcomingEventForMember(studioId, memberId));
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'MEMBER')")
     @GetMapping("{studioId}/member/{memberId}/upcoming-event")
     public ResponseEntity<Page<EventListResponseDTO>> getUpcomingEventsForMember(
             @PathVariable Long studioId,
@@ -171,6 +187,7 @@ public class EventController {
         return ResponseEntity.ok(eventService.getUpcomingEventsForMember(studioId, memberId, pageable));
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'MEMBER')")
     @GetMapping("{studioId}/member/{memberId}/completed-event")
     public ResponseEntity<Page<EventListResponseDTO>> getCompletedEventsForMember(
             @PathVariable Long studioId,
@@ -184,6 +201,7 @@ public class EventController {
 
     //SEARCHING
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("{studioId}/search/all-events")
     public ResponseEntity<Page<EventListResponseDTO>> searchAllEvents(
             @PathVariable Long studioId,
@@ -194,6 +212,7 @@ public class EventController {
         return ResponseEntity.ok(eventService.searchAllEvents(studioId, query, pageable));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{studioId}/search/upcoming-events")
     public ResponseEntity<Page<EventListResponseDTO>> searchUpcomingEvents(
             @PathVariable Long studioId,
@@ -204,6 +223,7 @@ public class EventController {
         return ResponseEntity.ok(eventService.searchUpcomingEvents(studioId, query, pageable));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{studioId}/search/completed-events")
     public ResponseEntity<Page<EventListResponseDTO>> searchCompletedEvents(
             @PathVariable Long studioId,
@@ -214,6 +234,7 @@ public class EventController {
         return ResponseEntity.ok(eventService.searchCompletedEvents(studioId, query, pageable));
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'MEMBER')")
     @GetMapping("{studioId}/member/{memberId}/search/all-events")
     public ResponseEntity<Page<EventListResponseDTO>> searchAllEventsForMember(
             @PathVariable Long studioId,
@@ -225,6 +246,7 @@ public class EventController {
         return ResponseEntity.ok(eventService.searchAllEventsForMember(studioId, memberId, query, pageable));
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'MEMBER')")
     @GetMapping("/{studioId}/member/{memberId}/search/upcoming-events")
     public ResponseEntity<Page<EventListResponseDTO>> searchUpcomingEventsForMember(
             @PathVariable Long studioId,
@@ -236,6 +258,7 @@ public class EventController {
         return ResponseEntity.ok(eventService.searchUpcomingEventsForMember(studioId, memberId, query, pageable));
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'MEMBER')")
     @GetMapping("/{studioId}/member/{memberId}/search/completed-events")
     public ResponseEntity<Page<EventListResponseDTO>> searchCompletedEventsForMember(
             @PathVariable Long studioId,

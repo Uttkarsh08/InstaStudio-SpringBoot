@@ -6,6 +6,7 @@ import com.uttkarsh.InstaStudio.dto.studio.StudioCreationResponseDTO;
 import com.uttkarsh.InstaStudio.services.StudioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,6 +16,7 @@ public class StudioController {
 
     private final StudioService studioService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/register/studio")
     public ResponseEntity<StudioCreationResponseDTO> createStudio(
             @RequestBody StudioCreationRequestDTO requestDTO
@@ -23,6 +25,7 @@ public class StudioController {
         return  ResponseEntity.ok(responseDTO);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping(path = "/{studioId}/assignAdmin/{userId}")
     public ResponseEntity<StudioCreationResponseDTO> assignAdminToStudio(
             @PathVariable Long studioId,

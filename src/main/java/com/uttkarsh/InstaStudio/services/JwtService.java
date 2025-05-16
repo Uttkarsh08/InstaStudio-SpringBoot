@@ -23,6 +23,6 @@ public interface JwtService {
 
     String getFireBaseIdFromToken(String token);
 
-
+    Claims getAllClaims(String token);
 
 }

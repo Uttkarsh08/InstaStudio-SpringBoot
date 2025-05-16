@@ -87,7 +87,8 @@ public interface EventRepository extends JpaRepository<Event, Long> {
             "JOIN e.members m " +
             "WHERE e.studio.studioId = :studioId " +
             "AND m.memberId = :memberId " +
-            "AND e.parentEvent IS NULL " +
+            "AND e.parentEvent IS NOT NULL " +
+            "AND e.clientName IS NOT NULL " +
             "AND (LOWER(e.clientName) LIKE LOWER(CONCAT('%', :query, '%')) " +
             "OR LOWER(e.clientPhoneNo) LIKE LOWER(CONCAT('%', :query, '%')) " +
             "OR LOWER(e.eventType) LIKE LOWER(CONCAT('%', :query, '%')) " +
@@ -104,7 +105,8 @@ public interface EventRepository extends JpaRepository<Event, Long> {
             "JOIN e.members m " +
             "WHERE e.studio.studioId = :studioId " +
             "AND m.memberId = :memberId " +
-            "AND e.parentEvent IS NULL " +
+            "AND e.parentEvent IS NOT NULL " +
+            "AND e.clientName IS NOT NULL " +
             "AND e.eventStartDate > :now " +
             "AND (LOWER(e.clientName) LIKE LOWER(CONCAT('%', :query, '%')) " +
             "OR LOWER(e.clientPhoneNo) LIKE LOWER(CONCAT('%', :query, '%')) " +
@@ -123,7 +125,8 @@ public interface EventRepository extends JpaRepository<Event, Long> {
             "JOIN e.members m " +
             "WHERE e.studio.studioId = :studioId " +
             "AND m.memberId = :memberId " +
-            "AND e.parentEvent IS NULL " +
+            "AND e.parentEvent IS NOT NULL " +
+            "AND e.clientName IS NOT NULL " +
             "AND e.eventEndDate < :now " +
             "AND (LOWER(e.clientName) LIKE LOWER(CONCAT('%', :query, '%')) " +
             "OR LOWER(e.clientPhoneNo) LIKE LOWER(CONCAT('%', :query, '%')) " +
