@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -43,8 +42,6 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     Page<Event> findAllByStudio_StudioIdAndMembers_MemberIdAndParentEventIsNotNullAndEventStartDateAfterOrderByEventStartDate(Long studioId, Long memberId, LocalDateTime now, Pageable pageable);
 
     Page<Event> findAllByStudio_StudioIdAndMembers_MemberIdAndParentEventIsNotNullAndEventStartDateBeforeOrderByEventStartDateDesc(Long studioId, Long memberId, LocalDateTime now, Pageable pageable);
-
-    void deleteAllByStudio_StudioIdAndMembers_MemberId(Long studioId, Long memberId);
 
     @Query("SELECT e FROM Event e WHERE e.studio.studioId = :studioId AND " +
 

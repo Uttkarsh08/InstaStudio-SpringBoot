@@ -1,10 +1,7 @@
 package com.uttkarsh.InstaStudio.utils.mappers.Member;
 
-import com.uttkarsh.InstaStudio.dto.member.MemberResponseDTO;
 import com.uttkarsh.InstaStudio.dto.member.MemberReviewResponseDTO;
-import com.uttkarsh.InstaStudio.entities.MemberProfile;
 import com.uttkarsh.InstaStudio.entities.Rating;
-import com.uttkarsh.InstaStudio.entities.User;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration

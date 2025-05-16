@@ -3,7 +3,6 @@ package com.uttkarsh.InstaStudio.services;
 import com.uttkarsh.InstaStudio.dto.member.MemberRequestDTO;
 import com.uttkarsh.InstaStudio.dto.member.MemberResponseDTO;
 import com.uttkarsh.InstaStudio.dto.member.MemberReviewResponseDTO;
-import com.uttkarsh.InstaStudio.entities.MemberProfile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

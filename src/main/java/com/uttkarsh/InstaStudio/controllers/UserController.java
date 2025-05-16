@@ -1,8 +1,6 @@
 package com.uttkarsh.InstaStudio.controllers;
 
-import com.uttkarsh.InstaStudio.dto.auth.LoginRequestDTO;
 import com.uttkarsh.InstaStudio.dto.user.UserRequestDTO;
-import com.uttkarsh.InstaStudio.entities.User;
 import com.uttkarsh.InstaStudio.services.JwtService;
 import com.uttkarsh.InstaStudio.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -10,9 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor

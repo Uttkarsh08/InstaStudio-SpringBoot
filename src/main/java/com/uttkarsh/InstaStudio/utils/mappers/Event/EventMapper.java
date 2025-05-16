@@ -1,6 +1,5 @@
 package com.uttkarsh.InstaStudio.utils.mappers.Event;
 
-import com.uttkarsh.InstaStudio.dto.event.EventListResponseDTO;
 import com.uttkarsh.InstaStudio.dto.event.EventResponseDTO;
 import com.uttkarsh.InstaStudio.entities.Event;
 import com.uttkarsh.InstaStudio.entities.MemberProfile;

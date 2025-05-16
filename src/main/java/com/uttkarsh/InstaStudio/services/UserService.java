@@ -2,7 +2,6 @@ package com.uttkarsh.InstaStudio.services;
 
 import com.uttkarsh.InstaStudio.dto.user.UserRequestDTO;
 import com.uttkarsh.InstaStudio.entities.User;
-import com.uttkarsh.InstaStudio.entities.enums.UserType;
 import org.springframework.stereotype.Service;
 
 @Service

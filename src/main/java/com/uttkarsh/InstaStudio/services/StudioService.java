@@ -1,6 +1,5 @@
 package com.uttkarsh.InstaStudio.services;
 
-import com.uttkarsh.InstaStudio.dto.event.EventResponseDTO;
 import com.uttkarsh.InstaStudio.dto.studio.StudioCreationRequestDTO;
 import com.uttkarsh.InstaStudio.dto.studio.StudioCreationResponseDTO;
 import org.springframework.stereotype.Service;

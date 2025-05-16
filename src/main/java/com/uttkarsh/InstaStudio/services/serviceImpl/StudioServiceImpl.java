@@ -1,9 +1,7 @@
 package com.uttkarsh.InstaStudio.services.serviceImpl;
 
-import com.uttkarsh.InstaStudio.dto.event.EventResponseDTO;
 import com.uttkarsh.InstaStudio.dto.studio.StudioCreationRequestDTO;
 import com.uttkarsh.InstaStudio.dto.studio.StudioCreationResponseDTO;
-import com.uttkarsh.InstaStudio.entities.Event;
 import com.uttkarsh.InstaStudio.entities.Studio;
 import com.uttkarsh.InstaStudio.entities.User;
 import com.uttkarsh.InstaStudio.entities.enums.UserType;
@@ -15,7 +13,6 @@ import com.uttkarsh.InstaStudio.services.StudioService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-
 import java.util.Base64;
 
 @Service
