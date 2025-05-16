@@ -29,7 +29,7 @@ public class JwtServiceImpl implements JwtService {
                 .claim("isRegistered", isRegistered)
                 .claim("userType", userType.name())
                 .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + 3600_00000))
+                .expiration(new Date(System.currentTimeMillis() + 60 * 1000))
                 .signWith(getSecretKey())
                 .compact();
     }
@@ -40,7 +40,7 @@ public class JwtServiceImpl implements JwtService {
                 .claim("isRegistered", isRegistered)
                 .claim("userType", userType.name())
                 .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + 86_400_000))
+                .expiration(new Date(System.currentTimeMillis() + 60 * 1000*10))
                 .signWith(getSecretKey())
                 .compact();
     }
@@ -62,4 +62,13 @@ public class JwtServiceImpl implements JwtService {
                 .getPayload();
         return claims.getSubject();
     }
+
+    public Claims getAllClaims(String token) {
+        return Jwts.parser()
+                .verifyWith(getSecretKey())
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+    }
+
 }

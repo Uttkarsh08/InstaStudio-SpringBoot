@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -31,6 +32,7 @@ public class ResourceController {
 
     private final ResourceService resourceService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("register/resource")
     public ResponseEntity<ResourceResponseDTO> createResource(
             @RequestBody ResourceRequestDTO requestDTO
@@ -40,6 +42,7 @@ public class ResourceController {
 
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("{studioId}/resource/{resourceId}")
     public ResponseEntity<ResourceResponseDTO> getResourceById(
             @PathVariable Long studioId,
@@ -49,6 +52,7 @@ public class ResourceController {
         return ResponseEntity.ok(responseDTO);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("{studioId}/all-resources")
     public ResponseEntity<Page<ResourceResponseDTO>> getAllResources(
             @PathVariable Long studioId,
@@ -59,6 +63,7 @@ public class ResourceController {
 
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("{studioId}/edit-resource/{resourceId}")
     public ResponseEntity<ResourceResponseDTO> updateResourceById(
             @PathVariable Long studioId,
@@ -69,6 +74,7 @@ public class ResourceController {
         return ResponseEntity.ok(resource);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("{studioId}/delete-resource/{resourceId}")
     public ResponseEntity<Void> deleteResourceById(
             @PathVariable Long studioId,
@@ -79,6 +85,7 @@ public class ResourceController {
         return ResponseEntity.noContent().build();
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{studioId}/available-resources")
     public ResponseEntity<List<ResourceResponseDTO>> getAvailableResources(
             @PathVariable Long studioId,
@@ -90,6 +97,7 @@ public class ResourceController {
 
     //SEARCHING
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{studioId}/search/resources")
     public ResponseEntity<Page<ResourceResponseDTO>> searchAllResources(
             @PathVariable Long studioId,

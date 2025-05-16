@@ -5,10 +5,14 @@ import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
 import com.uttkarsh.InstaStudio.dto.auth.LoginRequestDTO;
 import com.uttkarsh.InstaStudio.dto.auth.LoginResponseDTO;
+import com.uttkarsh.InstaStudio.dto.auth.TokenRefreshRequest;
+import com.uttkarsh.InstaStudio.dto.auth.TokenRefreshResponse;
 import com.uttkarsh.InstaStudio.entities.User;
 import com.uttkarsh.InstaStudio.entities.enums.UserType;
+import com.uttkarsh.InstaStudio.exceptions.InvalidTokenException;
 import com.uttkarsh.InstaStudio.services.JwtService;
 import com.uttkarsh.InstaStudio.services.UserService;
+import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -56,5 +60,25 @@ public class AuthController {
         return ResponseEntity.ok(response);
 
     }
+
+    @PostMapping("/auth/refresh-token")
+    public ResponseEntity<?> refreshToken(@RequestBody TokenRefreshRequest request) {
+        String refreshToken = request.getRefreshToken();
+
+        if (!jwtService.validateToken(refreshToken)) {
+            throw new InvalidTokenException("Refresh token is invalid or expired");
+        }
+
+        String firebaseId = jwtService.getFireBaseIdFromToken(refreshToken);
+        Claims claims =  jwtService.getAllClaims(refreshToken);
+
+        String userType = claims.get("userType", String.class);
+        Boolean isRegistered = claims.get("isRegistered", Boolean.class);
+
+        String newAccessToken = jwtService.generateAccessToken(firebaseId, isRegistered, UserType.valueOf(userType));
+
+        return ResponseEntity.ok(new TokenRefreshResponse(newAccessToken, refreshToken));
+    }
+
 
 }

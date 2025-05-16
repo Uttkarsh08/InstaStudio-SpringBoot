@@ -6,6 +6,7 @@ import com.uttkarsh.InstaStudio.services.RatingService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,6 +16,7 @@ public class RatingController {
 
     private final RatingService ratingService;
 
+    @PreAuthorize("hasRole('CUSTOMER')")
     @PostMapping("{studioId}/member/{memberId}/register/review")
     public ResponseEntity<MemberReviewResponseDTO> createReviewForMember(
             @PathVariable Long studioId,
@@ -25,6 +27,7 @@ public class RatingController {
         return ResponseEntity.ok(responseDTO);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'MEMBER', 'CUSTOMER')")
     @GetMapping("{studioId}/member/{memberId}/review/{reviewId}")
     public ResponseEntity<MemberReviewResponseDTO> getReviewById(
             @PathVariable Long studioId,
