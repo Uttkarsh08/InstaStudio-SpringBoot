@@ -7,7 +7,6 @@ import com.uttkarsh.InstaStudio.repositories.EventRepository;
 import com.uttkarsh.InstaStudio.repositories.ResourceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
-
 import java.time.LocalDateTime;
 
 @Configuration

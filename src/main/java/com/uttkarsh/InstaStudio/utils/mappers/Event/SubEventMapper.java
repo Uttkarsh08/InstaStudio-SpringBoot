@@ -1,12 +1,10 @@
 package com.uttkarsh.InstaStudio.utils.mappers.Event;
 
-import com.uttkarsh.InstaStudio.dto.event.EventResponseDTO;
 import com.uttkarsh.InstaStudio.dto.event.SubEventResponseDTO;
 import com.uttkarsh.InstaStudio.entities.Event;
 import com.uttkarsh.InstaStudio.entities.MemberProfile;
 import com.uttkarsh.InstaStudio.entities.Resource;
 import org.springframework.context.annotation.Configuration;
-
 import java.util.LinkedHashSet;
 import java.util.Set;
 
