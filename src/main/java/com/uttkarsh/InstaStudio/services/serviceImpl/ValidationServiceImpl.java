@@ -5,7 +5,6 @@ import com.uttkarsh.InstaStudio.repositories.MemberRepository;
 import com.uttkarsh.InstaStudio.repositories.StudioRepository;
 import com.uttkarsh.InstaStudio.services.ValidationService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 @Service

@@ -2,7 +2,6 @@ package com.uttkarsh.InstaStudio.filters;
 
 import com.uttkarsh.InstaStudio.exceptions.UnregisteredUserException;
 import com.uttkarsh.InstaStudio.services.JwtService;
-import com.uttkarsh.InstaStudio.services.UserService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.FilterChain;

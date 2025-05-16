@@ -7,10 +7,8 @@ import com.uttkarsh.InstaStudio.entities.MemberProfile;
 import com.uttkarsh.InstaStudio.entities.Resource;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Configuration
 public class SubEventMapper {

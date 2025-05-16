@@ -2,10 +2,7 @@ package com.uttkarsh.InstaStudio.services.serviceImpl;
 
 import com.uttkarsh.InstaStudio.dto.user.UserRequestDTO;
 import com.uttkarsh.InstaStudio.entities.User;
-import com.uttkarsh.InstaStudio.entities.enums.UserType;
 import com.uttkarsh.InstaStudio.exceptions.EventAlreadyAddedException;
-import com.uttkarsh.InstaStudio.exceptions.EventAlreadyAssignedException;
-import com.uttkarsh.InstaStudio.exceptions.ResourceNotFoundException;
 import com.uttkarsh.InstaStudio.repositories.UserRepository;
 import com.uttkarsh.InstaStudio.services.UserService;
 import lombok.RequiredArgsConstructor;

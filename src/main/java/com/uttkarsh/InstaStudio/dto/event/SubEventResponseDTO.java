@@ -1,13 +1,11 @@
 package com.uttkarsh.InstaStudio.dto.event;
 
-import com.uttkarsh.InstaStudio.entities.Event;
 import com.uttkarsh.InstaStudio.entities.MemberProfile;
 import com.uttkarsh.InstaStudio.entities.Resource;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.time.LocalDateTime;
 import java.util.Set;
 

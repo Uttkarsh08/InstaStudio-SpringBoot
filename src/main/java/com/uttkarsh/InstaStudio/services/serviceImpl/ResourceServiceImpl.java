@@ -1,13 +1,10 @@
 package com.uttkarsh.InstaStudio.services.serviceImpl;
 
-import com.uttkarsh.InstaStudio.dto.member.MemberResponseDTO;
 import com.uttkarsh.InstaStudio.dto.resource.ResourceRequestDTO;
 import com.uttkarsh.InstaStudio.dto.resource.ResourceResponseDTO;
 import com.uttkarsh.InstaStudio.entities.Event;
 import com.uttkarsh.InstaStudio.entities.Resource;
 import com.uttkarsh.InstaStudio.entities.Studio;
-import com.uttkarsh.InstaStudio.entities.User;
-import com.uttkarsh.InstaStudio.entities.enums.UserType;
 import com.uttkarsh.InstaStudio.exceptions.EventNotAssignedException;
 import com.uttkarsh.InstaStudio.exceptions.ResourceNotFoundException;
 import com.uttkarsh.InstaStudio.repositories.ResourceRepository;
@@ -19,7 +16,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.List;

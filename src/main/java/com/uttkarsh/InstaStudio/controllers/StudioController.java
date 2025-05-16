@@ -1,6 +1,5 @@
 package com.uttkarsh.InstaStudio.controllers;
 
-import com.uttkarsh.InstaStudio.dto.event.EventResponseDTO;
 import com.uttkarsh.InstaStudio.dto.studio.StudioCreationRequestDTO;
 import com.uttkarsh.InstaStudio.dto.studio.StudioCreationResponseDTO;
 import com.uttkarsh.InstaStudio.services.StudioService;

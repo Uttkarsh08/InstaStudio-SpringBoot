@@ -1,7 +1,6 @@
 package com.uttkarsh.InstaStudio.utils.mappers.Member;
 
 import com.uttkarsh.InstaStudio.dto.member.MemberResponseDTO;
-import com.uttkarsh.InstaStudio.entities.Rating;
 import com.uttkarsh.InstaStudio.entities.User;
 import com.uttkarsh.InstaStudio.repositories.RatingRepository;
 import lombok.RequiredArgsConstructor;
