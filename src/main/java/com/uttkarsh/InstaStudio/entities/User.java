@@ -8,8 +8,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import java.time.LocalDateTime;
 
+@EntityListeners(AuditingEntityListener.class)
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,14 +26,20 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
+    @Column(nullable = false)
     private String firebaseId;
 
+    @Column(nullable = false)
     private String userName;
 
+    @Column(nullable = false)
     private String userEmail;
 
+    @Column(nullable = false)
     private String userPhoneNo;
 
+    @CreatedDate
+    @Column(nullable = false)
     private LocalDateTime registrationDate;
 
     @Enumerated(EnumType.STRING)

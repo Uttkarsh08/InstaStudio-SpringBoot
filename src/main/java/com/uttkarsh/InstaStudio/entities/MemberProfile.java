@@ -19,8 +19,10 @@ public class MemberProfile {
     @Id
     private Long memberId;
 
+    @Column(nullable = false)
     private Long memberSalary;
 
+    @Column(nullable = false)
     private String specialization;
 
     @OneToOne

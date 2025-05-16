@@ -17,14 +17,19 @@ public class Studio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long studioId;
 
+    @Column(nullable = false)
     private String studioName;
 
+    @Column(nullable = false)
     private String studioAddress;
 
+    @Column(nullable = false)
     private String studioCity;
 
+    @Column(nullable = false)
     private String studioState;
 
+    @Column(nullable = false)
     private String studioPinCode;
 
     @Lob

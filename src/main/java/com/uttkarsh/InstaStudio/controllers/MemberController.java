@@ -15,7 +15,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -33,7 +32,7 @@ public class MemberController {
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("register/member")
     public ResponseEntity<MemberResponseDTO> createMember(
-            @RequestBody MemberRequestDTO requestDTO
+            @Valid @RequestBody MemberRequestDTO requestDTO
     ){
         MemberResponseDTO responseDTO = memberService.createMember(requestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);

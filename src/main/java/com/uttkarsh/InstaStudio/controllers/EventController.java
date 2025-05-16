@@ -25,7 +25,7 @@ public class EventController {
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/register/event")
     public ResponseEntity<EventResponseDTO> createEvent(
-            @RequestBody EventRequestDTO requestDTO
+            @Valid @RequestBody EventRequestDTO requestDTO
     ){
         EventResponseDTO responseDTO = eventService.createEvent(requestDTO);
         return  ResponseEntity.ok(responseDTO);
