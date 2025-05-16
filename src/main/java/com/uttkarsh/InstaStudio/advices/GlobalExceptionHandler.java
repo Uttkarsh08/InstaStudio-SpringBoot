@@ -1,11 +1,17 @@
 package com.uttkarsh.InstaStudio.advices;
 
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.uttkarsh.InstaStudio.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.security.access.AccessDeniedException;
+
+import java.util.Arrays;
+import java.util.List;
 
 
 @RestControllerAdvice
@@ -108,6 +114,43 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.BAD_REQUEST)
                 .message(ex.getMessage())
                 .build();
+        return buildErrorResponseEntity(apiError);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ApiResponse<?>> handleValidationException(MethodArgumentNotValidException ex) {
+        List<String> validationErrors = ex.getBindingResult()
+                .getFieldErrors()
+                .stream()
+                .map(error -> String.format("Field '%s': %s", error.getField(), error.getDefaultMessage()))
+                .toList();
+
+        ApiError apiError = ApiError.builder()
+                .status(HttpStatus.BAD_REQUEST)
+                .message("Validation failed")
+                .subErrors(validationErrors)
+                .build();
+
+        return buildErrorResponseEntity(apiError);
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ApiResponse<?>> handleJsonParseException(HttpMessageNotReadableException ex) {
+        String message = "Malformed JSON request or invalid enum value";
+
+        if (ex.getCause() instanceof InvalidFormatException invalidFormat) {
+            Class<?> targetType = invalidFormat.getTargetType();
+            if (targetType.isEnum()) {
+                Object[] validEnums = targetType.getEnumConstants();
+                message = "Invalid value. Allowed values: " + Arrays.toString(validEnums);
+            }
+        }
+
+        ApiError apiError = ApiError.builder()
+                .status(HttpStatus.BAD_REQUEST)
+                .message(message)
+                .build();
+
         return buildErrorResponseEntity(apiError);
     }
 

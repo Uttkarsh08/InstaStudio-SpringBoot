@@ -5,7 +5,7 @@ import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
 import com.uttkarsh.InstaStudio.dto.auth.LoginRequestDTO;
 import com.uttkarsh.InstaStudio.dto.auth.LoginResponseDTO;
-import com.uttkarsh.InstaStudio.dto.auth.TokenRefreshRequest;
+import com.uttkarsh.InstaStudio.dto.auth.TokenRefreshRequestDTO;
 import com.uttkarsh.InstaStudio.dto.auth.TokenRefreshResponse;
 import com.uttkarsh.InstaStudio.entities.User;
 import com.uttkarsh.InstaStudio.entities.enums.UserType;
@@ -13,6 +13,7 @@ import com.uttkarsh.InstaStudio.exceptions.InvalidTokenException;
 import com.uttkarsh.InstaStudio.services.JwtService;
 import com.uttkarsh.InstaStudio.services.UserService;
 import io.jsonwebtoken.Claims;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -32,10 +33,10 @@ public class AuthController {
     private final JwtService jwtService;
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO loginRequestDTO) throws FirebaseAuthException {
+    public ResponseEntity<LoginResponseDTO> login(@Valid @RequestBody LoginRequestDTO loginRequestDTO) throws FirebaseAuthException {
         FirebaseToken decoded;
         try {
-            decoded = FirebaseAuth.getInstance().verifyIdToken(loginRequestDTO.firebaseToken);
+            decoded = FirebaseAuth.getInstance().verifyIdToken(loginRequestDTO.getFirebaseToken());
             log.info("Firebase ID: {}", decoded.getUid());
         } catch (FirebaseAuthException e) {
             log.error("Token verification failed: {}", e.getMessage());
@@ -44,7 +45,7 @@ public class AuthController {
         String firebaseId = decoded.getUid();
         String username = decoded.getName();
         String userEmail = decoded.getEmail();
-        UserType loginType = loginRequestDTO.loginType;
+        UserType loginType = loginRequestDTO.getLoginType();
 
         log.info("FirebaseId: {}", firebaseId);
         log.info("loginType: {}", loginType);
@@ -61,8 +62,8 @@ public class AuthController {
 
     }
 
-    @PostMapping("/auth/refresh-token")
-    public ResponseEntity<?> refreshToken(@RequestBody TokenRefreshRequest request) {
+    @PostMapping("/refresh-token")
+    public ResponseEntity<?> refreshToken(@Valid @RequestBody TokenRefreshRequestDTO request) {
         String refreshToken = request.getRefreshToken();
 
         if (!jwtService.validateToken(refreshToken)) {

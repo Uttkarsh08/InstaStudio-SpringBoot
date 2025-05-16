@@ -35,14 +35,19 @@ public class Event {
     @JsonManagedReference  // Serialize sub-events when serializing the main event
     private Set<Event> subEvents = new LinkedHashSet<>();
 
+    @Column(nullable = false)
     private LocalDateTime eventStartDate;
 
+    @Column(nullable = false)
     private LocalDateTime eventEndDate;
 
+    @Column(nullable = false)
     private String eventLocation;
 
+    @Column(nullable = false)
     private String eventCity;
 
+    @Column(nullable = false)
     private String eventState;
 
     private boolean evenIsSaved;

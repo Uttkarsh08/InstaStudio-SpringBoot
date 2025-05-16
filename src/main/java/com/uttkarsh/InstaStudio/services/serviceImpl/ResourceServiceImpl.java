@@ -37,7 +37,6 @@ public class ResourceServiceImpl implements ResourceService {
        Resource resource = Resource.builder()
                .resourceName(requestDTO.getResourceName())
                .resourcePrice(requestDTO.getResourcePrice())
-               .resourceRegisteredAt(requestDTO.getResourceRegisteredAt())
                .studio(studio)
                .build();
        resourceRepository.save(resource);

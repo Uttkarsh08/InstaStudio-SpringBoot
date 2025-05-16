@@ -30,7 +30,6 @@ public class RatingServiceImpl implements RatingService {
                 .orElseThrow(() -> new ResourceNotFoundException("Member can't be found with id: "+  memberId));
 
         Rating newRating = new Rating();
-        newRating.setCreatedAt(requestDTO.getCreatedAt());
         newRating.setReviewBy(requestDTO.getReviewBy());
         newRating.setReview(requestDTO.getReview());
         newRating.setRatingValue(requestDTO.getRatingValue());

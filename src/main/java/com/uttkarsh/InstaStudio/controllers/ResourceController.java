@@ -1,7 +1,5 @@
 package com.uttkarsh.InstaStudio.controllers;
 
-import com.uttkarsh.InstaStudio.dto.member.MemberRequestDTO;
-import com.uttkarsh.InstaStudio.dto.member.MemberResponseDTO;
 import com.uttkarsh.InstaStudio.dto.resource.ResourceRequestDTO;
 import com.uttkarsh.InstaStudio.dto.resource.ResourceResponseDTO;
 import com.uttkarsh.InstaStudio.services.ResourceService;
@@ -35,7 +33,7 @@ public class ResourceController {
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("register/resource")
     public ResponseEntity<ResourceResponseDTO> createResource(
-            @RequestBody ResourceRequestDTO requestDTO
+            @Valid @RequestBody ResourceRequestDTO requestDTO
     ){
         ResourceResponseDTO responseDTO = resourceService.createResource(requestDTO);
         return ResponseEntity.ok(responseDTO);
