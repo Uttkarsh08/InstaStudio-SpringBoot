@@ -18,7 +18,7 @@ public class JwtServiceImpl implements JwtService {
     @Value("${jwt.secretKey}")
     private String jwtSecretKey;
 
-    private SecretKey getSecretKey(){
+    public SecretKey getSecretKey(){
         return Keys.hmacShaKeyFor(jwtSecretKey.getBytes(StandardCharsets.UTF_8));
     }
 

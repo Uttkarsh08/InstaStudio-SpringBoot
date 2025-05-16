@@ -42,4 +42,8 @@ public class Studio {
     @OneToMany(mappedBy = "studio", cascade = CascadeType.ALL)
     private Set<Resource> resources = new LinkedHashSet<>();
 
+    public Studio(Long studioId) {
+        this.studioId = studioId;
+    }
+
 }

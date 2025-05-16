@@ -23,8 +23,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ResourceController {
 
-    @Value("${PAGE_SIZE}")
-    private int PAGE_SIZE;
+//    @Value("${PAGE_SIZE}")
+//    private int PAGE_SIZE;
+
+    private final int PAGE_SIZE = 5;
 
 
     private final ResourceService resourceService;
