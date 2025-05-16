@@ -36,7 +36,6 @@ public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
     private final MemberMapper memberMapper;
     private final MemberReviewMapper memberReviewMapper;
-    private final EventRepository eventRepository;
 
     @Override
     public MemberResponseDTO createMember(MemberRequestDTO requestDTO) {
