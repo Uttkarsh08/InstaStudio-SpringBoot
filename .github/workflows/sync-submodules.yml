@@ -1,0 +1,23 @@
+name: Sync Submodules
+
+on:
+  repository_dispatch:
+    types: [sync-submodules]
+
+jobs:
+  update-submodules:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout main repo
+      uses: actions/checkout@v3
+      with:
+        submodules: true
+        token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+
+    - name: Pull latest submodules
+      run: |
+        git submodule update --remote
+        git add android backend
+        git commit -m "🔄 Auto-sync submodules" || echo "No changes to commit"
+        git push
