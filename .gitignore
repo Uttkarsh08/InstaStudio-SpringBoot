@@ -1,0 +1,37 @@
+# === Spring Boot (Java) ===
+backend/target/
+backend/.idea/
+backend/.classpath
+backend/.project
+backend/.settings/
+backend/src/main/resources/ServiceAccountkey.json
+backend/src/main/resources/application-secrets.yml
+
+# === Android ===
+android/*.iml
+android/.gradle/
+android/local.properties
+android/.idea/
+android/.idea/caches
+android/.idea/libraries
+android/.idea/modules.xml
+android/.idea/workspace.xml
+android/.idea/navEditor.xml
+android/.idea/assetWizardSettings.xml
+android/.DS_Store
+android/build/
+android/captures/
+android/.externalNativeBuild/
+android/.cxx/
+android/local.properties
+
+# Android app-specific (inside android/app/)
+android/app/build/
+android/app/google-services.json
+
+# === Global / General ===
+*.log
+*.env
+.DS_Store
+node_modules/
+
