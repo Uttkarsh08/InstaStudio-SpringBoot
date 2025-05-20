@@ -7,17 +7,25 @@ on:
 jobs:
   update-submodules:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout main repo
-      uses: actions/checkout@v3
-      with:
-        submodules: true
-        token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+      - name: Checkout Monorepo with submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Pull latest submodules
-      run: |
-        git submodule update --remote
-        git add android backend
-        git commit -m "🔄 Auto-sync submodules" || echo "No changes to commit"
-        git push
+      - name: Pull latest changes in submodules
+        run: |
+          git submodule update --remote --merge
+
+      - name: Commit updated submodule pointers
+        run: |
+          git config user.name "Uttkarsh08-Bot"
+          git config user.email "uttkarsh08@users.noreply.github.com"
+          git add android backend
+          if git diff --cached --quiet; then
+            echo "✅ Submodules are already up to date."
+          else
+            git commit -m "🔄 Auto-sync submodule pointers from Android/Backend"
+            git push origin main
+          fi
