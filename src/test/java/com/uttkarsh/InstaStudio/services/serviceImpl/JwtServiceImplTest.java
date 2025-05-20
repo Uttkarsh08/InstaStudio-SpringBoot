@@ -56,8 +56,6 @@ class JwtServiceImplTest {
     @Test
     void shouldReturnFalseForExpiredToken() {
         String firebaseId = "expired-user";
-
-        // Create a token that expired 1 minute ago
         String expiredToken = Jwts.builder()
                 .subject(firebaseId)
                 .issuedAt(new Date(System.currentTimeMillis() - 60000)) // issued 1 min ago
@@ -67,22 +65,18 @@ class JwtServiceImplTest {
 
         boolean isValid = jwtService.validateToken(expiredToken);
 
-        assertFalse(isValid); // token should be rejected
+        assertFalse(isValid);
     }
 
     @Test
     void shouldReturnFalseForTamperedToken() {
         String firebaseId = "valid-user";
-
-        // Generate a valid token
         String validToken = jwtService.generateAccessToken(firebaseId, false, UserType.ADMIN);
-
-        // Tamper with token by changing one character in payload
         String tamperedToken = validToken.substring(0, validToken.length() - 2) + "xx";
 
         boolean isValid = jwtService.validateToken(tamperedToken);
 
-        assertFalse(isValid); // should not validate due to invalid signature
+        assertFalse(isValid);
     }
 
 }

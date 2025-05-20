@@ -61,7 +61,6 @@ class ResourceControllerTest {
         sampleRequestDTO = new ResourceRequestDTO();
         sampleRequestDTO.setResourceName("Camera");
         sampleRequestDTO.setResourcePrice(5000L);
-        sampleRequestDTO.setResourceRegisteredAt(LocalDateTime.now());
         sampleRequestDTO.setStudioId(studioId);
 
         sampleResponseDTO = new ResourceResponseDTO();

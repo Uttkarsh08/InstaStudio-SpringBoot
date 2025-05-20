@@ -68,7 +68,6 @@ class ResourceServiceImplTest {
                 .studioId(studioId)
                 .resourceName("Camera")
                 .resourcePrice(1000L)
-                .resourceRegisteredAt(LocalDateTime.now())
                 .build();
     }
 

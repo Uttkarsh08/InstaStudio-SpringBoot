@@ -81,7 +81,6 @@
             requestDTO.setUserName("New User");
             requestDTO.setUserEmail("newuser@example.com");
             requestDTO.setUserPhoneNo("9876543210");
-            requestDTO.setRegistrationDate(LocalDateTime.now());
             requestDTO.setUserType(UserType.ADMIN);
 
             User savedUser = new User();

@@ -1,255 +1,222 @@
 package com.uttkarsh.InstaStudio.controllers;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
-import java.util.*;
-
 import com.uttkarsh.InstaStudio.dto.member.MemberRequestDTO;
 import com.uttkarsh.InstaStudio.dto.member.MemberResponseDTO;
+import com.uttkarsh.InstaStudio.dto.member.MemberReviewResponseDTO;
 import com.uttkarsh.InstaStudio.exceptions.ResourceNotFoundException;
 import com.uttkarsh.InstaStudio.services.MemberService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.*;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Objects;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class MemberControllerTest {
 
-    @Mock
-    private MemberService memberService;
-
     @InjectMocks
     private MemberController memberController;
 
-    private MemberRequestDTO validRequest;
-    private MemberResponseDTO validResponse;
+    @Mock
+    private MemberService memberService;
 
     @BeforeEach
     void setUp() {
-        validRequest = new MemberRequestDTO(
-                "member@example.com",
-                50000L,
-                "Photography",
-                1L
-        );
-
-        validResponse = new MemberResponseDTO(
-                10L,
-                "John Doe",
-                "member@example.com",
-                "1234567890",
-                50000L,
-                "Photography",
-                4L
-        );
+        ReflectionTestUtils.setField(memberController, "PAGE_SIZE", 10); // Set PAGE_SIZE
     }
 
-    // ========== GET BY ID ==========
+    private final MemberResponseDTO sampleResponse = new MemberResponseDTO(
+            1L, "John Doe", "john@example.com", "9876543210", 50000L, "Photographer", 4L
+    );
+
+    private final MemberRequestDTO sampleRequest = new MemberRequestDTO(
+            "john@example.com", 50000L, "Photographer", 1L
+    );
 
     @Test
-    void getMemberById_success() {
-        when(memberService.getMemberById(1L, 10L)).thenReturn(validResponse);
+    void createMember_Success() {
+        when(memberService.createMember(any(MemberRequestDTO.class))).thenReturn(sampleResponse);
 
-        ResponseEntity<MemberResponseDTO> response = memberController.getMemberById(1L, 10L);
-
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(validResponse, response.getBody());
-    }
-
-    @Test
-    void getMemberById_notFound() {
-        when(memberService.getMemberById(1L, 10L)).thenThrow(new ResourceNotFoundException("Member not Found"));
-
-        ResourceNotFoundException exception = assertThrows(ResourceNotFoundException.class, () -> {
-            memberController.getMemberById(1L, 10L);
-        });
-        assertEquals("Member not Found", exception.getMessage());
-    }
-
-    // ========== CREATE MEMBER ==========
-
-    @Test
-    void createMember_success() {
-        when(memberService.createMember(validRequest)).thenReturn(validResponse);
-
-        ResponseEntity<MemberResponseDTO> response = memberController.createMember(validRequest);
+        ResponseEntity<MemberResponseDTO> response = memberController.createMember(sampleRequest);
 
         assertEquals(HttpStatus.CREATED, response.getStatusCode());
-        assertEquals(validResponse, response.getBody());
+        assertEquals(sampleResponse, response.getBody());
     }
 
     @Test
-    void createMember_serviceThrowsException() {
-        when(memberService.createMember(any())).thenThrow(new RuntimeException("Service failed"));
-
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
-            memberController.createMember(validRequest);
+    void createMember_InvalidRequest_ThrowsException() {
+        assertThrows(MethodArgumentNotValidException.class, () -> {
+            memberController.createMember(new MemberRequestDTO());
         });
-
-        assertEquals("Service failed", exception.getMessage());
     }
 
-    // ========== UPDATE MEMBER ==========
-
     @Test
-    void updateMember_success() {
-        when(memberService.updateMemberById(eq(1L), eq(10L), any(MemberRequestDTO.class))).thenReturn(validResponse);
+    void getMemberById_Success() {
+        when(memberService.getMemberById(1L, 2L)).thenReturn(sampleResponse);
 
-        ResponseEntity<MemberResponseDTO> response = memberController.updateMemberById(1L, 10L, validRequest);
+        ResponseEntity<MemberResponseDTO> response = memberController.getMemberById(1L, 2L);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(validResponse, response.getBody());
+        assertEquals(sampleResponse, response.getBody());
     }
 
     @Test
-    void updateMember_notFound() {
-        when(memberService.updateMemberById(eq(1L), eq(10L), any(MemberRequestDTO.class)))
-                .thenThrow(new ResourceNotFoundException("Member not Found"));
+    void getMemberById_NotFound() {
+        when(memberService.getMemberById(1L, 99L)).thenThrow(new ResourceNotFoundException("Not found"));
 
-        ResourceNotFoundException thrown = assertThrows(ResourceNotFoundException.class, () -> {
-            memberController.updateMemberById(1L, 10L, validRequest);
-        });
-
-        assertEquals("Member not Found", thrown.getMessage());
+        assertThrows(ResourceNotFoundException.class, () -> memberController.getMemberById(1L, 99L));
     }
-
 
     @Test
-    void updateMember_serviceThrowsException() {
-        when(memberService.updateMemberById(anyLong(), anyLong(), any())).thenThrow(new RuntimeException("Update failed"));
+    void getAllMembers_Success() {
+        Page<MemberResponseDTO> page = new PageImpl<>(List.of(sampleResponse));
+        when(memberService.getAllMemebersForStudio(eq(1L), any(Pageable.class))).thenReturn(page);
 
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
-            memberController.updateMemberById(1L, 10L, validRequest);
-        });
+        ResponseEntity<Page<MemberResponseDTO>> response = memberController.getAllMembers(1L, 0);
 
-        assertEquals("Update failed", exception.getMessage());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(1, Objects.requireNonNull(response.getBody()).getTotalElements());
     }
 
-//    // ========== DELETE MEMBER ==========
-//
-//    @Test
-//    void deleteMember_success() {
-//        when(memberService.deleteMemberById(1L, 10L));
-//
-//        ResponseEntity<Void> response = memberController.deleteMemberById(1L, 10L);
-//
-//        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
-//        assertNull(response.getBody());
-//    }
-//
-//    @Test
-//    void deleteMember_notFound() {
-//        when(memberService.deleteMember(10L)).thenReturn(false);
-//
-//        ResponseEntity<Void> response = memberController.deleteMember(10L);
-//
-//        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
-//    }
-//
-//    @Test
-//    void deleteMember_serviceThrowsException() {
-//        when(memberService.deleteMember(anyLong())).thenThrow(new RuntimeException("Delete error"));
-//
-//        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
-//            memberController.deleteMember(10L);
-//        });
-//
-//        assertEquals("Delete error", exception.getMessage());
-//    }
+    @Test
+    void getAllMembers_EmptyPage() {
+        Page<MemberResponseDTO> page = Page.empty();
+        when(memberService.getAllMemebersForStudio(eq(1L), any(Pageable.class))).thenReturn(page);
 
-    // ========== LIST ALL MEMBERS ==========
+        ResponseEntity<Page<MemberResponseDTO>> response = memberController.getAllMembers(1L, 0);
 
-//    @Test
-//    void getAllMembers_success() {
-//        List<MemberResponseDTO> list = Arrays.asList(validResponse);
-//        when(memberService.getAllMemebersForStudio(1L)).thenReturn(list);
-//
-//        ResponseEntity<List<MemberResponseDTO>> response = memberController.getAllMembers();
-//
-//        assertEquals(HttpStatus.OK, response.getStatusCode());
-//        assertEquals(list, response.getBody());
-//    }
-//
-//    @Test
-//    void getAllMembers_emptyList() {
-//        when(memberService.getAllMembers()).thenReturn(Collections.emptyList());
-//
-//        ResponseEntity<List<MemberResponseDTO>> response = memberController.getAllMembers();
-//
-//        assertEquals(HttpStatus.OK, response.getStatusCode());
-//        assertTrue(response.getBody().isEmpty());
-//    }
-//
-//    @Test
-//    void getAllMembers_serviceThrowsException() {
-//        when(memberService.getAllMembers()).thenThrow(new RuntimeException("Fetch failed"));
-//
-//        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
-//            memberController.getAllMembers();
-//        });
-//
-//        assertEquals("Fetch failed", exception.getMessage());
-//    }
+        assertTrue(Objects.requireNonNull(response.getBody()).isEmpty());
+    }
 
-    // ========== VALIDATION FAILURE SIMULATION ==========
+    @Test
+    void updateMemberById_Success() {
+        when(memberService.updateMemberById(eq(1L), eq(2L), any(MemberRequestDTO.class)))
+                .thenReturn(sampleResponse);
 
-//    @Test
-//    void createMember_validationFailure() {
-//        // Simulate service throwing validation exception (e.g. invalid email)
-//        when(memberService.createMember(any())).thenThrow(new IllegalArgumentException("Invalid email"));
-//
-//        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-//            memberController.createMember(validRequest);
-//        });
-//
-//        assertEquals("Invalid email", exception.getMessage());
-//    }
-//
-//    @Test
-//    void updateMember_validationFailure() {
-//        when(memberService.updateMember(anyLong(), any())).thenThrow(new IllegalArgumentException("Invalid salary"));
-//
-//        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-//            memberController.updateMember(10L, validRequest);
-//        });
-//
-//        assertEquals("Invalid salary", exception.getMessage());
-//    }
-//
-//    // ========== EDGE CASES ==========
-//
-//    @Test
-//    void createMember_nullRequest() {
-//        assertThrows(NullPointerException.class, () -> {
-//            memberController.createMember(null);
-//        });
-//    }
-//
-//    @Test
-//    void updateMember_nullRequest() {
-//        assertThrows(NullPointerException.class, () -> {
-//            memberController.updateMember(10L, null);
-//        });
-//    }
-//
-//    @Test
-//    void getMemberById_nullId() {
-//        assertThrows(NullPointerException.class, () -> {
-//            memberController.getMemberById(null);
-//        });
-//    }
-//
-//    @Test
-//    void deleteMember_nullId() {
-//        assertThrows(NullPointerException.class, () -> {
-//            memberController.deleteMember(null);
-//        });
-//    }
+        ResponseEntity<MemberResponseDTO> response = memberController.updateMemberById(1L, 2L, sampleRequest);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(sampleResponse, response.getBody());
+    }
+
+    @Test
+    void updateMemberById_NotFound() {
+        when(memberService.updateMemberById(eq(1L), eq(99L), any()))
+                .thenThrow(new ResourceNotFoundException("Not found"));
+
+        assertThrows(ResourceNotFoundException.class,
+                () -> memberController.updateMemberById(1L, 99L, sampleRequest));
+    }
+
+    @Test
+    void deleteMemberById_Success() {
+        doNothing().when(memberService).deleteMemberById(1L, 2L);
+
+        ResponseEntity<Void> response = memberController.deleteMemberById(1L, 2L);
+
+        assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+    }
+
+    @Test
+    void deleteMemberById_NotFound() {
+        doThrow(new ResourceNotFoundException("Not found"))
+                .when(memberService).deleteMemberById(1L, 2L);
+
+        assertThrows(ResourceNotFoundException.class,
+                () -> memberController.deleteMemberById(1L, 2L));
+    }
+
+    @Test
+    void getMemberReviewsById_Success() {
+        Page<MemberReviewResponseDTO> page = new PageImpl<>(List.of(
+                new MemberReviewResponseDTO(1L, 5, "Great job!", "John", LocalDateTime.now())
+        ));
+        when(memberService.getMemberReviewsById(eq(1L), eq(2L), any(Pageable.class))).thenReturn(page);
+
+        ResponseEntity<Page<MemberReviewResponseDTO>> response =
+                memberController.getMemberReviewsById(1L, 2L, 0);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(1, Objects.requireNonNull(response.getBody()).getTotalElements());
+    }
+
+    @Test
+    void getMemberReviewsById_Empty() {
+        when(memberService.getMemberReviewsById(eq(1L), eq(2L), any(Pageable.class)))
+                .thenReturn(Page.empty());
+
+        ResponseEntity<Page<MemberReviewResponseDTO>> response =
+                memberController.getMemberReviewsById(1L, 2L, 0);
+
+        assertTrue(Objects.requireNonNull(response.getBody()).isEmpty());
+    }
+
+    @Test
+    void getAvailableMembers_Success() {
+        List<MemberResponseDTO> list = List.of(sampleResponse);
+        when(memberService.getALlAvailableMembers(eq(1L), any(), any())).thenReturn(list);
+
+        ResponseEntity<List<MemberResponseDTO>> response =
+                memberController.getAvailableMembers(1L, LocalDateTime.now(), LocalDateTime.now().plusDays(1));
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(1, Objects.requireNonNull(response.getBody()).size());
+    }
+
+    @Test
+    void getAvailableMembers_Empty() {
+        when(memberService.getALlAvailableMembers(eq(1L), any(), any())).thenReturn(List.of());
+
+        ResponseEntity<List<MemberResponseDTO>> response =
+                memberController.getAvailableMembers(1L, LocalDateTime.now(), LocalDateTime.now().plusDays(1));
+
+        assertTrue(Objects.requireNonNull(response.getBody()).isEmpty());
+    }
+
+    @Test
+    void getAvailableMembers_InvalidDates() {
+        assertThrows(Exception.class, () -> {
+            memberController.getAvailableMembers(1L, null, null);
+        });
+    }
+
+    @Test
+    void searchAllMembers_Success() {
+        Page<MemberResponseDTO> page = new PageImpl<>(List.of(sampleResponse));
+        when(memberService.searchAllMembers(eq(1L), eq("john"), any(Pageable.class))).thenReturn(page);
+
+        ResponseEntity<Page<MemberResponseDTO>> response = memberController.searchAllMembers(1L, "john", 0);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(1, Objects.requireNonNull(response.getBody()).getTotalElements());
+    }
+
+    @Test
+    void searchAllMembers_NoResults() {
+        when(memberService.searchAllMembers(eq(1L), eq("unknown"), any(Pageable.class)))
+                .thenReturn(Page.empty());
+
+        ResponseEntity<Page<MemberResponseDTO>> response = memberController.searchAllMembers(1L, "unknown", 0);
+
+        assertTrue(Objects.requireNonNull(response.getBody()).isEmpty());
+    }
 
 }
+

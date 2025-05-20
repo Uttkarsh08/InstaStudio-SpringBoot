@@ -58,7 +58,6 @@ class RatingServiceImplTest {
     @BeforeEach
     void setUp() {
         validRequestDTO = new MemberReviewRequestDTO();
-        validRequestDTO.setCreatedAt(LocalDateTime.now());
         validRequestDTO.setReviewBy("John Doe");
         validRequestDTO.setReview("Excellent service");
         validRequestDTO.setRatingValue(4);
@@ -68,7 +67,6 @@ class RatingServiceImplTest {
 
         rating = new Rating();
         rating.setRatingId(reviewId);
-        rating.setCreatedAt(validRequestDTO.getCreatedAt());
         rating.setReviewBy(validRequestDTO.getReviewBy());
         rating.setReview(validRequestDTO.getReview());
         rating.setRatingValue(validRequestDTO.getRatingValue());
@@ -76,13 +74,10 @@ class RatingServiceImplTest {
 
         responseDTO = new MemberReviewResponseDTO();
         responseDTO.setRatingId(reviewId);
-        responseDTO.setCreatedAt(validRequestDTO.getCreatedAt());
         responseDTO.setReviewBy(validRequestDTO.getReviewBy());
         responseDTO.setReview(validRequestDTO.getReview());
         responseDTO.setRatingValue(validRequestDTO.getRatingValue());
     }
-
-    // --- createReview tests ---
 
     @Test
     void createReview_WhenValidRequest_SavesAndReturnsDTO() {

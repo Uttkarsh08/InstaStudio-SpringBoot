@@ -22,7 +22,6 @@ public class StudioServiceImpl implements StudioService {
 
     private final StudioRepository studioRepository;
     private final UserRepository userRepository;
-    private final EventRepository eventRepository;
     private final ModelMapper mapper;
 
     @Override

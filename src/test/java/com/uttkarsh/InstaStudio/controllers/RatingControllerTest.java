@@ -40,14 +40,12 @@ class RatingControllerTest {
     @BeforeEach
     void setUp() {
         requestDTO = new MemberReviewRequestDTO();
-        requestDTO.setCreatedAt(LocalDateTime.now());
         requestDTO.setReviewBy("John Doe");
         requestDTO.setReview("Great work!");
         requestDTO.setRatingValue(5);
 
         responseDTO = new MemberReviewResponseDTO();
         responseDTO.setRatingId(reviewId);
-        responseDTO.setCreatedAt(requestDTO.getCreatedAt());
         responseDTO.setReviewBy(requestDTO.getReviewBy());
         responseDTO.setReview(requestDTO.getReview());
         responseDTO.setRatingValue(requestDTO.getRatingValue());
