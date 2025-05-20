@@ -26,42 +26,42 @@ InstaStudio/
 
 ## How to Get Started
 
-# 1. Clone the Monorepo with submodules
+- 1. Clone the Monorepo with submodules
 ```bash
 git clone --recurse-submodules https://github.com/Uttkarsh08/InstaStudio.git
 ```
-# 2. Navigate into the project folder
+- 2. Navigate into the project folder
 ```bash
 cd InstaStudio
 ```
 
-# 3. Initialize and update submodules
+- 3. Initialize and update submodules
 ```bash
 git submodule update --init --recursive
 ```
 
 ### Android Setup
 
-# Open the 'android' folder in Android Studio
+- Open the 'android' folder in Android Studio
 ```bash
 cd android
 ```
 
-# Then:
-# - Build the project
-# - Connect your emulator or Android device
-# - Run the app
+-**Then**:
+ - Build the project
+ - Connect your emulator or Android device
+ - Run the app
 
 
 ### Backend Setup
 
-# Navigate to the backend folder
+- Navigate to the backend folder
 ```bash
 cd backend
 ```
 
-# Make sure you have Java 17+ and Maven installed
-# Then run the Spring Boot app:
+- Make sure you have Java 17+ and Maven installed
+- Then run the Spring Boot app:
 ```bash
 ./mvnw spring-boot:run
 ```
