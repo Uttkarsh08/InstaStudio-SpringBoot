@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7df082fd-01c9-4f11-ac5d-6932c0859655" name="Changes" comment="Completed PHASE-1" />
+    <list default="true" id="7df082fd-01c9-4f11-ac5d-6932c0859655" name="Changes" comment="Testing Commit" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -411,7 +411,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747737113354</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Testing Commit">
+      <option name="closed" value="true" />
+      <created>1747738307390</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1747738307390</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -455,7 +463,8 @@
     <MESSAGE value="Added Request Validations, and code cleaning" />
     <MESSAGE value="code cleaning" />
     <MESSAGE value="Completed PHASE-1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Completed PHASE-1" />
+    <MESSAGE value="Testing Commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Testing Commit" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
