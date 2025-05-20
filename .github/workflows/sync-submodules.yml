@@ -8,17 +8,17 @@ jobs:
   update-submodules:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Monorepo with submodules
+      - name: Checkout Monorepo (without submodules yet)
         uses: actions/checkout@v4
         with:
-          submodules: true
-          token: ${{ secrets.GITHUB_TOKEN }}
+          submodules: false  # delay submodule checkout
 
-      - name: Pull latest changes in submodules
+      - name: Patch submodule URLs with GitHub Token
         run: |
-          git submodule update --remote --merge
+          git config --global url."https://${{ secrets.GITHUB_TOKEN }}@github.com/".insteadOf "https://github.com/"
+          git submodule update --init --remote
 
-      - name: Commit updated submodule pointers
+      - name: Commit updated submodule pointers if any
         run: |
           git config user.name "Uttkarsh08-Bot"
           git config user.email "uttkarsh08@users.noreply.github.com"
@@ -26,6 +26,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "✅ Submodules are already up to date."
           else
-            git commit -m "🔄 Auto-sync submodule pointers from Android/Backend"
+            git commit -m "🔄 Auto-sync submodules"
             git push origin main
           fi
