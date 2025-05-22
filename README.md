@@ -1,84 +1,75 @@
-# InstaStudio
+# InstaStudio – Photography Studio Management App
 
 ## Introduction
 
-Welcome to **InstaStudio**, your all-in-one studio management solution tailored specifically for Indian photographers and clients. From managing bookings and team members to handling payments and client communications, InstaStudio streamlines every part of a photography business in one place—both on the web and mobile.
+InstaStudio is a comprehensive backend-driven platform tailored for managing photography studios, event schedules, team collaboration, and client engagement. Designed with Indian photographers in mind, it brings structure, automation, and convenience to a studio’s day-to-day operations.
 
-This monorepo contains the full codebase for both the Android frontend and the Spring Boot backend, making development, collaboration, and CI/CD setup more efficient and centralized.
+## ⭐ Key Features
+- **🔐 Role-Based Access Control**
+Implements a secure authentication and authorization system using Spring Security and JWT for Admins, Members, and Customers.
 
-## Features
+- **📅 Event Scheduling & Management**
+Allows creation, assignment, and tracking of photography events—managing dates, locations, associated teams, and client details.
 
-- 📸 **Client Booking & Event Scheduling**: Clients can book services, select event types, and manage schedules.
-- 👥 **Team & Role Management**: Admins can assign roles and manage studio team members with proper permissions.
-- 💰 **Payment Integration**: Built-in UPI, Razorpay, and Stripe support for seamless transaction experiences.
-- 🛡️ **Secure Authentication**: JWT-based login system with refresh/access token mechanism.
-- 🔔 **Notifications**: Real-time alerts for booking updates, payments, and new messages.
-- 📊 **Dashboard Analytics**: View earnings, booking trends, and team performance all in one place.
+- **👥 Team & Customer Management**
+Manage studio team members and customers with dedicated modules for assigning roles, responsibilities, and tracking participation.
 
-## Project Structure
+- **📤 Layered REST API Architecture**
+Clean RESTful API design using DTOs, service layers, and repository abstraction for maintainability and scalability.
 
-```bash
-InstaStudio/
-├── android/       # Jetpack Compose Android App
-├── backend/       # Spring Boot Backend with RESTful APIs
-└── .gitmodules    # Submodule definitions
+- **💳 Payment & Booking Status**
+Backend-ready structure for integrating payment systems (like UPI or Razorpay) and tracking payment status across events.
+
+- **🧪 Testing & Validation**
+All APIs are tested using Postman and JUnit to ensure reliability and smooth frontend integration.
+
+- **🛠️ Exception Handling & Consistent Responses**
+Custom exceptions and response wrappers for cleaner debugging, better client-side error handling, and consistent API formats.
+
+- **📸 Use Cases**
+  - A studio admin can create events, assign team members, and track their completion status.
+  - Clients can be onboarded and linked with specific events or shoots.
+  - Members can view assigned events and contribute to real-time progress tracking.
+  - API responses are consistently structured to support smooth mobile frontend integration.
+
+## 🚀 How to Get Started
+
+- **Clone the Repository:**
+ ```bash
+git clone https://github.com/Uttkarsh08/InstaStudio-SpringBoot.git
+cd InstaStudio-SpringBoot
 ```
+- **Configure Database (PostgreSQL):**
 
-## How to Get Started
+Create a PostgreSQL database.
+Add credentials in your application.yml or .env.
 
-- 1. Clone the Monorepo with submodules
-```bash
-git clone --recurse-submodules https://github.com/Uttkarsh08/InstaStudio.git
-```
-- 2. Navigate into the project folder
-```bash
-cd InstaStudio
-```
-
-- 3. Initialize and update submodules
-```bash
-git submodule update --init --recursive
-```
-
-### Android Setup
-
-- Open the 'android' folder in Android Studio
-```bash
-cd android
-```
-
--**Then**:
- - Build the project
- - Connect your emulator or Android device
- - Run the app
-
-
-### Backend Setup
-
-- Navigate to the backend folder
-```bash
-cd backend
-```
-
-- Make sure you have Java 17+ and Maven installed
-- Then run the Spring Boot app:
-```bash
+- **Run the Backend Server:**
+ ```bash
 ./mvnw spring-boot:run
 ```
+- **API Testing::**
 
-## Tech Stack
+Use Postman to hit endpoints for events, users, authentication, and role management.
+Authentication uses access + refresh token logic with token regeneration and expiration handling.
 
-- **Frontend (Android)**:
-  - Language: Kotlin
-  - UI Framework: Jetpack Compose
-  - IDE: Android Studio
 
-- **Backend**:
-  - Language: Java
-  - Framework: Spring Boot
-  - Security: Spring Security + JWT (Access & Refresh Tokens)
-  - Database: PostgreSQL
-  - Build Tool: Maven
+## 🧱 Tech Stack
+- **Language:** Java (Kotlin used in frontend)
 
-- **Monorepo Tools**:
-  - Git Submodules for managing `android/` and `backend/`
+- **Backend Framework:** Spring Boot
+
+- **Database:** PostgreSQL
+
+- **Security:** Spring Security, JWT
+
+- **API Testing:** Postman, JUnit
+
+
+## 📅 Development Timeline
+- **🧩 Backend Modules Developed:** Authentication, Role Authorization, Event & Team Management, Customer Module, Exception Handling.
+
+- **📦 Current State:** Over 20+ endpoints implemented and tested.
+
+- **🎯 Target:** 100% backend readiness by May 31, 2025, followed by integration with the Android frontend.
+>>>>>>> 667653ad57018392e835cbf1e2efbd4b4c80c58d

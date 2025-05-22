@@ -1,6 +1,8 @@
-[submodule "backend"]
-	path = backend
-	url = https://github.com/Uttkarsh08/InstaStudio-SpringBoot.git
+
 [submodule "android"]
 	path = android
 	url = https://github.com/Uttkarsh08/InstaStudio-Android.git
+[submodule "backend"]
+	path = backend
+	url = https://github.com/Uttkarsh08/InstaStudio-SpringBoot.git
+
