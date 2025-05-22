@@ -11,6 +11,6 @@ public interface StudioService {
 
     void assignAdminToStudio(Long studioId, Long userId);
 
-
+    String getImageForStudio(Long studioId);
 
 }

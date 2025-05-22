@@ -1,8 +1,10 @@
 package com.uttkarsh.InstaStudio.controllers;
 
+import com.uttkarsh.InstaStudio.advices.ApiResponse;
 import com.uttkarsh.InstaStudio.dto.studio.StudioCreationRequestDTO;
 import com.uttkarsh.InstaStudio.dto.studio.StudioCreationResponseDTO;
 import com.uttkarsh.InstaStudio.services.StudioService;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -37,4 +39,13 @@ public class StudioController {
         ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+    @Transactional
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping(path = "/image/{studioId}")
+    public ResponseEntity<?> getImageForStudio(
+            @PathVariable Long studioId
+    ){
+        String base64Image = studioService.getImageForStudio(studioId);
+        return ResponseEntity.ok(new ApiResponse<>(base64Image));
+    }
 }

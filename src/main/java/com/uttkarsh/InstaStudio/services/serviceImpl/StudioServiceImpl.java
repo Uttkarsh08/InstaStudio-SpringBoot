@@ -11,10 +11,13 @@ import com.uttkarsh.InstaStudio.repositories.StudioRepository;
 import com.uttkarsh.InstaStudio.repositories.UserRepository;
 import com.uttkarsh.InstaStudio.services.StudioService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import java.util.Base64;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 
@@ -29,6 +32,7 @@ public class StudioServiceImpl implements StudioService {
         byte[] imageBytes = null;
         if (requestDTO.getImageDataBase64() != null) {
             imageBytes = Base64.getDecoder().decode(requestDTO.getImageDataBase64());
+            log.info("image", requestDTO.getImageDataBase64());
         }else{
             System.out.println("image null");
         }
@@ -63,5 +67,15 @@ public class StudioServiceImpl implements StudioService {
         user.setStudio(studio);
         userRepository.save(user);
 
+    }
+
+    @Override
+    public String getImageForStudio(Long studioId) {
+
+        Studio studio = studioRepository.findById(studioId)
+                .orElseThrow(()-> new ResourceNotFoundException("Studio not found with ID: " + studioId));
+
+        byte[] imageBytes = studio.getImageData();
+        return Base64.getEncoder().encodeToString(imageBytes);
     }
 }

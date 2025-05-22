@@ -5,23 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7df082fd-01c9-4f11-ac5d-6932c0859655" name="Changes" comment="Testing Commit">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/user/AdminProfileSetupRequestDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/user/AdminProfileSetupResponseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/utils/mappers/user/UserMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/controllers/StudioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/controllers/StudioController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/controllers/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/filters/JwtAuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/filters/JwtAuthFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/StudioService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/StudioService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/StudioServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/StudioServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/uttkarsh/InstaStudio/controllers/StudioControllerTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/uttkarsh/InstaStudio/controllers/UserControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/uttkarsh/InstaStudio/controllers/UserControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/uttkarsh/InstaStudio/services/serviceImpl/RatingServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/uttkarsh/InstaStudio/services/serviceImpl/RatingServiceImplTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/uttkarsh/InstaStudio/services/serviceImpl/StudioServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/uttkarsh/InstaStudio/services/serviceImpl/StudioServiceImplTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/uttkarsh/InstaStudio/services/serviceImpl/UserServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/uttkarsh/InstaStudio/services/serviceImpl/UserServiceImplTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
