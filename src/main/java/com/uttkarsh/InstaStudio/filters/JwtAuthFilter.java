@@ -58,8 +58,11 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             Boolean isRegistered = claims.get("isRegistered", Boolean.class);
 
             if (Boolean.FALSE.equals(isRegistered)) {
-                if (!request.getRequestURI().startsWith("/api/v1/register/user") &&
-                        !request.getRequestURI().startsWith("/api/auth")) {
+                String uri = request.getRequestURI();
+
+                if (    !uri.startsWith("/api/auth") &&
+                        !uri.startsWith("/api/v1/register/adminProfileSetup")
+                ) {
                     throw new UnregisteredUserException("User must complete profile before accessing protected resources");
                 }
             }

@@ -48,7 +48,7 @@ public class StudioServiceImpl implements StudioService {
     }
 
     @Override
-    public StudioCreationResponseDTO assignAdminToStudio(Long studioId, Long userId) {
+    public void assignAdminToStudio(Long studioId, Long userId) {
 
         Studio studio = studioRepository.findById(studioId)
                 .orElseThrow(()-> new ResourceNotFoundException("Studio not found with ID: " + studioId));
@@ -63,6 +63,5 @@ public class StudioServiceImpl implements StudioService {
         user.setStudio(studio);
         userRepository.save(user);
 
-        return mapper.map(studio, StudioCreationResponseDTO.class);
     }
 }

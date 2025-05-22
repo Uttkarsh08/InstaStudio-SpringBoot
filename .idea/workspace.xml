@@ -4,7 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7df082fd-01c9-4f11-ac5d-6932c0859655" name="Changes" comment="Testing Commit" />
+    <list default="true" id="7df082fd-01c9-4f11-ac5d-6932c0859655" name="Changes" comment="Testing Commit">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/user/AdminProfileSetupRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/user/AdminProfileSetupResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/utils/mappers/user/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/controllers/StudioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/controllers/StudioController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/controllers/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/filters/JwtAuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/filters/JwtAuthFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/StudioService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/StudioService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/StudioServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/StudioServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/uttkarsh/InstaStudio/controllers/StudioControllerTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/uttkarsh/InstaStudio/controllers/UserControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/uttkarsh/InstaStudio/controllers/UserControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/uttkarsh/InstaStudio/services/serviceImpl/RatingServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/uttkarsh/InstaStudio/services/serviceImpl/RatingServiceImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/uttkarsh/InstaStudio/services/serviceImpl/StudioServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/uttkarsh/InstaStudio/services/serviceImpl/StudioServiceImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/uttkarsh/InstaStudio/services/serviceImpl/UserServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/uttkarsh/InstaStudio/services/serviceImpl/UserServiceImplTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,6 +33,7 @@
       <list>
         <option value="Interface" />
         <option value="Class" />
+        <option value="Kotlin Class" />
       </list>
     </option>
   </component>
@@ -27,12 +46,19 @@
     &quot;assignee&quot;: &quot;Uttkarsh08&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Uttkarsh08/InstaStudio-SpringBoot.git",
-    "accountId": "a6c2a64b-ee77-4f82-9b20-050cea22dc8c"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Uttkarsh08/InstaStudio-SpringBoot.git&quot;,
+    &quot;accountId&quot;: &quot;a6c2a64b-ee77-4f82-9b20-050cea22dc8c&quot;
   }
-}]]></component>
+}</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -47,52 +73,52 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.InstaStudio.executor": "Run",
-    "JUnit.AuthControllerTest.executor": "Run",
-    "JUnit.AuthControllerTest.login_shouldReturnUnauthorizedForInvalidToken.executor": "Debug",
-    "JUnit.AuthControllerTest.login_success_userExists_returns200.executor": "Debug",
-    "JUnit.AuthControllerTest.login_success_userNotExists_returns200.executor": "Run",
-    "JUnit.AuthControllerTest.testLogin_whenInvalidToken_returnsUnauthorized.executor": "Run",
-    "JUnit.EventControllerTest.executor": "Run",
-    "JUnit.EventControllerTest.getAllEventsForMember_ReturnsPage.executor": "Run",
-    "JUnit.JwtServiceImplTest.executor": "Run",
-    "JUnit.MemberControllerTest.createMember_InvalidRequest_ThrowsException.executor": "Run",
-    "JUnit.MemberControllerTest.createMember_success.executor": "Run",
-    "JUnit.MemberControllerTest.executor": "Run",
-    "JUnit.MemberControllerTest.getMemberById_notFound.executor": "Run",
-    "JUnit.MemberControllerTest.getMemberReviewsById_Success.executor": "Run",
-    "JUnit.MemberControllerTest.updateMember_notFound.executor": "Run",
-    "JUnit.MemberServiceImplTest.deleteMemberById_MemberNotFound_ThrowsResourceNotFoundException.executor": "Run",
-    "JUnit.MemberServiceImplTest.deleteMemberById_StudioMismatch_ThrowsEventNotAssignedException.executor": "Run",
-    "JUnit.MemberServiceImplTest.deleteMemberById_Success.executor": "Run",
-    "JUnit.MemberServiceImplTest.executor": "Run",
-    "JUnit.MemberServiceImplTest.updateMemberById_StudioMismatch_ThrowsEventNotAssignedException.executor": "Run",
-    "JUnit.MemberServiceImplTest.updateMemberById_StudioMismatch_ThrowsResourceNotFoundException.executor": "Run",
-    "JUnit.RatingControllerTest.executor": "Debug",
-    "JUnit.RatingServiceImplTest.executor": "Run",
-    "JUnit.RatingServiceImplTest.getReviewById_WhenStudioInvalid_ThrowsResourceNotFoundException.executor": "Run",
-    "JUnit.ResourceControllerTest.executor": "Run",
-    "JUnit.ResourceControllerTest.getAllResources_ReturnsOkAndPagedResources.executor": "Run",
-    "JUnit.ResourceServiceImplTest.executor": "Run",
-    "JUnit.StudioControllerTest.executor": "Run",
-    "JUnit.StudioServiceImplTest.executor": "Run",
-    "JUnit.UserControllerTest.executor": "Run",
-    "JUnit.UserServiceImplTest.executor": "Run",
-    "JUnit.UserServiceImplTest.shouldThrowExceptionIfFirebaseIdDoesNotExist.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/uttka/Desktop/SpringBoot/InstaStudio-SpringBoot/src/main/resources",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "MavenSettings"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.InstaStudio.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AuthControllerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AuthControllerTest.login_shouldReturnUnauthorizedForInvalidToken.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.AuthControllerTest.login_success_userExists_returns200.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.AuthControllerTest.login_success_userNotExists_returns200.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AuthControllerTest.testLogin_whenInvalidToken_returnsUnauthorized.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EventControllerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.EventControllerTest.getAllEventsForMember_ReturnsPage.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.JwtServiceImplTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MemberControllerTest.createMember_InvalidRequest_ThrowsException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MemberControllerTest.createMember_success.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MemberControllerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MemberControllerTest.getMemberById_notFound.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MemberControllerTest.getMemberReviewsById_Success.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MemberControllerTest.updateMember_notFound.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MemberServiceImplTest.deleteMemberById_MemberNotFound_ThrowsResourceNotFoundException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MemberServiceImplTest.deleteMemberById_StudioMismatch_ThrowsEventNotAssignedException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MemberServiceImplTest.deleteMemberById_Success.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MemberServiceImplTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MemberServiceImplTest.updateMemberById_StudioMismatch_ThrowsEventNotAssignedException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MemberServiceImplTest.updateMemberById_StudioMismatch_ThrowsResourceNotFoundException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.RatingControllerTest.executor&quot;: &quot;Debug&quot;,
+    &quot;JUnit.RatingServiceImplTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.RatingServiceImplTest.getReviewById_WhenStudioInvalid_ThrowsResourceNotFoundException.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ResourceControllerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ResourceControllerTest.getAllResources_ReturnsOkAndPagedResources.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ResourceServiceImplTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.StudioControllerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.StudioServiceImplTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserControllerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserServiceImplTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.UserServiceImplTest.shouldThrowExceptionIfFirebaseIdDoesNotExist.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/uttka/Desktop/Project/InstaStudio-SpringBoot/src/main/resources&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.uttkarsh.InstaStudio.exceptions" />
@@ -100,6 +126,7 @@
       <recent name="com.uttkarsh.InstaStudio.controllers" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\uttka\Desktop\Project\InstaStudio-SpringBoot\src\main\resources" />
       <recent name="C:\Users\uttka\Desktop\SpringBoot\InstaStudio-SpringBoot\src\main\resources" />
       <recent name="C:\Users\uttka\Desktop\SpringBoot\InstaStudio\src\main\resources" />
       <recent name="C:\Users\uttka\Desktop\SpringBoot\InstaStudio\src\test\java\com\uttkarsh\InstaStudio" />
@@ -170,16 +197,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StudioControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="RatingServiceImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="InstaStudio" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.uttkarsh.InstaStudio.controllers.*" />
+          <option name="PATTERN" value="com.uttkarsh.InstaStudio.services.serviceImpl.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.uttkarsh.InstaStudio.controllers" />
-      <option name="MAIN_CLASS_NAME" value="com.uttkarsh.InstaStudio.controllers.StudioControllerTest" />
+      <option name="PACKAGE_NAME" value="com.uttkarsh.InstaStudio.services.serviceImpl" />
+      <option name="MAIN_CLASS_NAME" value="com.uttkarsh.InstaStudio.services.serviceImpl.RatingServiceImplTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -202,11 +229,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.RatingServiceImplTest" />
         <item itemvalue="JUnit.EventControllerTest.getAllEventsForMember_ReturnsPage" />
         <item itemvalue="JUnit.MemberControllerTest.getMemberReviewsById_Success" />
         <item itemvalue="JUnit.EventControllerTest" />
         <item itemvalue="JUnit.StudioServiceImplTest" />
-        <item itemvalue="JUnit.StudioControllerTest" />
       </list>
     </recent_temporary>
   </component>

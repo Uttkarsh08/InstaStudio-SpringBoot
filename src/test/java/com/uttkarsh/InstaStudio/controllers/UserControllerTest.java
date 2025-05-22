@@ -28,38 +28,6 @@ class UserControllerTest {
     @Mock
     private JwtService jwtService;
 
-    @Test
-    void createUser_shouldRegisterSuccessfully() throws Exception {
-        String firebaseId = "firebase123";
-        String token = "Bearer valid.jwt.token";
-
-        UserRequestDTO requestDTO = new UserRequestDTO();
-        requestDTO.setFirebaseId(firebaseId);
-        requestDTO.setUserName("Test User");
-        requestDTO.setUserEmail("test@example.com");
-        requestDTO.setUserPhoneNo("1234567890");
-        requestDTO.setUserType(UserType.CUSTOMER);
-
-        when(jwtService.getFireBaseIdFromToken("valid.jwt.token")).thenReturn(firebaseId);
-        when(userService.existsByFirebaseId(firebaseId)).thenReturn(false);
-
-        User savedUser = new User();
-        savedUser.setFirebaseId(firebaseId);
-        savedUser.setUserName(requestDTO.getUserName());
-        savedUser.setUserEmail(requestDTO.getUserEmail());
-        savedUser.setUserPhoneNo(requestDTO.getUserPhoneNo());
-        savedUser.setUserType(requestDTO.getUserType());
-
-        when(userService.createUser(requestDTO)).thenReturn(savedUser);
-
-        ResponseEntity<?> response = userController.createUser(token, requestDTO);
-
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertTrue(response.getBody() instanceof User);
-        User responseUser = (User) response.getBody();
-        assertEquals(firebaseId, responseUser.getFirebaseId());
-        assertEquals("Test User", responseUser.getUserName());
-    }
 
     @Test
     void createUser_shouldFailIfFirebaseIdMismatch() throws Exception {

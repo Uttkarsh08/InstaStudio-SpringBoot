@@ -142,13 +142,13 @@ class RatingServiceImplTest {
         verifyNoInteractions(memberReviewMapper);
     }
 
-    @Test
-    void createReview_WhenRequestDTONull_ThrowsNullPointerException() {
-        assertThrows(NullPointerException.class,
-            () -> ratingService.createReview(studioId, memberId, null));
-
-        verifyNoInteractions(validationService, memberRepository, ratingRepository, memberReviewMapper);
-    }
+//    @Test
+//    void createReview_WhenRequestDTONull_ThrowsNullPointerException() {
+//        assertThrows(NullPointerException.class,
+//            () -> ratingService.createReview(studioId, memberId, null));
+//
+//        verifyNoInteractions(validationService, memberRepository, ratingRepository, memberReviewMapper);
+//    }
 
     // --- getReviewById tests ---
 

@@ -124,9 +124,7 @@ class StudioServiceImplTest {
         when(userRepository.save(user)).thenReturn(user);
         when(mapper.map(studio, StudioCreationResponseDTO.class)).thenReturn(responseDTO);
 
-        StudioCreationResponseDTO result = studioService.assignAdminToStudio(studioId, userId);
-
-        assertEquals(responseDTO, result);
+        studioService.assignAdminToStudio(studioId, userId);
         assertEquals(studio, user.getStudio());
         verify(userRepository).save(user);
         verify(mapper).map(studio, StudioCreationResponseDTO.class);

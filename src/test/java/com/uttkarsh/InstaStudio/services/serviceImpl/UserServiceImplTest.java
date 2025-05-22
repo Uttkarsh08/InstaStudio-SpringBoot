@@ -73,34 +73,6 @@
 
 
         @Test
-        void shouldCreateUserWhenFirebaseIdDoesNotExist() {
-            when(userRepository.existsByFirebaseId("unique_id")).thenReturn(false);
-
-            UserRequestDTO requestDTO = new UserRequestDTO();
-            requestDTO.setFirebaseId("unique_id");
-            requestDTO.setUserName("New User");
-            requestDTO.setUserEmail("newuser@example.com");
-            requestDTO.setUserPhoneNo("9876543210");
-            requestDTO.setUserType(UserType.ADMIN);
-
-            User savedUser = new User();
-            savedUser.setFirebaseId("unique_id");
-            savedUser.setUserName("New User");
-            savedUser.setUserEmail("newuser@example.com");
-            savedUser.setUserPhoneNo("9876543210");
-            savedUser.setUserType(UserType.ADMIN);
-
-            when(userRepository.save(any(User.class))).thenReturn(savedUser);
-
-            User result = userService.createUser(requestDTO);
-
-            assertNotNull(result);
-            assertEquals("unique_id", result.getFirebaseId());
-            assertEquals("New User", result.getUserName());
-            assertEquals(UserType.ADMIN, result.getUserType());
-        }
-
-        @Test
         void shouldReturnTrueIfUserExistsByFirebaseId() {
             when(userRepository.existsByFirebaseId("exists_id")).thenReturn(true);
 

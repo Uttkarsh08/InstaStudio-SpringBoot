@@ -9,7 +9,7 @@ public interface StudioService {
 
     StudioCreationResponseDTO createStudio(StudioCreationRequestDTO requestDTO);
 
-    StudioCreationResponseDTO assignAdminToStudio(Long studioId, Long userId);
+    void assignAdminToStudio(Long studioId, Long userId);
 
 
 
