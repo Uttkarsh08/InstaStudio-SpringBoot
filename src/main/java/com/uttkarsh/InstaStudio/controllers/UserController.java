@@ -5,6 +5,7 @@ import com.uttkarsh.InstaStudio.dto.user.AdminProfileSetupRequestDTO;
 import com.uttkarsh.InstaStudio.dto.user.AdminProfileSetupResponseDTO;
 import com.uttkarsh.InstaStudio.dto.user.UserRequestDTO;
 import com.uttkarsh.InstaStudio.dto.user.UserResponseDTO;
+import com.uttkarsh.InstaStudio.exceptions.InvalidTokenException;
 import com.uttkarsh.InstaStudio.services.JwtService;
 import com.uttkarsh.InstaStudio.services.StudioService;
 import com.uttkarsh.InstaStudio.services.UserService;
@@ -29,17 +30,13 @@ public class UserController {
     @PostMapping("/register/user")
     public ResponseEntity<?> createUser(
             @RequestHeader("Authorization") String authHeader,
-            @Valid @RequestBody UserRequestDTO requestDTO) throws Exception {
+            @Valid @RequestBody UserRequestDTO requestDTO) {
 
         String token = authHeader.split("Bearer ")[1];
         String firebaseId = jwtService.getFireBaseIdFromToken(token);
 
-        if(!firebaseId.equals(requestDTO.getFirebaseId())){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Token does not match Firebase ID");
-        }
-
-        if (userService.existsByFirebaseId(requestDTO.getFirebaseId())) {
-            return ResponseEntity.badRequest().body("User already registered.");
+        if (!firebaseId.equals(requestDTO.getFirebaseId())) {
+            throw new InvalidTokenException("Token does not match Firebase ID");
         }
 
         UserResponseDTO responseDTO = userService.createUser(requestDTO);
@@ -53,16 +50,6 @@ public class UserController {
             @RequestHeader("Authorization") String authHeader,
             @Valid @RequestBody AdminProfileSetupRequestDTO requestDTO) throws Exception {
 
-        String token = authHeader.split("Bearer ")[1];
-        String firebaseId = jwtService.getFireBaseIdFromToken(token);
-
-        if(!firebaseId.equals(requestDTO.getUser().getFirebaseId())){
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Token does not match Firebase ID");
-        }
-
-        if (userService.existsByFirebaseId(requestDTO.getUser().getFirebaseId())) {
-            return ResponseEntity.badRequest().body("User already registered.");
-        }
 
         UserResponseDTO userResponse = userService.createUser(requestDTO.getUser());
 
