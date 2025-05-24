@@ -28,7 +28,7 @@ public class JwtServiceImpl implements JwtService {
                 .claim("isRegistered", isRegistered)
                 .claim("userType", userType.name())
                 .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + 60 * 1000*100))
+                .expiration(new Date(System.currentTimeMillis() + 60 * 100))
                 .signWith(getSecretKey())
                 .compact();
     }
@@ -46,7 +46,7 @@ public class JwtServiceImpl implements JwtService {
 
     public  boolean validateToken(String token) {
         try {
-            Jwts.parser().setSigningKey(getSecretKey()).build().parseClaimsJws(token);
+            Jwts.parser().verifyWith(getSecretKey()).build().parseSignedClaims(token);
             return true;
         } catch (JwtException e) {
             return false;

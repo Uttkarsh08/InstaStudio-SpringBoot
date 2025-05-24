@@ -3,6 +3,7 @@ package com.uttkarsh.InstaStudio.filters;
 import com.uttkarsh.InstaStudio.exceptions.UnregisteredUserException;
 import com.uttkarsh.InstaStudio.services.JwtService;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -77,7 +78,10 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
             filterChain.doFilter(request, response);
 
-        } catch (Exception e) {
+        } catch(ExpiredJwtException e) {
+            handlerExceptionResolver.resolveException(request, response, null, e);
+
+        }catch (Exception e) {
             handlerExceptionResolver.resolveException(request, response, null, e);
         }
 

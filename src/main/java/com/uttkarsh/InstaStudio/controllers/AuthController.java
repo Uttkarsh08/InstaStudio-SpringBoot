@@ -56,7 +56,7 @@ public class AuthController {
         String accessToken = jwtService.generateAccessToken(firebaseId, isRegistered, loginType);
         String refreshToken = jwtService.generateRefreshToken(firebaseId, isRegistered, loginType);
 
-        LoginResponseDTO response = new LoginResponseDTO(accessToken, refreshToken, isRegistered, username, userEmail, firebaseId, loginType);
+        LoginResponseDTO response = new LoginResponseDTO(accessToken, refreshToken, username, userEmail, firebaseId, loginType, isRegistered);
         log.info("Returning response: {}", response);
         return ResponseEntity.ok(response);
 
@@ -74,11 +74,12 @@ public class AuthController {
         Claims claims =  jwtService.getAllClaims(refreshToken);
 
         String userType = claims.get("userType", String.class);
-        Boolean isRegistered = claims.get("isRegistered", Boolean.class);
+        boolean isRegistered = userService.existsByFirebaseId(firebaseId);
 
         String newAccessToken = jwtService.generateAccessToken(firebaseId, isRegistered, UserType.valueOf(userType));
+        String newRefreshToken = jwtService.generateRefreshToken(firebaseId, isRegistered, UserType.valueOf(userType));
 
-        return ResponseEntity.ok(new TokenRefreshResponse(newAccessToken, refreshToken));
+        return ResponseEntity.ok(new TokenRefreshResponse(newAccessToken, newRefreshToken));
     }
 
 

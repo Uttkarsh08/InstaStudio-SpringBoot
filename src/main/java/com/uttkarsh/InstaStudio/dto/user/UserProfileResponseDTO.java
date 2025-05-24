@@ -1,7 +1,5 @@
 package com.uttkarsh.InstaStudio.dto.user;
 
-import com.uttkarsh.InstaStudio.dto.studio.StudioCreationRequestDTO;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +9,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class AdminProfileSetupResponseDTO {
+public class UserProfileResponseDTO {
 
     private Long studioId;
 

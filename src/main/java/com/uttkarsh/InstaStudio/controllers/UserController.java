@@ -2,7 +2,7 @@ package com.uttkarsh.InstaStudio.controllers;
 
 import com.uttkarsh.InstaStudio.dto.studio.StudioCreationResponseDTO;
 import com.uttkarsh.InstaStudio.dto.user.AdminProfileSetupRequestDTO;
-import com.uttkarsh.InstaStudio.dto.user.AdminProfileSetupResponseDTO;
+import com.uttkarsh.InstaStudio.dto.user.UserProfileResponseDTO;
 import com.uttkarsh.InstaStudio.dto.user.UserRequestDTO;
 import com.uttkarsh.InstaStudio.dto.user.UserResponseDTO;
 import com.uttkarsh.InstaStudio.exceptions.InvalidTokenException;
@@ -43,6 +43,19 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'MEMBER', 'CUSTOMER')")
+    @PostMapping("/user/profile")
+    public ResponseEntity<UserProfileResponseDTO> getUserProfile(
+            @RequestHeader("Authorization") String authHeader
+    ){
+        String token = authHeader.split("Bearer ")[1];
+        String firebaseId = jwtService.getFireBaseIdFromToken(token);
+
+        UserProfileResponseDTO responseDTO = userService.getUserProfile(firebaseId);
+        return ResponseEntity.ok(responseDTO);
+
+    }
+
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/register/adminProfileSetup")
     @Transactional
@@ -57,7 +70,7 @@ public class UserController {
 
         studioService.assignAdminToStudio(studioResponse.getStudioId(), userResponse.getUserId());
 
-        AdminProfileSetupResponseDTO responseDTO = new AdminProfileSetupResponseDTO(studioResponse.getStudioId(), userResponse.getUserId());
+        UserProfileResponseDTO responseDTO = new UserProfileResponseDTO(studioResponse.getStudioId(), userResponse.getUserId());
 
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
     }

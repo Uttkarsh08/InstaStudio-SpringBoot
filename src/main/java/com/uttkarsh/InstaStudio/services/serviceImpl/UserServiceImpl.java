@@ -1,9 +1,11 @@
 package com.uttkarsh.InstaStudio.services.serviceImpl;
 
+import com.uttkarsh.InstaStudio.dto.user.UserProfileResponseDTO;
 import com.uttkarsh.InstaStudio.dto.user.UserRequestDTO;
 import com.uttkarsh.InstaStudio.dto.user.UserResponseDTO;
 import com.uttkarsh.InstaStudio.entities.User;
 import com.uttkarsh.InstaStudio.exceptions.EventAlreadyAddedException;
+import com.uttkarsh.InstaStudio.exceptions.EventNotAssignedException;
 import com.uttkarsh.InstaStudio.exceptions.ResourceNotFoundException;
 import com.uttkarsh.InstaStudio.repositories.UserRepository;
 import com.uttkarsh.InstaStudio.services.UserService;
@@ -21,6 +23,16 @@ public class UserServiceImpl implements UserService {
     public User getUserByFirebaseId(String firebaseId){
         return userRepository.getUserByFirebaseId(firebaseId)
                 .orElse(null);
+    }
+
+    @Override
+    public UserProfileResponseDTO getUserProfile(String firebaseId) {
+
+        User user = userRepository.getUserByFirebaseId(firebaseId)
+                .orElseThrow(()-> new EventNotAssignedException("Please give Valid Account"));
+
+        return new UserProfileResponseDTO(user.getStudio().getStudioId(), user.getUserId());
+
     }
 
     public UserResponseDTO createUser(UserRequestDTO requestDTO) {

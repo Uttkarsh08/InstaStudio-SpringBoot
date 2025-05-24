@@ -1,5 +1,6 @@
 package com.uttkarsh.InstaStudio.dto.auth;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.uttkarsh.InstaStudio.entities.enums.UserType;
 import lombok.*;
 
@@ -10,10 +11,11 @@ import lombok.*;
 public class LoginResponseDTO {
     private String accessToken;
     private String refreshToken;
-    private boolean isRegistered;
     private String userName;
     private String userEmail;
     private String firebaseId;
     private UserType userType;
 
+    @JsonProperty("isRegistered")
+    private boolean isRegistered;
 }

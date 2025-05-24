@@ -2,6 +2,7 @@ package com.uttkarsh.InstaStudio.advices;
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.uttkarsh.InstaStudio.exceptions.*;
+import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -58,6 +59,15 @@ public class GlobalExceptionHandler {
         ApiError apiError = ApiError.builder()
                 .status(HttpStatus.BAD_REQUEST)
                 .message(ex.getMessage())
+                .build();
+        return buildErrorResponseEntity(apiError);
+    }
+
+    @ExceptionHandler(ExpiredJwtException.class)
+    public ResponseEntity<ApiResponse<?>> handleEventAlreadyAddedException(ExpiredJwtException ex){
+        ApiError apiError = ApiError.builder()
+                .status(HttpStatus.UNAUTHORIZED)
+                .message("Access token expired")
                 .build();
         return buildErrorResponseEntity(apiError);
     }
