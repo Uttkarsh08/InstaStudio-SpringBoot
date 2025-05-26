@@ -19,11 +19,11 @@ public class SubEventRequestDTO {
     private String eventType;
 
     @NotNull(message = "Event start date is required")
-    @Future(message = "Event start date must be in the future")
+//    @Future(message = "Event start date must be in the future")
     private LocalDateTime eventStartDate;
 
     @NotNull(message = "Event end date is required")
-    @Future(message = "Event end date must be in the future")
+//    @Future(message = "Event end date must be in the future")
     private LocalDateTime eventEndDate;
 
     @NotBlank(message = "Event location can't be blank")

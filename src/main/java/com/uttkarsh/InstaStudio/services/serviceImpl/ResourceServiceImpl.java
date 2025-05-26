@@ -57,7 +57,7 @@ public class ResourceServiceImpl implements ResourceService {
     public Page<ResourceResponseDTO> getAllResourcesForStudio(Long studioId, Pageable pageable) {
         validationService.isStudioValid(studioId);
 
-        Page<Resource> resources = resourceRepository.findAllByStudio_StudioId(studioId, pageable);
+        Page<Resource> resources = resourceRepository.findAllByStudio_StudioIdOrderByResourceRegisteredAtDesc(studioId, pageable);
 
         return resources.map(resourceMapper::toResponseDTO);
 

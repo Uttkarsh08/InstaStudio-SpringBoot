@@ -46,4 +46,6 @@ public interface ResourceRepository extends JpaRepository<Resource, Long> {
     )
 """)
     Page<Resource> searchAllResources(Long studioId, String query, Pageable pageable);
+
+    Page<Resource> findAllByStudio_StudioIdOrderByResourceRegisteredAtDesc(Long studioId, Pageable pageable);
 }
