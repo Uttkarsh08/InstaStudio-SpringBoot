@@ -5,17 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7df082fd-01c9-4f11-ac5d-6932c0859655" name="Changes" comment="Minor Changes">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/InstaStudioApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/InstaStudioApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/advices/GlobalResponseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/advices/GlobalResponseHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/event/SubEventRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/dto/event/SubEventRequestDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/repositories/EventRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/repositories/EventRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/repositories/ResourceRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/repositories/ResourceRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/JwtServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/JwtServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/ResourceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/ResourceServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/controllers/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/controllers/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/repositories/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/repositories/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/uttkarsh/InstaStudio/services/serviceImpl/UserServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

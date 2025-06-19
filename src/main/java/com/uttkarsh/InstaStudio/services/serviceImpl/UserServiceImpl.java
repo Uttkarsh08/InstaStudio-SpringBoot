@@ -4,6 +4,7 @@ import com.uttkarsh.InstaStudio.dto.user.UserProfileResponseDTO;
 import com.uttkarsh.InstaStudio.dto.user.UserRequestDTO;
 import com.uttkarsh.InstaStudio.dto.user.UserResponseDTO;
 import com.uttkarsh.InstaStudio.entities.User;
+import com.uttkarsh.InstaStudio.entities.enums.UserType;
 import com.uttkarsh.InstaStudio.exceptions.EventAlreadyAddedException;
 import com.uttkarsh.InstaStudio.exceptions.EventNotAssignedException;
 import com.uttkarsh.InstaStudio.exceptions.ResourceNotFoundException;
@@ -22,6 +23,12 @@ public class UserServiceImpl implements UserService {
 
     public User getUserByFirebaseId(String firebaseId){
         return userRepository.getUserByFirebaseId(firebaseId)
+                .orElse(null);
+    }
+
+    @Override
+    public User getUserByFirebaseIdAndUserType(String firebaseId, UserType userType) {
+        return userRepository.getUserByFirebaseIdAndUserType(firebaseId, userType)
                 .orElse(null);
     }
 

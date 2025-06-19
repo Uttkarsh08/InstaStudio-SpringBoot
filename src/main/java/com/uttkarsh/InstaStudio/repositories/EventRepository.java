@@ -138,5 +138,5 @@ public interface EventRepository extends JpaRepository<Event, Long> {
             @Param("query") String query,
             Pageable pageable);
 
-    Event findFirstByResources_ResourceIdAndParentEventIsNotNullAndEventStartDateBeforeOrderByEventStartDateDesc(Long resourceId, LocalDateTime time);
+    Event findFirstByResources_ResourceIdAndParentEventIsNullAndClientNameIsNotNullAndEventStartDateBeforeOrderByEventStartDateDesc(Long resourceId, LocalDateTime now);
 }
