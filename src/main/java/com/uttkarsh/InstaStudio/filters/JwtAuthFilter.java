@@ -62,7 +62,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                 String uri = request.getRequestURI();
 
                 if (    !uri.startsWith("/api/auth") &&
-                        !uri.startsWith("/api/v1/register/adminProfileSetup")
+                        !uri.startsWith("/api/v1/register/adminProfileSetup") &&
+                        !uri.startsWith("/api/v1/register/user")
                 ) {
                     throw new UnregisteredUserException("User must complete profile before accessing protected resources");
                 }

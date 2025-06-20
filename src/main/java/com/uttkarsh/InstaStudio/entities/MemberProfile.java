@@ -1,6 +1,7 @@
 package com.uttkarsh.InstaStudio.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.LinkedHashSet;
@@ -28,7 +29,7 @@ public class MemberProfile {
     @OneToOne
     @MapsId
     @JoinColumn(name = "user_id")
-    @JsonBackReference
+    @JsonManagedReference
     private User user;
 
     @OneToMany(mappedBy = "memberProfile", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)

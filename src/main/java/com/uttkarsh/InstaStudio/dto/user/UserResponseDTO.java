@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -23,5 +25,7 @@ public class UserResponseDTO {
     private String userPhoneNo;
 
     private UserType userType;
+
+    private LocalDateTime registrationDate;
 
 }

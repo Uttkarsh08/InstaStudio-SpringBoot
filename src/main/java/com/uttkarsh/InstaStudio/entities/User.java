@@ -51,6 +51,6 @@ public class User {
     private Studio studio;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @JsonManagedReference
+    @JsonBackReference
     private MemberProfile memberProfile;
 }

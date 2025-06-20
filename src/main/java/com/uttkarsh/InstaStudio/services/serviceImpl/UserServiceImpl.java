@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
         user.setUserEmail(requestDTO.getUserEmail());
         user.setUserType(requestDTO.getUserType());
         User savedUser = userRepository.save(user);
-        return userMapper.toEventDTO(savedUser);
+        return userMapper.toUserDTO(savedUser);
     }
 
     public boolean existsByFirebaseId(String firebaseId) {
