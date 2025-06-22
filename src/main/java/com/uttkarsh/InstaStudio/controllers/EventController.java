@@ -34,7 +34,7 @@ public class EventController {
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/register/sub-event")
     public ResponseEntity<SubEventResponseDTO> createSubEvent(
-            @RequestBody SubEventRequestDTO requestDTO
+            @Valid @RequestBody SubEventRequestDTO requestDTO
     ){
         SubEventResponseDTO responseDTO = eventService.createSubEvent(requestDTO);
         return  ResponseEntity.ok(responseDTO);
