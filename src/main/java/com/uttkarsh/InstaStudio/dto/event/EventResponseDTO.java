@@ -36,10 +36,10 @@ public class EventResponseDTO {
 
     private boolean eventIsSaved;
 
-    private Set<EventResponseDTO> subEvents;
+    private Set<Event> subEvents;
 
-    private Set<MemberInEventDTO> members;
+    private Set<MemberProfile> members;
 
-    private Set<ResourceResponseDTO> resources;
+    private Set<Resource> resources;
 
 }
