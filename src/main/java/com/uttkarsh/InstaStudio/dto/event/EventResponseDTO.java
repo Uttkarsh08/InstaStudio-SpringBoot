@@ -34,12 +34,12 @@ public class EventResponseDTO {
 
     private String eventState;
 
-    private boolean evenIsSaved;
+    private boolean eventIsSaved;
 
-    private Set<Event> subEvents;
+    private Set<EventResponseDTO> subEvents;
 
-    private Set<MemberProfile> members;
+    private Set<MemberInEventDTO> members;
 
-    private Set<Resource> resources;
+    private Set<ResourceResponseDTO> resources;
 
 }

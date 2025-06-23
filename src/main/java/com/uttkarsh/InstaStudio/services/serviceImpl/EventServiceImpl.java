@@ -182,7 +182,7 @@ public class EventServiceImpl implements EventService {
 
         Event event =  eventRepository.findFirstByStudio_StudioIdAndParentEventIsNullAndClientNameIsNotNullAndEventStartDateAfterOrderByEventStartDate(studioId, LocalDateTime.now())
                 .orElseThrow(() -> new ResourceNotFoundException(
-                        "No Upcoming Event associated with studio id: " + studioId));
+                        "No Upcoming Event"));
         return eventMapper.toEventDTO(event);
 
     }
