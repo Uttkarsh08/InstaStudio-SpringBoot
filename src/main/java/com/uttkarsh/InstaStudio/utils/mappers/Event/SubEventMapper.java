@@ -24,6 +24,9 @@ public class SubEventMapper {
         dto.setEventState(event.getEventState());
         dto.setEventType(event.getEventType());
 
+        if(event.getParentEvent() != null){
+            dto.setParentEventId(event.getParentEvent().getEventId());
+        }
 
         Set<MemberProfile> members = new LinkedHashSet<>(event.getMembers());
         dto.setMembers(members);
