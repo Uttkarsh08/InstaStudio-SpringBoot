@@ -38,6 +38,7 @@ public class Resource {
     @JsonBackReference
     private Studio studio;
 
+    @Builder.Default
     @ManyToMany(mappedBy = "resources", cascade = CascadeType.PERSIST)
     @JsonBackReference
     private Set<Event> events = new LinkedHashSet<>();

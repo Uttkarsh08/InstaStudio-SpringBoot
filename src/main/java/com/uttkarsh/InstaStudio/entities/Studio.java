@@ -37,17 +37,16 @@ public class Studio {
     @Column(name = "image_data")
     private byte[] imageData;
 
+    @Builder.Default
     @OneToMany(mappedBy = "studio", cascade = CascadeType.ALL)
     private Set<User> users = new LinkedHashSet<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "studio", cascade = CascadeType.ALL)
     private Set<Event> events = new LinkedHashSet<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "studio", cascade = CascadeType.ALL)
     private Set<Resource> resources = new LinkedHashSet<>();
-
-    public Studio(Long studioId) {
-        this.studioId = studioId;
-    }
 
 }

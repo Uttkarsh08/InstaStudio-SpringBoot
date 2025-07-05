@@ -31,6 +31,7 @@ public class Event {
     @JsonBackReference  // Prevent serialization of the parent event when serializing sub-events
     private Event parentEvent;
 
+    @Builder.Default
     @OneToMany(mappedBy = "parentEvent", cascade = CascadeType.ALL)
     @JsonManagedReference  // Serialize sub-events when serializing the main event
     private Set<Event> subEvents = new LinkedHashSet<>();
@@ -57,6 +58,7 @@ public class Event {
     @JsonBackReference
     private Studio studio;
 
+    @Builder.Default
     @ManyToMany
     @JoinTable(
             name = "event_member",
@@ -65,6 +67,7 @@ public class Event {
     )
     private Set<MemberProfile> members = new LinkedHashSet<>();
 
+    @Builder.Default
     @ManyToMany
     @JoinTable(
             name = "event_resource",
